@@ -3,7 +3,9 @@ FROM node:20-alpine AS base
 FROM base AS deps
 WORKDIR /app
 RUN corepack enable
-COPY package.json pnpm-lock.yaml* ./
+COPY package.json pnpm-lock.yaml* pnpm-workspace.yaml* prisma.config.ts ./
+COPY prisma ./prisma
+# postinstall corre `prisma generate`, que necesita el schema presente.
 RUN pnpm install --frozen-lockfile
 
 FROM base AS builder
