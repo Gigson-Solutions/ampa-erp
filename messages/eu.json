@@ -25,5 +25,20 @@
     "submitting": "Bidaltzen…",
     "success": "Familia alta emanda! Erreferentzia kodea:",
     "genericError": "Ezin izan da altarik osatu. Saiatu berriro."
+  },
+  "board": {
+    "memberships": {
+      "title": "Kidetza alta",
+      "familyId": "Familiaren ID-a",
+      "academicYearId": "Ikasturtearen ID-a",
+      "feeSchemaId": "Kuotaren ID-a",
+      "siblingCount": "Anai-arreba kopurua",
+      "isLargeFamily": "Familia ugaria",
+      "scholarshipDiscountPercent": "Beka %",
+      "submit": "Kidetza sortu eta kargua sortu",
+      "submitting": "Sortzen…",
+      "success": "Kidetza sortuta. Karguaren zenbatekoa:",
+      "genericError": "Ezin izan da kidetza sortu. Saiatu berriro."
+    }
   }
 }

@@ -25,5 +25,20 @@
     "submitting": "Enviant…",
     "success": "Família donada d'alta! Codi de referència:",
     "genericError": "No s'ha pogut completar l'alta. Torna-ho a provar."
+  },
+  "board": {
+    "memberships": {
+      "title": "Alta de membresia",
+      "familyId": "ID de família",
+      "academicYearId": "ID de curs escolar",
+      "feeSchemaId": "ID de quota",
+      "siblingCount": "Núm. de germans/es",
+      "isLargeFamily": "Família nombrosa",
+      "scholarshipDiscountPercent": "% de beca",
+      "submit": "Crear membresia i generar càrrec",
+      "submitting": "Creant…",
+      "success": "Membresia creada. Import del càrrec:",
+      "genericError": "No s'ha pogut crear la membresia. Torna-ho a provar."
+    }
   }
 }

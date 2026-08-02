@@ -25,5 +25,20 @@
     "submitting": "Enviando…",
     "success": "¡Familia dada de alta! Código de referencia:",
     "genericError": "No se pudo completar el alta. Inténtalo de nuevo."
+  },
+  "board": {
+    "memberships": {
+      "title": "Alta de membresía",
+      "familyId": "ID de familia",
+      "academicYearId": "ID de curso escolar",
+      "feeSchemaId": "ID de cuota",
+      "siblingCount": "Nº de hermanos/as",
+      "isLargeFamily": "Familia numerosa",
+      "scholarshipDiscountPercent": "% de beca",
+      "submit": "Crear membresía y generar cargo",
+      "submitting": "Creando…",
+      "success": "Membresía creada. Importe del cargo:",
+      "genericError": "No se pudo crear la membresía. Inténtalo de nuevo."
+    }
   }
 }
