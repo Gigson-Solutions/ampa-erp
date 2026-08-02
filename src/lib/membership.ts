@@ -12,7 +12,10 @@ import { calculateDiscountedFee, calculateProratedFee } from "./fees";
 
 export const createMembershipSchema = z.object({
   familyId: z.string().min(1),
-  academicYearId: z.string().min(1),
+  // `academicYearId` NO se pide aquí a propósito: `FeeSchema.academicYearId` ya lo
+  // fija de forma inequívoca, y pedirlo por separado abría la puerta a que alguien
+  // enviara una combinación inconsistente (una cuota de un curso con el
+  // academicYearId de otro). Se deriva siempre del FeeSchema elegido.
   feeSchemaId: z.string().min(1),
   enrollmentDate: z.coerce.date().optional(),
   familyDiscounts: z
@@ -58,7 +61,7 @@ export async function createMembershipWithCharge(
     const feeSchema = await db.feeSchema.findUnique({ where: { id: parsed.feeSchemaId } });
     if (!feeSchema) throw new Error("FeeSchema no encontrado para esta AMPA");
 
-    const academicYear = await db.academicYear.findUnique({ where: { id: parsed.academicYearId } });
+    const academicYear = await db.academicYear.findUnique({ where: { id: feeSchema.academicYearId } });
     if (!academicYear) throw new Error("AcademicYear no encontrado para esta AMPA");
 
     const enrollmentDate = parsed.enrollmentDate ?? new Date();
@@ -83,7 +86,7 @@ export async function createMembershipWithCharge(
       data: {
         ampaId: scopedAmpaId,
         familyId: parsed.familyId,
-        academicYearId: parsed.academicYearId,
+        academicYearId: feeSchema.academicYearId,
         feeSchemaId: parsed.feeSchemaId,
         status: "ACTIVE",
       },

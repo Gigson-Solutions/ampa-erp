@@ -27,18 +27,26 @@
     "genericError": "No s'ha pogut completar l'alta. Torna-ho a intentar."
   },
   "board": {
+    "families": {
+      "title": "Famílies",
+      "empty": "Encara no hi ha famílies donades d'alta en esta AMPA.",
+      "referenceCode": "Codi",
+      "guardians": "Tutor/a",
+      "students": "Alumnes",
+      "createMembership": "Crear membresia"
+    },
     "memberships": {
       "title": "Alta de membresia",
-      "familyId": "ID de família",
-      "academicYearId": "ID de curs escolar",
-      "feeSchemaId": "ID de quota",
+      "familyId": "Família",
+      "feeSchemaId": "Quota",
       "siblingCount": "Núm. de germans/es",
       "isLargeFamily": "Família nombrosa",
       "scholarshipDiscountPercent": "% de beca",
       "submit": "Crear membresia i generar càrrec",
       "submitting": "Creant…",
       "success": "Membresia creada. Import del càrrec:",
-      "genericError": "No s'ha pogut crear la membresia. Torna-ho a intentar."
+      "genericError": "No s'ha pogut crear la membresia. Torna-ho a intentar.",
+      "emptyDirectories": "Encara no hi ha famílies o quotes creades per a esta AMPA."
     }
   }
 }

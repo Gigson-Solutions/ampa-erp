@@ -78,7 +78,6 @@ describe("createMembershipWithCharge (integración contra Postgres real)", () =>
   it("crea Membership + Charge con el importe calculado por fees.ts (alta el primer día de curso)", async () => {
     const result = await createMembershipWithCharge(ampaId, {
       familyId,
-      academicYearId,
       feeSchemaId,
       enrollmentDate: new Date("2026-09-01"),
       familyDiscounts: { siblingCount: 2, isLargeFamily: false, scholarshipDiscountPercent: 0 },
@@ -102,7 +101,6 @@ describe("createMembershipWithCharge (integración contra Postgres real)", () =>
   it("aplica el descuento de familia numerosa además del de hermanos", async () => {
     const result = await createMembershipWithCharge(ampaId, {
       familyId,
-      academicYearId,
       feeSchemaId,
       enrollmentDate: new Date("2026-09-01"),
       familyDiscounts: { siblingCount: 1, isLargeFamily: true, scholarshipDiscountPercent: 0 },
@@ -121,7 +119,6 @@ describe("createMembershipWithCharge (integración contra Postgres real)", () =>
     await expect(
       createMembershipWithCharge(ampaId, {
         familyId,
-        academicYearId,
         feeSchemaId: "non-existent-id",
         familyDiscounts: { siblingCount: 0, isLargeFamily: false, scholarshipDiscountPercent: 0 },
       }),
@@ -131,7 +128,6 @@ describe("createMembershipWithCharge (integración contra Postgres real)", () =>
   it("no permite ver el Charge creado desde otra AMPA (aislamiento multi-tenant)", async () => {
     const result = await createMembershipWithCharge(ampaId, {
       familyId,
-      academicYearId,
       feeSchemaId,
       enrollmentDate: new Date("2026-09-01"),
       familyDiscounts: { siblingCount: 0, isLargeFamily: false, scholarshipDiscountPercent: 0 },

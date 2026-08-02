@@ -27,18 +27,26 @@
     "genericError": "Non se puido completar a alta. Inténtao de novo."
   },
   "board": {
+    "families": {
+      "title": "Familias",
+      "empty": "Aínda non hai familias dadas de alta nesta AMPA.",
+      "referenceCode": "Código",
+      "guardians": "Titor/a",
+      "students": "Alumnado",
+      "createMembership": "Crear membresía"
+    },
     "memberships": {
       "title": "Alta de membresía",
-      "familyId": "ID de familia",
-      "academicYearId": "ID de curso escolar",
-      "feeSchemaId": "ID de cota",
+      "familyId": "Familia",
+      "feeSchemaId": "Cota",
       "siblingCount": "Nº de irmáns/ás",
       "isLargeFamily": "Familia numerosa",
       "scholarshipDiscountPercent": "% de bolsa",
       "submit": "Crear membresía e xerar cargo",
       "submitting": "Creando…",
       "success": "Membresía creada. Importe do cargo:",
-      "genericError": "Non se puido crear a membresía. Inténtao de novo."
+      "genericError": "Non se puido crear a membresía. Inténtao de novo.",
+      "emptyDirectories": "Aínda non hai familias ou cotas creadas para esta AMPA."
     }
   }
 }

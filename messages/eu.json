@@ -27,18 +27,26 @@
     "genericError": "Ezin izan da altarik osatu. Saiatu berriro."
   },
   "board": {
+    "families": {
+      "title": "Familiak",
+      "empty": "Oraindik ez dago familiarik alta emanda AMPA honetan.",
+      "referenceCode": "Kodea",
+      "guardians": "Tutorea",
+      "students": "Ikasleak",
+      "createMembership": "Kidetza sortu"
+    },
     "memberships": {
       "title": "Kidetza alta",
-      "familyId": "Familiaren ID-a",
-      "academicYearId": "Ikasturtearen ID-a",
-      "feeSchemaId": "Kuotaren ID-a",
+      "familyId": "Familia",
+      "feeSchemaId": "Kuota",
       "siblingCount": "Anai-arreba kopurua",
       "isLargeFamily": "Familia ugaria",
       "scholarshipDiscountPercent": "Beka %",
       "submit": "Kidetza sortu eta kargua sortu",
       "submitting": "Sortzen…",
       "success": "Kidetza sortuta. Karguaren zenbatekoa:",
-      "genericError": "Ezin izan da kidetza sortu. Saiatu berriro."
+      "genericError": "Ezin izan da kidetza sortu. Saiatu berriro.",
+      "emptyDirectories": "Oraindik ez dago familiarik edo kuotarik sortuta AMPA honentzat."
     }
   }
 }
