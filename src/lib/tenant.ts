@@ -116,10 +116,18 @@ export type TenantScopedClient = Parameters<Parameters<ScopedClient["$transactio
  * Punto de entrada obligatorio para leer/escribir modelos de negocio. Abre una
  * transacción interactiva sobre un cliente extendido con el filtro `ampaId`, y de
  * paso fija la variable de sesión que usa RLS como red de seguridad final.
+ *
+ * `fn` recibe también `ampaId` de vuelta (aunque ya se pasó como primer argumento)
+ * para que los `create({ data: { ampaId, ... } })` type-checkeen sin `as any`: los
+ * tipos generados por Prisma no saben que la extensión de la capa 2 va a inyectar
+ * `ampaId` en tiempo de ejecución, así que hay que dárselo explícitamente para
+ * satisfacer al compilador. La extensión SIEMPRE sobreescribe ese valor con el
+ * `ampaId` real al final (ver `scopeArgs`), así que pasar un valor "de más" aquí es
+ * inofensivo — nunca puede usarse para escribir en la AMPA equivocada.
  */
 export async function withAmpaScope<T>(
   ampaId: string,
-  fn: (db: TenantScopedClient) => Promise<T>,
+  fn: (db: TenantScopedClient, ampaId: string) => Promise<T>,
   client: PrismaClient = prisma,
 ): Promise<T> {
   const scopedClient = scopeClient(client, ampaId);
@@ -131,6 +139,6 @@ export async function withAmpaScope<T>(
     // los puede fijar cualquier rol sin privilegios especiales.
     await tx.$executeRaw`SET LOCAL ROLE ampa_erp_app`;
     await tx.$executeRaw`SELECT set_config('app.current_ampa', ${ampaId}, true)`;
-    return fn(tx);
+    return fn(tx, ampaId);
   });
 }

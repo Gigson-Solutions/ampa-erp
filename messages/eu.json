@@ -5,5 +5,25 @@
     "login": "Sartu",
     "loginHint": "Sarbide-esteka bidaliko dizugu zure emailera",
     "loginButton": "Bidali sarbide-esteka"
+  },
+  "register": {
+    "title": "Familia alta",
+    "guardianName": "Tutorearen izena",
+    "guardianEmail": "Emaila",
+    "guardianPhone": "Telefonoa (aukerakoa)",
+    "studentName": "Ikaslearen izena",
+    "addStudent": "Beste ikasle bat gehitu",
+    "removeStudent": "Kendu",
+    "consentDataTitle": "Oinarrizko datuen tratamendua",
+    "consentDataHint": "Nahitaezkoa AMPAko kidetza kudeatzeko.",
+    "consentImageTitle": "Irudiaren erabilera",
+    "consentImageHint": "AMPAren jardueretan argazkiak/bideoak erabiltzea baimendu.",
+    "consentCenterShareTitle": "Datuak ikastetxeari lagatzea",
+    "consentCenterShareHint": "Oinarrizko datuak ikastetxearekin partekatu.",
+    "accept": "Onartzen dut",
+    "submit": "Alta eman",
+    "submitting": "Bidaltzen…",
+    "success": "Familia alta emanda! Erreferentzia kodea:",
+    "genericError": "Ezin izan da altarik osatu. Saiatu berriro."
   }
 }

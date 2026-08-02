@@ -5,5 +5,25 @@
     "login": "Acceder",
     "loginHint": "Enviarémosche unha ligazón de acceso ao teu email",
     "loginButton": "Enviar ligazón de acceso"
+  },
+  "register": {
+    "title": "Alta de familia",
+    "guardianName": "Nome do titor/a",
+    "guardianEmail": "Email",
+    "guardianPhone": "Teléfono (opcional)",
+    "studentName": "Nome do alumno/a",
+    "addStudent": "Engadir outro/a alumno/a",
+    "removeStudent": "Quitar",
+    "consentDataTitle": "Tratamento de datos básicos",
+    "consentDataHint": "Obrigatorio para xestionar a túa membresía na AMPA.",
+    "consentImageTitle": "Uso de imaxe",
+    "consentImageHint": "Permitir o uso de fotos/vídeos en actividades da AMPA.",
+    "consentCenterShareTitle": "Cesión de datos ao centro",
+    "consentCenterShareHint": "Compartir datos básicos co centro educativo.",
+    "accept": "Acepto",
+    "submit": "Dar de alta",
+    "submitting": "Enviando…",
+    "success": "Familia dada de alta! Código de referencia:",
+    "genericError": "Non se puido completar a alta. Inténtao de novo."
   }
 }
