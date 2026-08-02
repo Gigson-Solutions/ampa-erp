@@ -13,10 +13,10 @@ import type { NextRequest } from "next/server";
 // Nota: en Next.js 16 este fichero se llama `proxy.ts` (antes `middleware.ts`) — ver
 // https://nextjs.org/docs/messages/middleware-to-proxy.
 
-const ROOT_DOMAIN = process.env["ROOT_DOMAIN"] ?? "ampas.org";
-const RESERVED_SUBDOMAINS = new Set(["www", "app", "api", "admin"]);
+export const ROOT_DOMAIN = process.env["ROOT_DOMAIN"] ?? "ampas.org";
+export const RESERVED_SUBDOMAINS = new Set(["www", "app", "api", "admin", "login"]);
 
-function extractSubdomain(host: string): string | null {
+export function extractSubdomainFromHost(host: string): string | null {
   const hostname = host.split(":")[0] ?? "";
   if (!hostname.endsWith(ROOT_DOMAIN)) return null;
 
@@ -26,9 +26,26 @@ function extractSubdomain(host: string): string | null {
   return withoutRoot;
 }
 
+/**
+ * Fallback SOLO para desarrollo local sin subdominios reales configurados (p.ej.
+ * `localhost:3000/riberadeltajo/...`, como ya usan las páginas públicas vía
+ * `params.ampa`). En producción esto nunca se llega a usar porque
+ * `extractSubdomainFromHost` ya resuelve el subdominio real primero — este fallback
+ * solo entra en juego cuando el host no coincide con `ROOT_DOMAIN`.
+ */
+export function extractSubdomainFromPath(pathname: string): string | null {
+  const [, first] = pathname.split("/");
+  if (!first || RESERVED_SUBDOMAINS.has(first) || first.startsWith("_next")) return null;
+  return first;
+}
+
+export function resolveAmpaSubdomain(host: string, pathname: string): string | null {
+  return extractSubdomainFromHost(host) ?? extractSubdomainFromPath(pathname);
+}
+
 export function proxy(request: NextRequest): NextResponse {
   const host = request.headers.get("host") ?? "";
-  const subdomain = extractSubdomain(host);
+  const subdomain = resolveAmpaSubdomain(host, request.nextUrl.pathname);
 
   const requestHeaders = new Headers(request.headers);
   if (subdomain) {

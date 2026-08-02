@@ -87,6 +87,36 @@ async function main(): Promise<void> {
     },
   });
 
+  // Cuota de prueba para poder probar en local el alta de membresía (board).
+  const feeSchemaA = await prisma.feeSchema.upsert({
+    where: { id: "seed-fee-schema-a" },
+    update: {},
+    create: {
+      id: "seed-fee-schema-a",
+      ampaId: ampaA.id,
+      academicYearId: yearA.id,
+      name: "Cuota estándar",
+      amount: 100,
+      discountRules: { siblingDiscountPercent: 10, largeFamilyDiscountPercent: 15 },
+    },
+  });
+
+  // Usuario de junta de prueba (PRESIDENCIA de ampaA) para poder entrar en local a
+  // /riberadeltajo/families y /riberadeltajo/memberships: pide el magic link con
+  // este email en /login — en desarrollo (sin credenciales AWS) el enlace se
+  // imprime en la consola de `pnpm dev` en vez de enviarse por email de verdad.
+  const boardUser = await prisma.user.upsert({
+    where: { email: "presidencia@example.com" },
+    update: {},
+    create: { email: "presidencia@example.com", name: "Presidenta de prueba" },
+  });
+
+  await prisma.userAmpaRole.upsert({
+    where: { userId_ampaId_role: { userId: boardUser.id, ampaId: ampaA.id, role: "PRESIDENCIA" } },
+    update: {},
+    create: { userId: boardUser.id, ampaId: ampaA.id, role: "PRESIDENCIA" },
+  });
+
   console.log("Seed OK:", {
     ampaA: ampaA.subdomain,
     ampaB: ampaB.subdomain,
@@ -94,6 +124,8 @@ async function main(): Promise<void> {
     yearB: yearB.label,
     familyA: familyA.referenceCode,
     familyB: familyB.referenceCode,
+    feeSchemaA: feeSchemaA.name,
+    boardUser: boardUser.email,
   });
 }
 
