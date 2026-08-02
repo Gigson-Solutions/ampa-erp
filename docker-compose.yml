@@ -1,0 +1,23 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: ampa-erp-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      # Configurable — en máquinas con otro Postgres local ya escuchando en 5432
+      # (nativo o de otro proyecto), sobreescribir POSTGRES_HOST_PORT en .env.
+      - "${POSTGRES_HOST_PORT:-5432}:5432"
+    volumes:
+      - ampa_erp_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U \"$$POSTGRES_USER\" -d \"$$POSTGRES_DB\""]
+      interval: 3s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  ampa_erp_pgdata:

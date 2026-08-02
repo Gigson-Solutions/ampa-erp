@@ -1,0 +1,9 @@
+{
+  "common": {
+    "appName": "AMPA ERP",
+    "welcome": "Benvingut/da a la teua AMPA",
+    "login": "Accedir",
+    "loginHint": "T'enviarem un enllaç d'accés al teu correu",
+    "loginButton": "Envia l'enllaç d'accés"
+  }
+}

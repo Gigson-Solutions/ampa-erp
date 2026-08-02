@@ -1,0 +1,9 @@
+{
+  "common": {
+    "appName": "AMPA ERP",
+    "welcome": "Ongi etorri zure AMPAra",
+    "login": "Sartu",
+    "loginHint": "Sarbide-esteka bidaliko dizugu zure emailera",
+    "loginButton": "Bidali sarbide-esteka"
+  }
+}

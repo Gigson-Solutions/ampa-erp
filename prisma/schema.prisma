@@ -1,0 +1,446 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ─── Auth (NextAuth) ───────────────────────────────────────────────────────────
+// Nota: sin proveedor OAuth — solo Email (magic link). VerificationToken es lo que
+// NextAuth usa para el token de un solo uso enviado por email.
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  image         String?
+  accounts      Account[]
+  sessions      Session[]
+  ampaRoles     UserAmpaRole[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("users")
+}
+
+model Account {
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([provider, providerAccountId])
+  @@map("accounts")
+}
+
+model Session {
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+
+  @@id([identifier, token])
+  @@map("verification_tokens")
+}
+
+// ─── Roles por AMPA ─────────────────────────────────────────────────────────────
+// Un mismo usuario puede tener roles en varias AMPAs (p. ej. una empresa proveedora
+// de extraescolares que trabaja para varias). El ampaId de sesión activo se resuelve
+// por subdominio en middleware.ts; este modelo es la matriz de permisos real.
+
+enum AmpaRole {
+  SUPERADMIN
+  PRESIDENCIA
+  SECRETARIA
+  TESORERIA
+  VOCAL
+  COMISION
+  FAMILIA
+  PROVEEDOR
+  MONITOR
+}
+
+model UserAmpaRole {
+  id     String   @id @default(cuid())
+  userId String
+  ampaId String
+  role   AmpaRole
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  ampa Ampa @relation(fields: [ampaId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@unique([userId, ampaId, role])
+  @@index([ampaId])
+  @@map("user_ampa_roles")
+}
+
+// ─── Centro educativo (contexto, no tenant) ────────────────────────────────────
+
+model Center {
+  id   String @id @default(cuid())
+  name String
+  code String @unique
+
+  ampas  Ampa[]
+  groups Group[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("centers")
+}
+
+model Group {
+  id       String @id @default(cuid())
+  centerId String
+  name     String // p.ej. "1º ESO A"
+
+  center   Center    @relation(fields: [centerId], references: [id], onDelete: Cascade)
+  students Student[]
+
+  createdAt DateTime @default(now())
+
+  @@index([centerId])
+  @@map("groups")
+}
+
+// ─── AMPA (TENANT) ──────────────────────────────────────────────────────────────
+// Raíz de aislamiento multi-tenant. Toda tabla de negocio de aquí en adelante lleva
+// ampaId y está sujeta a RLS (ver prisma/migrations/*_rls/migration.sql).
+
+model Ampa {
+  id        String  @id @default(cuid())
+  centerId  String
+  name      String
+  subdomain String  @unique
+  locale    String  @default("es") // es | ca | eu | gl | va
+  active    Boolean @default(true)
+
+  // Datos bancarios/SEPA — por-AMPA, nunca centralizados (cada AMPA es su propio
+  // acreedor). Nulos hasta completar el onboarding bancario (Fase 1).
+  sepaCreditorId   String?
+  sepaCreditorName String?
+  sepaIban         String?
+
+  center Center @relation(fields: [centerId], references: [id])
+
+  academicYears AcademicYear[]
+  userRoles     UserAmpaRole[]
+  families      Family[]
+  feeSchemas    FeeSchema[]
+  charges       Charge[]
+  payments      Payment[]
+  activities    Activity[]
+  events        Event[]
+  providers     Provider[]
+  announcements Announcement[]
+  documents     Document[]
+  ledgerEntries LedgerEntry[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("ampas")
+}
+
+model AcademicYear {
+  id        String   @id @default(cuid())
+  ampaId    String
+  label     String // p.ej. "2026-2027"
+  startDate DateTime
+  endDate   DateTime
+  isActive  Boolean  @default(false)
+
+  ampa       Ampa         @relation(fields: [ampaId], references: [id], onDelete: Cascade)
+  students   Student[]
+  memberships Membership[]
+  feeSchemas  FeeSchema[]
+  activities  Activity[]
+
+  createdAt DateTime @default(now())
+
+  @@unique([ampaId, label])
+  @@index([ampaId])
+  @@map("academic_years")
+}
+
+// ─── Familias ────────────────────────────────────────────────────────────────
+
+model Family {
+  id            String @id @default(cuid())
+  ampaId        String
+  referenceCode String // código interno del AMPA, p.ej. para banco de libros
+
+  ampa       Ampa         @relation(fields: [ampaId], references: [id], onDelete: Cascade)
+  guardians  Guardian[]
+  students   Student[]
+  memberships Membership[]
+  charges     Charge[]
+  consents    Consent[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([ampaId])
+  @@map("families")
+}
+
+model Guardian {
+  id       String  @id @default(cuid())
+  familyId String
+  userId   String?
+  name     String
+  email    String
+  phone    String?
+
+  family Family @relation(fields: [familyId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@index([familyId])
+  @@map("guardians")
+}
+
+model Student {
+  id             String  @id @default(cuid())
+  familyId       String
+  academicYearId String?
+  groupId        String?
+  name           String
+  birthDate      DateTime?
+
+  family       Family        @relation(fields: [familyId], references: [id], onDelete: Cascade)
+  academicYear AcademicYear? @relation(fields: [academicYearId], references: [id])
+  group        Group?        @relation(fields: [groupId], references: [id])
+  consents     Consent[]
+
+  createdAt DateTime @default(now())
+
+  @@index([familyId])
+  @@index([academicYearId])
+  @@map("students")
+}
+
+// ─── Cuotas y cobros ─────────────────────────────────────────────────────────
+
+model FeeSchema {
+  id             String @id @default(cuid())
+  ampaId         String
+  academicYearId String
+  name           String
+  amount         Decimal @db.Decimal(10, 2)
+  discountRules  Json? // hermanos, familia numerosa, beca, etc.
+
+  ampa         Ampa         @relation(fields: [ampaId], references: [id], onDelete: Cascade)
+  academicYear AcademicYear @relation(fields: [academicYearId], references: [id])
+  memberships  Membership[]
+
+  createdAt DateTime @default(now())
+
+  @@index([ampaId])
+  @@map("fee_schemas")
+}
+
+model Membership {
+  id             String   @id @default(cuid())
+  ampaId         String
+  familyId       String
+  academicYearId String
+  feeSchemaId    String?
+  status         String   @default("ACTIVE") // ACTIVE | PENDING | CANCELLED
+
+  family       Family        @relation(fields: [familyId], references: [id], onDelete: Cascade)
+  academicYear AcademicYear  @relation(fields: [academicYearId], references: [id])
+  feeSchema    FeeSchema?    @relation(fields: [feeSchemaId], references: [id])
+
+  createdAt DateTime @default(now())
+
+  @@index([ampaId])
+  @@map("memberships")
+}
+
+model Charge {
+  id       String   @id @default(cuid())
+  ampaId   String
+  familyId String
+  concept  String
+  amount   Decimal  @db.Decimal(10, 2)
+  dueDate  DateTime
+  status   String   @default("PENDING") // PENDING | PAID | OVERDUE | CANCELLED
+
+  ampa     Ampa      @relation(fields: [ampaId], references: [id], onDelete: Cascade)
+  family   Family    @relation(fields: [familyId], references: [id], onDelete: Cascade)
+  payments Payment[]
+
+  createdAt DateTime @default(now())
+
+  @@index([ampaId])
+  @@index([familyId])
+  @@map("charges")
+}
+
+model Payment {
+  id       String   @id @default(cuid())
+  ampaId   String
+  chargeId String
+  method   String // STRIPE_CARD | STRIPE_BIZUM | SEPA | TRANSFER | CASH
+  amount   Decimal  @db.Decimal(10, 2)
+  status   String   @default("PENDING") // PENDING | SETTLED | FAILED | REFUNDED
+  paidAt   DateTime?
+
+  ampa   Ampa   @relation(fields: [ampaId], references: [id], onDelete: Cascade)
+  charge Charge @relation(fields: [chargeId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@index([ampaId])
+  @@index([chargeId])
+  @@map("payments")
+}
+
+// ─── Extraescolares y eventos ────────────────────────────────────────────────
+
+model Provider {
+  id           String  @id @default(cuid())
+  ampaId       String
+  name         String
+  contactEmail String?
+
+  ampa       Ampa       @relation(fields: [ampaId], references: [id], onDelete: Cascade)
+  activities Activity[]
+
+  createdAt DateTime @default(now())
+
+  @@index([ampaId])
+  @@map("providers")
+}
+
+model Activity {
+  id             String  @id @default(cuid())
+  ampaId         String
+  academicYearId String
+  providerId     String?
+  name           String
+  capacity       Int?
+  price          Decimal @db.Decimal(10, 2)
+
+  ampa         Ampa         @relation(fields: [ampaId], references: [id], onDelete: Cascade)
+  academicYear AcademicYear @relation(fields: [academicYearId], references: [id])
+  provider     Provider?    @relation(fields: [providerId], references: [id])
+
+  createdAt DateTime @default(now())
+
+  @@index([ampaId])
+  @@map("activities")
+}
+
+model Event {
+  id       String   @id @default(cuid())
+  ampaId   String
+  name     String
+  date     DateTime
+  capacity Int?
+  price    Decimal? @db.Decimal(10, 2)
+
+  ampa Ampa @relation(fields: [ampaId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@index([ampaId])
+  @@map("events")
+}
+
+// ─── Comunicación y documentos ───────────────────────────────────────────────
+
+model Announcement {
+  id      String    @id @default(cuid())
+  ampaId  String
+  title   String
+  body    String
+  segment Json? // filtros de segmentación (curso, grupo, estado de pago, rol, idioma)
+  sentAt  DateTime?
+
+  ampa Ampa @relation(fields: [ampaId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@index([ampaId])
+  @@map("announcements")
+}
+
+model Document {
+  id       String @id @default(cuid())
+  ampaId   String
+  title    String
+  url      String
+  category String?
+
+  ampa Ampa @relation(fields: [ampaId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@index([ampaId])
+  @@map("documents")
+}
+
+// ─── RGPD de menores ─────────────────────────────────────────────────────────
+// Consentimientos versionados con evidencia de firma (IP + timestamp + hash).
+
+model Consent {
+  id         String   @id @default(cuid())
+  familyId   String
+  studentId  String?
+  type       String // DATA | IMAGE | CENTER_SHARE
+  version    String
+  accepted   Boolean
+  ip         String
+  hash       String
+  acceptedAt DateTime @default(now())
+
+  family  Family   @relation(fields: [familyId], references: [id], onDelete: Cascade)
+  student Student? @relation(fields: [studentId], references: [id])
+
+  @@index([familyId])
+  @@map("consents")
+}
+
+// ─── Contabilidad (PGC ESFL simplificada) ────────────────────────────────────
+
+model LedgerEntry {
+  id          String   @id @default(cuid())
+  ampaId      String
+  date        DateTime
+  account     String // código de cuenta PGC ESFL
+  debit       Decimal  @default(0) @db.Decimal(10, 2)
+  credit      Decimal  @default(0) @db.Decimal(10, 2)
+  description String
+
+  ampa Ampa @relation(fields: [ampaId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@index([ampaId])
+  @@map("ledger_entries")
+}

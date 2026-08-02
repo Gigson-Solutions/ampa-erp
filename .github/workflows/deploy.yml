@@ -1,0 +1,20 @@
+name: Deploy
+
+# El build/test real ya se valida en ci.yml en cada push/PR. Este workflow solo
+# dispara el webhook de Coolify tras un push a `main` — el propio Coolify hace
+# `git pull` + `docker compose build/up` en el VPS (a diferencia del deploy.yml de
+# erp-awesomely, que llama a un webhook de Vercel).
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  trigger-coolify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Coolify deploy webhook
+        run: |
+          curl --fail -X POST "${{ secrets.COOLIFY_DEPLOY_WEBHOOK_URL }}" \
+            -H "Authorization: Bearer ${{ secrets.COOLIFY_DEPLOY_TOKEN }}"

@@ -1,0 +1,35 @@
+# Producción: desplegado vía Coolify sobre Hetzner (ver plan de visión > Infra).
+#
+# A diferencia de z1-gestion (que gestiona su propio Caddy porque se despliega por
+# SSH/Actions sin Coolify), Coolify inyecta su propio reverse proxy (Traefik) y TLS
+# automáticamente cuando el "Fully Qualified Domain Name" del servicio se configura
+# en su panel — por eso aquí NO se declara un servicio Caddy/Traefik manual. Esto
+# resuelve la pregunta abierta del plan de Fase 0 sobre gestión de TLS/proxy.
+#
+# Uso local equivalente a producción:
+#   docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build
+
+services:
+  postgres:
+    ports: !override []
+    # En producción Postgres NO se expone al host — solo accesible desde `app` por
+    # la red interna de Docker. El acceso administrativo puntual se hace vía túnel
+    # SSH, igual que en z1-gestion.
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ampa-erp-app
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
+    ports:
+      - "3000:3000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  ampa_erp_pgdata:

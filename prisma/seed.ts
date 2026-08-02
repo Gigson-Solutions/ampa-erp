@@ -1,0 +1,107 @@
+import { prisma } from "../src/lib/prisma";
+
+// Dos AMPAs de prueba en centros distintos, con datos cruzados suficientes para el
+// test de aislamiento multi-tenant (tests/tenant-isolation.test.ts): cada una con su
+// propia familia, para verificar que la AMPA A nunca puede leer/escribir datos de la
+// AMPA B por ninguna vía.
+async function main(): Promise<void> {
+  const centerA = await prisma.center.upsert({
+    where: { code: "IES-RIBERA-DEL-TAJO" },
+    update: {},
+    create: { name: "IES Ribera del Tajo", code: "IES-RIBERA-DEL-TAJO" },
+  });
+
+  const centerB = await prisma.center.upsert({
+    where: { code: "IES-MONTE-ALTO" },
+    update: {},
+    create: { name: "IES Monte Alto", code: "IES-MONTE-ALTO" },
+  });
+
+  const ampaA = await prisma.ampa.upsert({
+    where: { subdomain: "riberadeltajo" },
+    update: {},
+    create: {
+      centerId: centerA.id,
+      name: "AMPA IES Ribera del Tajo",
+      subdomain: "riberadeltajo",
+      locale: "es",
+    },
+  });
+
+  const ampaB = await prisma.ampa.upsert({
+    where: { subdomain: "montealto" },
+    update: {},
+    create: {
+      centerId: centerB.id,
+      name: "AMPA IES Monte Alto",
+      subdomain: "montealto",
+      locale: "ca",
+    },
+  });
+
+  const yearA = await prisma.academicYear.upsert({
+    where: { ampaId_label: { ampaId: ampaA.id, label: "2026-2027" } },
+    update: {},
+    create: {
+      ampaId: ampaA.id,
+      label: "2026-2027",
+      startDate: new Date("2026-09-01"),
+      endDate: new Date("2027-06-30"),
+      isActive: true,
+    },
+  });
+
+  const yearB = await prisma.academicYear.upsert({
+    where: { ampaId_label: { ampaId: ampaB.id, label: "2026-2027" } },
+    update: {},
+    create: {
+      ampaId: ampaB.id,
+      label: "2026-2027",
+      startDate: new Date("2026-09-01"),
+      endDate: new Date("2027-06-30"),
+      isActive: true,
+    },
+  });
+
+  const familyA = await prisma.family.create({
+    data: { ampaId: ampaA.id, referenceCode: "A-0001" },
+  });
+
+  const familyB = await prisma.family.create({
+    data: { ampaId: ampaB.id, referenceCode: "B-0001" },
+  });
+
+  await prisma.guardian.create({
+    data: {
+      familyId: familyA.id,
+      name: "Familia de prueba A",
+      email: "familia-a@example.com",
+    },
+  });
+
+  await prisma.guardian.create({
+    data: {
+      familyId: familyB.id,
+      name: "Familia de prueba B",
+      email: "familia-b@example.com",
+    },
+  });
+
+  console.log("Seed OK:", {
+    ampaA: ampaA.subdomain,
+    ampaB: ampaB.subdomain,
+    yearA: yearA.label,
+    yearB: yearB.label,
+    familyA: familyA.referenceCode,
+    familyB: familyB.referenceCode,
+  });
+}
+
+main()
+  .catch((error: unknown) => {
+    console.error(error);
+    process.exitCode = 1;
+  })
+  .finally(async () => {
+    await prisma.$disconnect();
+  });
