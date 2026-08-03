@@ -130,6 +130,13 @@
       "add": "Gehitu",
       "submitting": "Gordetzen…",
       "genericError": "Ezin izan da dokumentua gehitu. Saiatu berriro."
+    },
+    "export": {
+      "title": "Datuak esportatu",
+      "description": "Deskargatu zure AMPAren datu guztiak JSON fitxategi batean — familiak, kuotak, karguak, ordainketak, jarduerak, ekitaldiak, jakinarazpenak eta dokumentuak.",
+      "export": "Esportatu",
+      "exporting": "Esportatzen…",
+      "genericError": "Ezin izan dira datuak esportatu. Saiatu berriro."
     }
   },
   "tablon": {

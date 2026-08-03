@@ -130,6 +130,13 @@
       "add": "Afegir",
       "submitting": "Guardant…",
       "genericError": "No s'ha pogut afegir el document. Torna-ho a provar."
+    },
+    "export": {
+      "title": "Exportar dades",
+      "description": "Descarrega totes les dades de la teua AMPA en un fitxer JSON — famílies, quotes, càrrecs, pagaments, activitats, esdeveniments, comunicats i documents.",
+      "export": "Exportar",
+      "exporting": "Exportant…",
+      "genericError": "No s'han pogut exportar les dades. Torna-ho a provar."
     }
   },
   "tablon": {

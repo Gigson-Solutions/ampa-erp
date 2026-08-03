@@ -130,6 +130,13 @@
       "add": "Engadir",
       "submitting": "Gardando…",
       "genericError": "Non se puido engadir o documento. Inténtao de novo."
+    },
+    "export": {
+      "title": "Exportar datos",
+      "description": "Descarga todos os datos da túa AMPA nun ficheiro JSON — familias, cotas, cargos, pagos, actividades, eventos, comunicados e documentos.",
+      "export": "Exportar",
+      "exporting": "Exportando…",
+      "genericError": "Non se puideron exportar os datos. Inténtao de novo."
     }
   },
   "tablon": {
