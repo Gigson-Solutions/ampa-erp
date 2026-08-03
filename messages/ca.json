@@ -95,6 +95,32 @@
       "family": "Família",
       "status": "Estat",
       "cancelEnrollment": "Cancel·lar inscripció"
+    },
+    "events": {
+      "title": "Esdeveniments",
+      "createEvent": "Crear esdeveniment",
+      "name": "Nom",
+      "date": "Data",
+      "capacity": "Aforament (en blanc = il·limitat)",
+      "capacityPlaceholder": "Il·limitat",
+      "price": "Preu",
+      "pricePlaceholder": "Gratuït",
+      "submitting": "Guardant…",
+      "genericError": "No s'ha pogut completar l'operació. Torna-ho a provar.",
+      "register": "Inscriure família",
+      "event": "Esdeveniment",
+      "family": "Família",
+      "attendeeCount": "Núm. d'assistents",
+      "waitlisted": "En llista d'espera",
+      "registered": "Inscrita",
+      "noEventsOrFamilies": "Cal almenys un esdeveniment i una família donada d'alta.",
+      "attendance": "Aforament",
+      "waitlistShort": "en espera",
+      "viewRegistrations": "Veure inscripcions",
+      "registrationsTitle": "Inscripcions",
+      "noRegistrations": "Encara no hi ha cap família inscrita en aquest esdeveniment.",
+      "status": "Estat",
+      "cancelRegistration": "Cancel·lar inscripció"
     }
   },
   "tablon": {

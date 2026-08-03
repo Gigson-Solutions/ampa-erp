@@ -176,3 +176,64 @@ export async function listActivityEnrollments(
     }));
   });
 }
+
+export interface EventSummary {
+  id: string;
+  name: string;
+  date: Date;
+  capacity: number | null;
+  price: number | null;
+  registeredAttendees: number;
+  waitlistedCount: number;
+}
+
+export interface EventRegistrationSummary {
+  id: string;
+  familyReferenceCode: string;
+  attendeeCount: number;
+  status: string;
+}
+
+export async function listEvents(ampaId: string): Promise<EventSummary[]> {
+  return withAmpaScope(ampaId, async (db) => {
+    const events = await db.event.findMany({
+      include: { registrations: true },
+      orderBy: { date: "asc" },
+    });
+
+    return events.map((event) => ({
+      id: event.id,
+      name: event.name,
+      date: event.date,
+      capacity: event.capacity,
+      price: event.price?.toNumber() ?? null,
+      registeredAttendees: event.registrations
+        .filter((r) => r.status === "REGISTERED")
+        .reduce((sum, r) => sum + r.attendeeCount, 0),
+      waitlistedCount: event.registrations.filter((r) => r.status === "WAITLISTED").length,
+    }));
+  });
+}
+
+export async function listEventRegistrations(
+  ampaId: string,
+  eventId: string,
+): Promise<EventRegistrationSummary[]> {
+  return withAmpaScope(ampaId, async (db, scopedAmpaId) => {
+    const event = await db.event.findUnique({ where: { id: eventId } });
+    if (!event || event.ampaId !== scopedAmpaId) return [];
+
+    const registrations = await db.eventRegistration.findMany({
+      where: { eventId, status: { not: "CANCELLED" } },
+      include: { family: true },
+      orderBy: { createdAt: "asc" },
+    });
+
+    return registrations.map((registration) => ({
+      id: registration.id,
+      familyReferenceCode: registration.family.referenceCode,
+      attendeeCount: registration.attendeeCount,
+      status: registration.status,
+    }));
+  });
+}

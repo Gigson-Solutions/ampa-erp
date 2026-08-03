@@ -95,6 +95,32 @@
       "family": "Familia",
       "status": "Estado",
       "cancelEnrollment": "Cancelar inscripción"
+    },
+    "events": {
+      "title": "Eventos",
+      "createEvent": "Crear evento",
+      "name": "Nombre",
+      "date": "Fecha",
+      "capacity": "Aforo (dejar en blanco = ilimitado)",
+      "capacityPlaceholder": "Ilimitado",
+      "price": "Precio",
+      "pricePlaceholder": "Gratuito",
+      "submitting": "Guardando…",
+      "genericError": "No se pudo completar la operación. Inténtalo de nuevo.",
+      "register": "Inscribir familia",
+      "event": "Evento",
+      "family": "Familia",
+      "attendeeCount": "Nº de asistentes",
+      "waitlisted": "En lista de espera",
+      "registered": "Inscrita",
+      "noEventsOrFamilies": "Hace falta al menos un evento y una familia dada de alta.",
+      "attendance": "Aforo",
+      "waitlistShort": "en espera",
+      "viewRegistrations": "Ver inscripciones",
+      "registrationsTitle": "Inscripciones",
+      "noRegistrations": "Todavía no hay ninguna familia inscrita en este evento.",
+      "status": "Estado",
+      "cancelRegistration": "Cancelar inscripción"
     }
   },
   "tablon": {

@@ -199,6 +199,7 @@ model Family {
   memberships Membership[]
   charges     Charge[]
   consents    Consent[]
+  eventRegistrations EventRegistration[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -386,12 +387,34 @@ model Event {
   capacity Int?
   price    Decimal? @db.Decimal(10, 2)
 
-  ampa Ampa @relation(fields: [ampaId], references: [id], onDelete: Cascade)
+  ampa          Ampa                @relation(fields: [ampaId], references: [id], onDelete: Cascade)
+  registrations EventRegistration[]
 
   createdAt DateTime @default(now())
 
   @@index([ampaId])
   @@map("events")
+}
+
+// Sin `ampaId` propio a propósito — igual que ActivityEnrollment, se aísla
+// transitivamente a través de `Event.ampaId` Y `Family.ampaId` (ambos SÍ están en
+// TENANT_SCOPED_MODELS, así que `db.event.findUnique`/`db.family.findUnique` ya
+// devuelven null si pertenecen a otra AMPA — ver src/lib/events.ts).
+model EventRegistration {
+  id            String @id @default(cuid())
+  eventId       String
+  familyId      String
+  attendeeCount Int    @default(1)
+  status        String @default("REGISTERED") // REGISTERED | WAITLISTED | CANCELLED
+
+  event  Event  @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  family Family @relation(fields: [familyId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@unique([eventId, familyId])
+  @@index([eventId])
+  @@map("event_registrations")
 }
 
 // ─── Comunicación y documentos ───────────────────────────────────────────────

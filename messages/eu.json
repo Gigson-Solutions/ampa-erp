@@ -95,6 +95,32 @@
       "family": "Familia",
       "status": "Egoera",
       "cancelEnrollment": "Izen-ematea bertan behera utzi"
+    },
+    "events": {
+      "title": "Ekitaldiak",
+      "createEvent": "Ekitaldia sortu",
+      "name": "Izena",
+      "date": "Data",
+      "capacity": "Edukiera (hutsik = mugagabea)",
+      "capacityPlaceholder": "Mugagabea",
+      "price": "Prezioa",
+      "pricePlaceholder": "Doakoa",
+      "submitting": "Gordetzen…",
+      "genericError": "Ezin izan da eragiketa osatu. Saiatu berriro.",
+      "register": "Familia izena eman",
+      "event": "Ekitaldia",
+      "family": "Familia",
+      "attendeeCount": "Bertaratuen kopurua",
+      "waitlisted": "Itxaron zerrendan",
+      "registered": "Izena emanda",
+      "noEventsOrFamilies": "Gutxienez ekitaldi bat eta familia bat behar dira.",
+      "attendance": "Edukiera",
+      "waitlistShort": "zain",
+      "viewRegistrations": "Izen-emateak ikusi",
+      "registrationsTitle": "Izen-emateak",
+      "noRegistrations": "Oraindik ez dago familiarik izena emanda ekitaldi honetan.",
+      "status": "Egoera",
+      "cancelRegistration": "Izen-ematea bertan behera utzi"
     }
   },
   "tablon": {
