@@ -31,6 +31,7 @@ const TENANT_SCOPED_MODELS = new Set([
   "Document",
   "LedgerEntry",
   "UserAmpaRole",
+  "MinutesEntry",
 ]);
 
 const WRITE_OPERATIONS_WITH_DATA = new Set([

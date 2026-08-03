@@ -150,6 +150,22 @@
       "present": "Present",
       "absent": "Absent",
       "noEnrolled": "No hi ha alumnes inscrits en esta activitat."
+    },
+    "minutes": {
+      "title": "Llibre d'actes",
+      "immutableNotice": "Les actes són immutables: una vegada guardades no es poden editar ni esborrar.",
+      "titleLabel": "Títol",
+      "bodyLabel": "Contingut",
+      "signedByLabel": "Firmat per",
+      "addEntry": "Guardar acta",
+      "submitting": "Guardant…",
+      "genericError": "No s'ha pogut guardar l'acta. Torna-ho a intentar.",
+      "verifyChain": "Verificar integritat del llibre",
+      "verifying": "Verificant…",
+      "chainValid": "Cadena íntegra — núm. d'actes:",
+      "chainBroken": "⚠️ Cadena trencada en l'acta",
+      "entryNumber": "Acta núm.",
+      "signedBy": "Firmat per"
     }
   },
   "tablon": {

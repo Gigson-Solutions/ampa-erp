@@ -150,6 +150,22 @@
       "present": "Bertan",
       "absent": "Ez bertan",
       "noEnrolled": "Ez dago ikaslerik izena emanda jarduera honetan."
+    },
+    "minutes": {
+      "title": "Aktaren liburua",
+      "immutableNotice": "Aktak aldaezinak dira: behin gordeta, ezin dira editatu ez ezabatu.",
+      "titleLabel": "Izenburua",
+      "bodyLabel": "Edukia",
+      "signedByLabel": "Sinatzailea",
+      "addEntry": "Akta gorde",
+      "submitting": "Gordetzen…",
+      "genericError": "Ezin izan da akta gorde. Saiatu berriro.",
+      "verifyChain": "Liburuaren osotasuna egiaztatu",
+      "verifying": "Egiaztatzen…",
+      "chainValid": "Katea osoa — akta kopurua:",
+      "chainBroken": "⚠️ Katea hautsita akta honetan",
+      "entryNumber": "Akta zk.",
+      "signedBy": "Sinatzailea"
     }
   },
   "tablon": {

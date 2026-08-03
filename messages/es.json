@@ -150,6 +150,22 @@
       "present": "Presente",
       "absent": "Ausente",
       "noEnrolled": "No hay alumnos/as inscritos/as en esta actividad."
+    },
+    "minutes": {
+      "title": "Libro de actas",
+      "immutableNotice": "Las actas son inmutables: una vez guardadas no se pueden editar ni borrar.",
+      "titleLabel": "Título",
+      "bodyLabel": "Contenido",
+      "signedByLabel": "Firmado por",
+      "addEntry": "Guardar acta",
+      "submitting": "Guardando…",
+      "genericError": "No se pudo guardar el acta. Inténtalo de nuevo.",
+      "verifyChain": "Verificar integridad del libro",
+      "verifying": "Verificando…",
+      "chainValid": "Cadena íntegra — nº de actas:",
+      "chainBroken": "⚠️ Cadena rota en el acta",
+      "entryNumber": "Acta nº",
+      "signedBy": "Firmado por"
     }
   },
   "tablon": {

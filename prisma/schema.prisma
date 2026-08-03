@@ -170,6 +170,7 @@ model Ampa {
   announcements Announcement[]
   documents     Document[]
   ledgerEntries LedgerEntry[]
+  minutesEntries MinutesEntry[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -527,4 +528,31 @@ model LedgerEntry {
 
   @@index([ampaId])
   @@map("ledger_entries")
+}
+
+// ─── Fase 2: libro de actas (LO 1/2002) ──────────────────────────────────────
+// Numeración correlativa inmutable + cadena de hashes (cada asiento incluye el
+// hash del anterior) — prueba documental de que ningún acta se ha insertado,
+// borrado o modificado a posteriori. Sin update/delete a propósito: solo existen
+// `createMinutesEntry` y `verifyMinutesChain` en src/lib/minutes.ts. La firma
+// (nombre de quien firma + timestamp) se captura EN LA CREACIÓN, nunca después,
+// para no tener que mutar un asiento ya hasheado.
+model MinutesEntry {
+  id             String   @id @default(cuid())
+  ampaId         String
+  sequenceNumber Int
+  title          String
+  body           String
+  previousHash   String? // null solo en el primer asiento del libro
+  hash           String
+  signedByName   String
+  signedAt       DateTime
+
+  ampa Ampa @relation(fields: [ampaId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@unique([ampaId, sequenceNumber])
+  @@index([ampaId])
+  @@map("minutes_entries")
 }
