@@ -157,5 +157,14 @@
   "documentos": {
     "title": "Documentos",
     "empty": "Aínda non hai documentos publicados nesta AMPA."
+  },
+  "admin": {
+    "title": "Panel de plataforma",
+    "empty": "Aínda non hai ningunha AMPA rexistrada.",
+    "name": "Nome",
+    "subdomain": "Subdominio",
+    "academicYear": "Curso activo",
+    "families": "Familias",
+    "pendingCharges": "Cargos pendentes"
   }
 }

@@ -157,5 +157,14 @@
   "documentos": {
     "title": "Dokumentuak",
     "empty": "Oraindik ez dago dokumenturik argitaratuta AMPA honetan."
+  },
+  "admin": {
+    "title": "Plataformaren panela",
+    "empty": "Oraindik ez dago AMParik erregistratuta.",
+    "name": "Izena",
+    "subdomain": "Azpidomeinua",
+    "academicYear": "Ikasturte aktiboa",
+    "families": "Familiak",
+    "pendingCharges": "Zain dauden karguak"
   }
 }

@@ -20,6 +20,15 @@ model User {
   sessions      Session[]
   ampaRoles     UserAmpaRole[]
 
+  // Superadmin de PLATAFORMA (equipo de Gigson/la ONG) — deliberadamente distinto
+  // del valor de enum `AmpaRole.SUPERADMIN` en `UserAmpaRole`, que es un rol MÁS
+  // dentro de la matriz de permisos de UNA AMPA concreta (ver plan de visión >
+  // Roles: "superadmin (plataforma) · presidencia/secretaría/tesorería/vocal
+  // (junta)" — son dos conceptos distintos a propósito). Este flag da acceso
+  // transversal de solo lectura a `/admin` (todas las AMPAs), gestionado con
+  // `requirePlatformAdmin()`, nunca con `requireAmpaRole()`.
+  isPlatformAdmin Boolean @default(false)
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -69,6 +78,9 @@ model VerificationToken {
 // por subdominio en middleware.ts; este modelo es la matriz de permisos real.
 
 enum AmpaRole {
+  // Rol de gestión dentro de ESTA AMPA (p.ej. alguien de Gigson dado de alta como
+  // soporte puntual de una AMPA concreta) — NO es lo mismo que `User.isPlatformAdmin`
+  // (acceso transversal a todas las AMPAs vía `/admin`). Ver comentario en `User`.
   SUPERADMIN
   PRESIDENCIA
   SECRETARIA

@@ -117,6 +117,14 @@ async function main(): Promise<void> {
     create: { userId: boardUser.id, ampaId: ampaA.id, role: "PRESIDENCIA" },
   });
 
+  // Superadmin de PLATAFORMA de prueba (equipo Gigson/ONG) para poder entrar en
+  // local a /admin — distinto del PRESIDENCIA de arriba, que solo ve su AMPA.
+  await prisma.user.upsert({
+    where: { email: "admin@example.com" },
+    update: { isPlatformAdmin: true },
+    create: { email: "admin@example.com", name: "Admin de plataforma", isPlatformAdmin: true },
+  });
+
   console.log("Seed OK:", {
     ampaA: ampaA.subdomain,
     ampaB: ampaB.subdomain,
