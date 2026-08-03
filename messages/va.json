@@ -27,6 +27,19 @@
     "genericError": "No s'ha pogut completar l'alta. Torna-ho a intentar."
   },
   "board": {
+    "charges": {
+      "title": "Càrrecs pendents",
+      "empty": "No hi ha càrrecs pendents de cobrament en esta AMPA.",
+      "family": "Família",
+      "concept": "Concepte",
+      "amount": "Import",
+      "dueDate": "Venciment",
+      "methodTransfer": "Transferència",
+      "methodCash": "Efectiu",
+      "markPaid": "Marcar com a pagat",
+      "submitting": "Guardant…",
+      "genericError": "No s'ha pogut registrar el pagament. Torna-ho a intentar."
+    },
     "families": {
       "title": "Famílies",
       "empty": "Encara no hi ha famílies donades d'alta en esta AMPA.",

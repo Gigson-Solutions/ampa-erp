@@ -53,3 +53,33 @@ export async function listFeeSchemas(ampaId: string): Promise<FeeSchemaSummary[]
     }));
   });
 }
+
+export interface PendingChargeSummary {
+  id: string;
+  familyId: string;
+  familyReferenceCode: string;
+  concept: string;
+  amount: number;
+  dueDate: Date;
+  status: string;
+}
+
+export async function listPendingCharges(ampaId: string): Promise<PendingChargeSummary[]> {
+  return withAmpaScope(ampaId, async (db) => {
+    const charges = await db.charge.findMany({
+      where: { status: { in: ["PENDING", "OVERDUE"] } },
+      include: { family: true },
+      orderBy: { dueDate: "asc" },
+    });
+
+    return charges.map((charge) => ({
+      id: charge.id,
+      familyId: charge.familyId,
+      familyReferenceCode: charge.family.referenceCode,
+      concept: charge.concept,
+      amount: charge.amount.toNumber(),
+      dueDate: charge.dueDate,
+      status: charge.status,
+    }));
+  });
+}

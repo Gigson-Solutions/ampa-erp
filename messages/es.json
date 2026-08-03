@@ -27,6 +27,19 @@
     "genericError": "No se pudo completar el alta. Inténtalo de nuevo."
   },
   "board": {
+    "charges": {
+      "title": "Cargos pendientes",
+      "empty": "No hay cargos pendientes de cobro en esta AMPA.",
+      "family": "Familia",
+      "concept": "Concepto",
+      "amount": "Importe",
+      "dueDate": "Vencimiento",
+      "methodTransfer": "Transferencia",
+      "methodCash": "Efectivo",
+      "markPaid": "Marcar como pagado",
+      "submitting": "Guardando…",
+      "genericError": "No se pudo registrar el pago. Inténtalo de nuevo."
+    },
     "families": {
       "title": "Familias",
       "empty": "Todavía no hay familias dadas de alta en esta AMPA.",

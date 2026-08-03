@@ -27,6 +27,19 @@
     "genericError": "Ezin izan da altarik osatu. Saiatu berriro."
   },
   "board": {
+    "charges": {
+      "title": "Zain dauden kargu",
+      "empty": "Ez dago kobratzeko zain dagoen kargurik AMPA honetan.",
+      "family": "Familia",
+      "concept": "Kontzeptua",
+      "amount": "Zenbatekoa",
+      "dueDate": "Muga-eguna",
+      "methodTransfer": "Transferentzia",
+      "methodCash": "Eskudirua",
+      "markPaid": "Ordainduta gisa markatu",
+      "submitting": "Gordetzen…",
+      "genericError": "Ezin izan da ordainketa erregistratu. Saiatu berriro."
+    },
     "families": {
       "title": "Familiak",
       "empty": "Oraindik ez dago familiarik alta emanda AMPA honetan.",
