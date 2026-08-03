@@ -68,6 +68,33 @@
       "publish": "Argitaratu",
       "submitting": "Argitaratzen…",
       "genericError": "Ezin izan da jakinarazpena argitaratu. Saiatu berriro."
+    },
+    "activities": {
+      "title": "Eskola-orduz kanpokoak",
+      "createActivity": "Jarduera sortu",
+      "name": "Izena",
+      "academicYear": "Ikasturtea",
+      "capacity": "Lekuak (hutsik = mugagabea)",
+      "capacityPlaceholder": "Mugagabea",
+      "price": "Prezioa",
+      "submitting": "Gordetzen…",
+      "genericError": "Ezin izan da eragiketa osatu. Saiatu berriro.",
+      "noAcademicYears": "Sortu lehendabizi ikasturte bat jarduerak alta emateko.",
+      "enroll": "Ikaslea izena eman",
+      "activity": "Jarduera",
+      "student": "Ikaslea",
+      "waitlisted": "Itxaron zerrendan",
+      "enrolled": "Izena emanda",
+      "noActivitiesOrStudents": "Gutxienez jarduera bat eta ikasle bat behar dira.",
+      "provider": "Hornitzailea",
+      "occupancy": "Okupazioa",
+      "waitlistShort": "zain",
+      "viewEnrollments": "Izen-emateak ikusi",
+      "enrollmentsTitle": "Izen-emateak",
+      "noEnrollments": "Oraindik ez dago inor izena emanda jarduera honetan.",
+      "family": "Familia",
+      "status": "Egoera",
+      "cancelEnrollment": "Izen-ematea bertan behera utzi"
     }
   },
   "tablon": {

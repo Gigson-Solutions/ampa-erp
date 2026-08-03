@@ -235,6 +235,7 @@ model Student {
   academicYear AcademicYear? @relation(fields: [academicYearId], references: [id])
   group        Group?        @relation(fields: [groupId], references: [id])
   consents     Consent[]
+  activityEnrollments ActivityEnrollment[]
 
   createdAt DateTime @default(now())
 
@@ -346,14 +347,35 @@ model Activity {
   capacity       Int?
   price          Decimal @db.Decimal(10, 2)
 
-  ampa         Ampa         @relation(fields: [ampaId], references: [id], onDelete: Cascade)
-  academicYear AcademicYear @relation(fields: [academicYearId], references: [id])
-  provider     Provider?    @relation(fields: [providerId], references: [id])
+  ampa         Ampa                 @relation(fields: [ampaId], references: [id], onDelete: Cascade)
+  academicYear AcademicYear         @relation(fields: [academicYearId], references: [id])
+  provider     Provider?            @relation(fields: [providerId], references: [id])
+  enrollments  ActivityEnrollment[]
 
   createdAt DateTime @default(now())
 
   @@index([ampaId])
   @@map("activities")
+}
+
+// Sin `ampaId` propio a propósito — igual que Guardian/Student/Consent, se aísla
+// transitivamente a través de `Activity.ampaId` (ver src/lib/activities.ts, que
+// SIEMPRE verifica primero que la actividad pertenece a la AMPA activa antes de
+// tocar inscripciones).
+model ActivityEnrollment {
+  id         String @id @default(cuid())
+  activityId String
+  studentId  String
+  status     String @default("ENROLLED") // ENROLLED | WAITLISTED | CANCELLED
+
+  activity Activity @relation(fields: [activityId], references: [id], onDelete: Cascade)
+  student  Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@unique([activityId, studentId])
+  @@index([activityId])
+  @@map("activity_enrollments")
 }
 
 model Event {

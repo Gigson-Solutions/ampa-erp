@@ -68,6 +68,33 @@
       "publish": "Publicar",
       "submitting": "Publicando…",
       "genericError": "Non se puido publicar o comunicado. Inténtao de novo."
+    },
+    "activities": {
+      "title": "Extraescolares",
+      "createActivity": "Crear actividade",
+      "name": "Nome",
+      "academicYear": "Curso escolar",
+      "capacity": "Prazas (en branco = ilimitadas)",
+      "capacityPlaceholder": "Ilimitadas",
+      "price": "Prezo",
+      "submitting": "Gardando…",
+      "genericError": "Non se puido completar a operación. Inténtao de novo.",
+      "noAcademicYears": "Crea antes un curso escolar para poder dar de alta actividades.",
+      "enroll": "Inscribir alumno/a",
+      "activity": "Actividade",
+      "student": "Alumno/a",
+      "waitlisted": "En lista de espera",
+      "enrolled": "Inscrito/a",
+      "noActivitiesOrStudents": "Fai falta polo menos unha actividade e un alumno/a dado de alta.",
+      "provider": "Provedor",
+      "occupancy": "Ocupación",
+      "waitlistShort": "en espera",
+      "viewEnrollments": "Ver inscricións",
+      "enrollmentsTitle": "Inscricións",
+      "noEnrollments": "Aínda non hai ninguén inscrito nesta actividade.",
+      "family": "Familia",
+      "status": "Estado",
+      "cancelEnrollment": "Cancelar inscrición"
     }
   },
   "tablon": {

@@ -68,6 +68,33 @@
       "publish": "Publicar",
       "submitting": "Publicant…",
       "genericError": "No s'ha pogut publicar el comunicat. Torna-ho a provar."
+    },
+    "activities": {
+      "title": "Extraescolars",
+      "createActivity": "Crear activitat",
+      "name": "Nom",
+      "academicYear": "Curs escolar",
+      "capacity": "Places (en blanc = il·limitades)",
+      "capacityPlaceholder": "Il·limitades",
+      "price": "Preu",
+      "submitting": "Guardant…",
+      "genericError": "No s'ha pogut completar l'operació. Torna-ho a provar.",
+      "noAcademicYears": "Crea abans un curs escolar per poder donar d'alta activitats.",
+      "enroll": "Inscriure alumne/a",
+      "activity": "Activitat",
+      "student": "Alumne/a",
+      "waitlisted": "En llista d'espera",
+      "enrolled": "Inscrit/a",
+      "noActivitiesOrStudents": "Cal almenys una activitat i un alumne/a donat d'alta.",
+      "provider": "Proveïdor",
+      "occupancy": "Ocupació",
+      "waitlistShort": "en espera",
+      "viewEnrollments": "Veure inscripcions",
+      "enrollmentsTitle": "Inscripcions",
+      "noEnrollments": "Encara no hi ha ningú inscrit en aquesta activitat.",
+      "family": "Família",
+      "status": "Estat",
+      "cancelEnrollment": "Cancel·lar inscripció"
     }
   },
   "tablon": {

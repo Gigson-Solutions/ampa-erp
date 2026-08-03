@@ -83,3 +83,96 @@ export async function listPendingCharges(ampaId: string): Promise<PendingChargeS
     }));
   });
 }
+
+export interface AcademicYearSummary {
+  id: string;
+  label: string;
+  isActive: boolean;
+}
+
+export async function listAcademicYears(ampaId: string): Promise<AcademicYearSummary[]> {
+  return withAmpaScope(ampaId, async (db) => {
+    const years = await db.academicYear.findMany({ orderBy: { startDate: "desc" } });
+    return years.map((year) => ({ id: year.id, label: year.label, isActive: year.isActive }));
+  });
+}
+
+export interface StudentSummary {
+  id: string;
+  name: string;
+  familyReferenceCode: string;
+}
+
+export async function listStudents(ampaId: string): Promise<StudentSummary[]> {
+  return withAmpaScope(ampaId, async (db) => {
+    const families = await db.family.findMany({ include: { students: true } });
+    return families.flatMap((family) =>
+      family.students.map((student) => ({
+        id: student.id,
+        name: student.name,
+        familyReferenceCode: family.referenceCode,
+      })),
+    );
+  });
+}
+
+export interface ActivitySummary {
+  id: string;
+  name: string;
+  academicYearLabel: string;
+  providerName: string | null;
+  capacity: number | null;
+  price: number;
+  enrolledCount: number;
+  waitlistedCount: number;
+}
+
+export interface ActivityEnrollmentSummary {
+  id: string;
+  studentName: string;
+  familyReferenceCode: string;
+  status: string;
+}
+
+export async function listActivities(ampaId: string): Promise<ActivitySummary[]> {
+  return withAmpaScope(ampaId, async (db) => {
+    const activities = await db.activity.findMany({
+      include: { academicYear: true, provider: true, enrollments: true },
+      orderBy: { createdAt: "desc" },
+    });
+
+    return activities.map((activity) => ({
+      id: activity.id,
+      name: activity.name,
+      academicYearLabel: activity.academicYear.label,
+      providerName: activity.provider?.name ?? null,
+      capacity: activity.capacity,
+      price: activity.price.toNumber(),
+      enrolledCount: activity.enrollments.filter((e) => e.status === "ENROLLED").length,
+      waitlistedCount: activity.enrollments.filter((e) => e.status === "WAITLISTED").length,
+    }));
+  });
+}
+
+export async function listActivityEnrollments(
+  ampaId: string,
+  activityId: string,
+): Promise<ActivityEnrollmentSummary[]> {
+  return withAmpaScope(ampaId, async (db, scopedAmpaId) => {
+    const activity = await db.activity.findUnique({ where: { id: activityId } });
+    if (!activity || activity.ampaId !== scopedAmpaId) return [];
+
+    const enrollments = await db.activityEnrollment.findMany({
+      where: { activityId, status: { not: "CANCELLED" } },
+      include: { student: { include: { family: true } } },
+      orderBy: { createdAt: "asc" },
+    });
+
+    return enrollments.map((enrollment) => ({
+      id: enrollment.id,
+      studentName: enrollment.student.name,
+      familyReferenceCode: enrollment.student.family.referenceCode,
+      status: enrollment.status,
+    }));
+  });
+}
