@@ -121,10 +121,23 @@
       "noRegistrations": "Oraindik ez dago familiarik izena emanda ekitaldi honetan.",
       "status": "Egoera",
       "cancelRegistration": "Izen-ematea bertan behera utzi"
+    },
+    "documents": {
+      "title": "Dokumentuak",
+      "titleLabel": "Izenburua",
+      "urlLabel": "Esteka",
+      "categoryLabel": "Kategoria (aukerakoa)",
+      "add": "Gehitu",
+      "submitting": "Gordetzen…",
+      "genericError": "Ezin izan da dokumentua gehitu. Saiatu berriro."
     }
   },
   "tablon": {
     "title": "Iragarki-oholla",
     "empty": "Oraindik ez dago jakinarazpenik argitaratuta AMPA honetan."
+  },
+  "documentos": {
+    "title": "Dokumentuak",
+    "empty": "Oraindik ez dago dokumenturik argitaratuta AMPA honetan."
   }
 }

@@ -121,10 +121,23 @@
       "noRegistrations": "Encara no hi ha cap família inscrita en aquest esdeveniment.",
       "status": "Estat",
       "cancelRegistration": "Cancel·lar inscripció"
+    },
+    "documents": {
+      "title": "Documents",
+      "titleLabel": "Títol",
+      "urlLabel": "Enllaç",
+      "categoryLabel": "Categoria (opcional)",
+      "add": "Afegir",
+      "submitting": "Guardant…",
+      "genericError": "No s'ha pogut afegir el document. Torna-ho a provar."
     }
   },
   "tablon": {
     "title": "Tauler",
     "empty": "Encara no hi ha comunicats publicats en aquesta AMPA."
+  },
+  "documentos": {
+    "title": "Documents",
+    "empty": "Encara no hi ha documents publicats en aquesta AMPA."
   }
 }

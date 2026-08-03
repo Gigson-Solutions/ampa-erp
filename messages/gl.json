@@ -121,10 +121,23 @@
       "noRegistrations": "Aínda non hai ningunha familia inscrita neste evento.",
       "status": "Estado",
       "cancelRegistration": "Cancelar inscrición"
+    },
+    "documents": {
+      "title": "Documentos",
+      "titleLabel": "Título",
+      "urlLabel": "Ligazón",
+      "categoryLabel": "Categoría (opcional)",
+      "add": "Engadir",
+      "submitting": "Gardando…",
+      "genericError": "Non se puido engadir o documento. Inténtao de novo."
     }
   },
   "tablon": {
     "title": "Taboleiro",
     "empty": "Aínda non hai comunicados publicados nesta AMPA."
+  },
+  "documentos": {
+    "title": "Documentos",
+    "empty": "Aínda non hai documentos publicados nesta AMPA."
   }
 }
