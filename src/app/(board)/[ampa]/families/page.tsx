@@ -46,6 +46,8 @@ function FamiliesPageContent({
               <td>{family.studentCount}</td>
               <td>
                 <Link href={`memberships?familyId=${family.id}`}>{t("createMembership")}</Link>
+                {" · "}
+                <Link href={`families/${family.id}/carnet`}>{t("viewCard")}</Link>
               </td>
             </tr>
           ))}

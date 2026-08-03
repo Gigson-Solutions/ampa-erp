@@ -20,6 +20,7 @@ export function RegisterFamilyForm({ ampaSubdomain }: { ampaSubdomain: string })
   const [consentCenterShare, setConsentCenterShare] = useState(false);
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [message, setMessage] = useState<string | null>(null);
+  const [cardToken, setCardToken] = useState<string | null>(null);
 
   function updateStudentName(index: number, name: string): void {
     setStudents((prev) => prev.map((student, i) => (i === index ? { name } : student)));
@@ -55,6 +56,7 @@ export function RegisterFamilyForm({ ampaSubdomain }: { ampaSubdomain: string })
     if (result.ok) {
       setStatus("success");
       setMessage(`${t("success")} ${result.referenceCode}`);
+      setCardToken(result.cardToken ?? null);
     } else {
       setStatus("error");
       setMessage(result.error ?? t("genericError"));
@@ -62,7 +64,16 @@ export function RegisterFamilyForm({ ampaSubdomain }: { ampaSubdomain: string })
   }
 
   if (status === "success") {
-    return <p role="status">{message}</p>;
+    return (
+      <div>
+        <p role="status">{message}</p>
+        {cardToken && (
+          <p className="mt-2">
+            <a href={`/${ampaSubdomain}/carnet/${cardToken}`}>{t("viewCard")}</a>
+          </p>
+        )}
+      </div>
+    );
   }
 
   return (

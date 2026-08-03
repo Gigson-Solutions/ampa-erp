@@ -205,6 +205,13 @@ model Family {
   ampaId        String
   referenceCode String // código interno del AMPA, p.ej. para banco de libros
 
+  // Carnet digital con QR (ver roadmap): token opaco no adivinable, distinto del
+  // `id` (cuid), para que la URL pública de verificación (`/[ampa]/carnet/[token]`)
+  // no sea enumerable ni exponga el id interno. Nullable a propósito — se genera
+  // de forma perezosa la primera vez que se pide (ver src/lib/card.ts), así no
+  // hace falta backfilear las familias ya existentes en una migración.
+  cardToken String? @unique
+
   ampa       Ampa         @relation(fields: [ampaId], references: [id], onDelete: Cascade)
   guardians  Guardian[]
   students   Student[]

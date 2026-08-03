@@ -4,11 +4,13 @@ import { headers } from "next/headers";
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { registerFamily, registerFamilySchema, type RegisterFamilyInput } from "@/lib/family-registration";
+import { getOrCreateFamilyCardToken } from "@/lib/card";
 
 export interface RegisterFamilyActionResult {
   ok: boolean;
   error?: string;
   referenceCode?: string;
+  cardToken?: string;
 }
 
 async function resolveRequestIp(): Promise<string> {
@@ -41,7 +43,10 @@ export async function registerFamilyAction(
 
   try {
     const result = await registerFamily(ampa.id, parseResult.data, { ip });
-    return { ok: true, referenceCode: result.referenceCode };
+    // El carnet digital se genera ya en el alta para poder enseñar el enlace en
+    // la propia pantalla de éxito — evita un paso adicional de "generar carnet".
+    const cardToken = await getOrCreateFamilyCardToken(ampa.id, result.familyId);
+    return { ok: true, referenceCode: result.referenceCode, cardToken };
   } catch (error) {
     console.error("registerFamilyAction failed:", error);
     return { ok: false, error: "No se pudo completar el alta. Inténtalo de nuevo." };

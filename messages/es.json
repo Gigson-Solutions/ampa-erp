@@ -24,7 +24,8 @@
     "submit": "Dar de alta",
     "submitting": "Enviando…",
     "success": "¡Familia dada de alta! Código de referencia:",
-    "genericError": "No se pudo completar el alta. Inténtalo de nuevo."
+    "genericError": "No se pudo completar el alta. Inténtalo de nuevo.",
+    "viewCard": "Ver tu carnet digital"
   },
   "board": {
     "charges": {
@@ -46,7 +47,8 @@
       "referenceCode": "Código",
       "guardians": "Tutor/a",
       "students": "Alumnos/as",
-      "createMembership": "Crear membresía"
+      "createMembership": "Crear membresía",
+      "viewCard": "Ver carnet"
     },
     "memberships": {
       "title": "Alta de membresía",
@@ -166,5 +168,15 @@
     "academicYear": "Curso activo",
     "families": "Familias",
     "pendingCharges": "Cargos pendientes"
+  },
+  "carnet": {
+    "subtitle": "Carnet digital de socio/a",
+    "qrAlt": "Código QR de verificación del carnet",
+    "status": "Estado",
+    "statusActive": "Activo",
+    "statusPending": "Pendiente",
+    "statusCancelled": "Cancelado",
+    "statusNone": "Sin membresía",
+    "academicYear": "Curso"
   }
 }

@@ -24,7 +24,8 @@
     "submit": "Donar d'alta",
     "submitting": "Enviant…",
     "success": "Família donada d'alta! Codi de referència:",
-    "genericError": "No s'ha pogut completar l'alta. Torna-ho a provar."
+    "genericError": "No s'ha pogut completar l'alta. Torna-ho a provar.",
+    "viewCard": "Veure el teu carnet digital"
   },
   "board": {
     "charges": {
@@ -46,7 +47,8 @@
       "referenceCode": "Codi",
       "guardians": "Tutor/a",
       "students": "Alumnes",
-      "createMembership": "Crear membresia"
+      "createMembership": "Crear membresia",
+      "viewCard": "Veure carnet"
     },
     "memberships": {
       "title": "Alta de membresia",
@@ -166,5 +168,15 @@
     "academicYear": "Curs actiu",
     "families": "Famílies",
     "pendingCharges": "Càrrecs pendents"
+  },
+  "carnet": {
+    "subtitle": "Carnet digital de soci/a",
+    "qrAlt": "Codi QR de verificació del carnet",
+    "status": "Estat",
+    "statusActive": "Actiu",
+    "statusPending": "Pendent",
+    "statusCancelled": "Cancel·lat",
+    "statusNone": "Sense membresia",
+    "academicYear": "Curs"
   }
 }

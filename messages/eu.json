@@ -24,7 +24,8 @@
     "submit": "Alta eman",
     "submitting": "Bidaltzen…",
     "success": "Familia alta emanda! Erreferentzia kodea:",
-    "genericError": "Ezin izan da altarik osatu. Saiatu berriro."
+    "genericError": "Ezin izan da altarik osatu. Saiatu berriro.",
+    "viewCard": "Ikusi zure txartel digitala"
   },
   "board": {
     "charges": {
@@ -46,7 +47,8 @@
       "referenceCode": "Kodea",
       "guardians": "Tutorea",
       "students": "Ikasleak",
-      "createMembership": "Kidetza sortu"
+      "createMembership": "Kidetza sortu",
+      "viewCard": "Txartela ikusi"
     },
     "memberships": {
       "title": "Kidetza alta",
@@ -166,5 +168,15 @@
     "academicYear": "Ikasturte aktiboa",
     "families": "Familiak",
     "pendingCharges": "Zain dauden karguak"
+  },
+  "carnet": {
+    "subtitle": "Kide-txartel digitala",
+    "qrAlt": "Txartela egiaztatzeko QR kodea",
+    "status": "Egoera",
+    "statusActive": "Aktibo",
+    "statusPending": "Zain",
+    "statusCancelled": "Bertan behera utzita",
+    "statusNone": "Kidetzarik gabe",
+    "academicYear": "Ikasturtea"
   }
 }
