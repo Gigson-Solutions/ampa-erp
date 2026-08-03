@@ -60,6 +60,18 @@
       "success": "Membresía creada. Importe del cargo:",
       "genericError": "No se pudo crear la membresía. Inténtalo de nuevo.",
       "emptyDirectories": "No hay familias o cuotas creadas todavía para esta AMPA."
+    },
+    "announcements": {
+      "title": "Comunicados",
+      "titleLabel": "Título",
+      "bodyLabel": "Contenido",
+      "publish": "Publicar",
+      "submitting": "Publicando…",
+      "genericError": "No se pudo publicar el comunicado. Inténtalo de nuevo."
     }
+  },
+  "tablon": {
+    "title": "Tablón",
+    "empty": "Todavía no hay comunicados publicados en esta AMPA."
   }
 }

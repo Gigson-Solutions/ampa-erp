@@ -60,6 +60,18 @@
       "success": "Membresia creada. Import del càrrec:",
       "genericError": "No s'ha pogut crear la membresia. Torna-ho a provar.",
       "emptyDirectories": "Encara no hi ha famílies o quotes creades per a aquesta AMPA."
+    },
+    "announcements": {
+      "title": "Comunicats",
+      "titleLabel": "Títol",
+      "bodyLabel": "Contingut",
+      "publish": "Publicar",
+      "submitting": "Publicant…",
+      "genericError": "No s'ha pogut publicar el comunicat. Torna-ho a provar."
     }
+  },
+  "tablon": {
+    "title": "Tauler",
+    "empty": "Encara no hi ha comunicats publicats en aquesta AMPA."
   }
 }

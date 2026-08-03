@@ -60,6 +60,18 @@
       "success": "Kidetza sortuta. Karguaren zenbatekoa:",
       "genericError": "Ezin izan da kidetza sortu. Saiatu berriro.",
       "emptyDirectories": "Oraindik ez dago familiarik edo kuotarik sortuta AMPA honentzat."
+    },
+    "announcements": {
+      "title": "Jakinarazpenak",
+      "titleLabel": "Izenburua",
+      "bodyLabel": "Edukia",
+      "publish": "Argitaratu",
+      "submitting": "Argitaratzen…",
+      "genericError": "Ezin izan da jakinarazpena argitaratu. Saiatu berriro."
     }
+  },
+  "tablon": {
+    "title": "Iragarki-oholla",
+    "empty": "Oraindik ez dago jakinarazpenik argitaratuta AMPA honetan."
   }
 }
