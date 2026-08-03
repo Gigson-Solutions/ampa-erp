@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { requireAmpaRole } from "@/lib/require-ampa-session";
 import { listActivityEnrollments } from "@/lib/board-directory";
@@ -34,6 +35,9 @@ function ActivityEnrollmentsContent({
   return (
     <main className="mx-auto max-w-2xl p-8">
       <h1 className="text-2xl font-semibold">{t("enrollmentsTitle")}</h1>
+      <p className="mt-2">
+        <Link href="attendance">{t("takeAttendance")}</Link>
+      </p>
       <table className="mt-6 w-full text-left">
         <thead>
           <tr>

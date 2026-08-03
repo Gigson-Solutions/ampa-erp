@@ -90,6 +90,7 @@
       "occupancy": "Okupazioa",
       "waitlistShort": "zain",
       "viewEnrollments": "Izen-emateak ikusi",
+      "takeAttendance": "Bertaratuak markatu",
       "enrollmentsTitle": "Izen-emateak",
       "noEnrollments": "Oraindik ez dago inor izena emanda jarduera honetan.",
       "family": "Familia",
@@ -137,6 +138,16 @@
       "export": "Esportatu",
       "exporting": "Esportatzen…",
       "genericError": "Ezin izan dira datuak esportatu. Saiatu berriro."
+    },
+    "attendance": {
+      "title": "Bertaratzea",
+      "date": "Data",
+      "changeDate": "Aldatu",
+      "student": "Ikaslea",
+      "family": "Familia",
+      "present": "Bertan",
+      "absent": "Ez bertan",
+      "noEnrolled": "Ez dago ikaslerik izena emanda jarduera honetan."
     }
   },
   "tablon": {

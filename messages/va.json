@@ -90,6 +90,7 @@
       "occupancy": "Ocupació",
       "waitlistShort": "en espera",
       "viewEnrollments": "Veure inscripcions",
+      "takeAttendance": "Passar llista",
       "enrollmentsTitle": "Inscripcions",
       "noEnrollments": "Encara no hi ha ningú inscrit en esta activitat.",
       "family": "Família",
@@ -137,6 +138,16 @@
       "export": "Exportar",
       "exporting": "Exportant…",
       "genericError": "No s'han pogut exportar les dades. Torna-ho a intentar."
+    },
+    "attendance": {
+      "title": "Assistència",
+      "date": "Data",
+      "changeDate": "Canviar",
+      "student": "Alumne/a",
+      "family": "Família",
+      "present": "Present",
+      "absent": "Absent",
+      "noEnrolled": "No hi ha alumnes inscrits en esta activitat."
     }
   },
   "tablon": {

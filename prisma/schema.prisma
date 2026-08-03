@@ -371,12 +371,32 @@ model ActivityEnrollment {
 
   activity Activity @relation(fields: [activityId], references: [id], onDelete: Cascade)
   student  Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  attendanceRecords AttendanceRecord[]
 
   createdAt DateTime @default(now())
 
   @@unique([activityId, studentId])
   @@index([activityId])
   @@map("activity_enrollments")
+}
+
+// Fase 1: "asistencia". Sin `ampaId` propio — se aísla transitivamente a través de
+// `ActivityEnrollment` -> `Activity` (mismo patrón que ActivityEnrollment mismo).
+// Un registro por (inscripción, fecha) — se puede corregir marcando de nuevo el
+// mismo día (upsert), no se acumulan duplicados.
+model AttendanceRecord {
+  id           String   @id @default(cuid())
+  enrollmentId String
+  date         DateTime @db.Date
+  present      Boolean
+
+  enrollment ActivityEnrollment @relation(fields: [enrollmentId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@unique([enrollmentId, date])
+  @@index([enrollmentId])
+  @@map("attendance_records")
 }
 
 model Event {

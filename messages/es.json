@@ -90,6 +90,7 @@
       "occupancy": "Ocupación",
       "waitlistShort": "en espera",
       "viewEnrollments": "Ver inscripciones",
+      "takeAttendance": "Pasar lista",
       "enrollmentsTitle": "Inscripciones",
       "noEnrollments": "Todavía no hay nadie inscrito en esta actividad.",
       "family": "Familia",
@@ -137,6 +138,16 @@
       "export": "Exportar",
       "exporting": "Exportando…",
       "genericError": "No se pudo exportar los datos. Inténtalo de nuevo."
+    },
+    "attendance": {
+      "title": "Asistencia",
+      "date": "Fecha",
+      "changeDate": "Cambiar",
+      "student": "Alumno/a",
+      "family": "Familia",
+      "present": "Presente",
+      "absent": "Ausente",
+      "noEnrolled": "No hay alumnos/as inscritos/as en esta actividad."
     }
   },
   "tablon": {
