@@ -4,7 +4,9 @@
     "welcome": "Benvido/a á túa AMPA",
     "login": "Acceder",
     "loginHint": "Enviarémosche unha ligazón de acceso ao teu email",
-    "loginButton": "Enviar ligazón de acceso"
+    "loginButton": "Enviar ligazón de acceso",
+    "goToBoard": "Ir ao panel de xunta",
+    "boardLogin": "Es da xunta? Accede aquí"
   },
   "register": {
     "title": "Alta de familia",

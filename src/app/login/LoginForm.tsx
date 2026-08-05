@@ -10,7 +10,7 @@ import { FormField, Input, Label } from "@/components/ui/Input";
 // Conecta el login por magic link (proveedor "nodemailer", sustituido por Amazon
 // SES — ver src/lib/mail/ses.ts). En desarrollo, sin credenciales AWS, el enlace se
 // imprime en la consola de `pnpm dev` en vez de enviarse por email de verdad.
-export function LoginForm(): React.ReactElement {
+export function LoginForm({ callbackUrl }: { callbackUrl?: string }): React.ReactElement {
   const t = useTranslations("common");
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "submitting" | "sent" | "error">("idle");
@@ -19,7 +19,11 @@ export function LoginForm(): React.ReactElement {
     event.preventDefault();
     setStatus("submitting");
     try {
-      await signIn("nodemailer", { email, redirect: false });
+      // Sin `callbackUrl` el enlace mágico aterriza en /login otra vez (o en la
+      // raíz) — nada conecta con el panel de junta de una AMPA concreta. Si se
+      // llegó aquí desde la web pública de una AMPA (ver enlace "Acceder" en
+      // (public)/[ampa]/page.tsx), el enlace ya trae la URL correcta.
+      await signIn("nodemailer", { email, redirect: false, callbackUrl });
       setStatus("sent");
     } catch (error) {
       console.error("signIn failed:", error);

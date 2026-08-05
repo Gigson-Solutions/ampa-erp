@@ -4,7 +4,9 @@
     "welcome": "Ongi etorri zure AMPAra",
     "login": "Sartu",
     "loginHint": "Sarbide-esteka bidaliko dizugu zure emailera",
-    "loginButton": "Bidali sarbide-esteka"
+    "loginButton": "Bidali sarbide-esteka",
+    "goToBoard": "Zuzendaritzaren panelera joan",
+    "boardLogin": "Zuzendaritzakoa zara? Sartu hemen"
   },
   "register": {
     "title": "Familia alta",

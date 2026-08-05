@@ -2,7 +2,16 @@ import { useTranslations } from "next-intl";
 import { LoginForm } from "./LoginForm";
 import { Card } from "@/components/ui/Card";
 
-export default function LoginPage(): React.ReactElement {
+interface PageProps {
+  searchParams: Promise<{ callbackUrl?: string }>;
+}
+
+export default async function LoginPage({ searchParams }: PageProps): Promise<React.ReactElement> {
+  const { callbackUrl } = await searchParams;
+  return <LoginPageContent callbackUrl={callbackUrl} />;
+}
+
+function LoginPageContent({ callbackUrl }: { callbackUrl?: string }): React.ReactElement {
   const t = useTranslations("common");
   return (
     <main className="flex min-h-screen items-center justify-center bg-page p-6">
@@ -11,7 +20,7 @@ export default function LoginPage(): React.ReactElement {
           <h1 className="text-xl font-bold text-ink-900">{t("login")}</h1>
           <p className="mt-2 text-sm text-ink-700">{t("loginHint")}</p>
           <div className="mt-6">
-            <LoginForm />
+            <LoginForm callbackUrl={callbackUrl} />
           </div>
         </Card>
       </div>
