@@ -3,6 +3,9 @@
 import { useState } from "react";
 import { signIn } from "next-auth/react";
 import { useTranslations } from "next-intl";
+import { Button } from "@/components/ui/Button";
+import { Alert } from "@/components/ui/Alert";
+import { FormField, Input, Label } from "@/components/ui/Input";
 
 // Conecta el login por magic link (proveedor "nodemailer", sustituido por Amazon
 // SES — ver src/lib/mail/ses.ts). En desarrollo, sin credenciales AWS, el enlace se
@@ -25,25 +28,25 @@ export function LoginForm(): React.ReactElement {
   }
 
   if (status === "sent") {
-    return <p role="status">{t("loginHint")}</p>;
+    return <Alert variant="success">{t("loginHint")}</Alert>;
   }
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-      <div>
-        <label htmlFor="email">Email</label>
-        <input
+      <FormField>
+        <Label htmlFor="email">Email</Label>
+        <Input
           id="email"
           type="email"
           required
           value={email}
           onChange={(event) => setEmail(event.target.value)}
         />
-      </div>
-      <button type="submit" disabled={status === "submitting"}>
+      </FormField>
+      <Button type="submit" disabled={status === "submitting"} size="md">
         {t("loginButton")}
-      </button>
-      {status === "error" && <p role="alert">Error al enviar el enlace.</p>}
+      </Button>
+      {status === "error" && <Alert variant="error">Error al enviar el enlace.</Alert>}
     </form>
   );
 }

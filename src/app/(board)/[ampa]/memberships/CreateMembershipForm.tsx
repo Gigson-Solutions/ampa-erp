@@ -4,6 +4,9 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { createMembershipAction } from "./actions";
 import type { FamilySummary, FeeSchemaSummary } from "@/lib/board-directory";
+import { Button } from "@/components/ui/Button";
+import { Alert } from "@/components/ui/Alert";
+import { FormField, Input, Label, Select } from "@/components/ui/Input";
 
 interface CreateMembershipFormProps {
   families: FamilySummary[];
@@ -55,49 +58,58 @@ export function CreateMembershipForm({
   }
 
   if (families.length === 0 || feeSchemas.length === 0) {
-    return <p role="alert">{t("emptyDirectories")}</p>;
+    return <Alert variant="error">{t("emptyDirectories")}</Alert>;
   }
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-      <div>
-        <label htmlFor="familyId">{t("familyId")}</label>
-        <select id="familyId" required value={familyId} onChange={(e) => setFamilyId(e.target.value)}>
+      <FormField>
+        <Label htmlFor="familyId">{t("familyId")}</Label>
+        <Select id="familyId" required value={familyId} onChange={(e) => setFamilyId(e.target.value)}>
           {families.map((family) => (
             <option key={family.id} value={family.id}>
               {family.referenceCode} — {family.guardianNames.join(", ") || "(sin tutor/a)"} (
               {family.studentCount} alumno/s)
             </option>
           ))}
-        </select>
-      </div>
-      <div>
-        <label htmlFor="feeSchemaId">{t("feeSchemaId")}</label>
-        <select id="feeSchemaId" required value={feeSchemaId} onChange={(e) => setFeeSchemaId(e.target.value)}>
+        </Select>
+      </FormField>
+
+      <FormField>
+        <Label htmlFor="feeSchemaId">{t("feeSchemaId")}</Label>
+        <Select id="feeSchemaId" required value={feeSchemaId} onChange={(e) => setFeeSchemaId(e.target.value)}>
           {feeSchemas.map((feeSchema) => (
             <option key={feeSchema.id} value={feeSchema.id}>
               {feeSchema.academicYearLabel} — {feeSchema.name} ({feeSchema.amount}€)
             </option>
           ))}
-        </select>
-      </div>
-      <div>
-        <label htmlFor="siblingCount">{t("siblingCount")}</label>
-        <input
+        </Select>
+      </FormField>
+
+      <FormField>
+        <Label htmlFor="siblingCount">{t("siblingCount")}</Label>
+        <Input
           id="siblingCount"
           type="number"
           min={0}
           value={siblingCount}
           onChange={(e) => setSiblingCount(Number(e.target.value))}
         />
-      </div>
-      <label>
-        <input type="checkbox" checked={isLargeFamily} onChange={(e) => setIsLargeFamily(e.target.checked)} />
+      </FormField>
+
+      <label className="flex items-center gap-2 text-sm text-ink-900">
+        <input
+          type="checkbox"
+          checked={isLargeFamily}
+          onChange={(e) => setIsLargeFamily(e.target.checked)}
+          className="h-4 w-4 rounded border-border text-brand-500 focus:ring-brand-500"
+        />
         {t("isLargeFamily")}
       </label>
-      <div>
-        <label htmlFor="scholarshipDiscountPercent">{t("scholarshipDiscountPercent")}</label>
-        <input
+
+      <FormField>
+        <Label htmlFor="scholarshipDiscountPercent">{t("scholarshipDiscountPercent")}</Label>
+        <Input
           id="scholarshipDiscountPercent"
           type="number"
           min={0}
@@ -105,13 +117,13 @@ export function CreateMembershipForm({
           value={scholarshipDiscountPercent}
           onChange={(e) => setScholarshipDiscountPercent(Number(e.target.value))}
         />
-      </div>
+      </FormField>
 
-      {message && <p role={status === "error" ? "alert" : "status"}>{message}</p>}
+      {message && <Alert variant={status === "error" ? "error" : "success"}>{message}</Alert>}
 
-      <button type="submit" disabled={status === "submitting"}>
+      <Button type="submit" disabled={status === "submitting"} size="md">
         {status === "submitting" ? t("submitting") : t("submit")}
-      </button>
+      </Button>
     </form>
   );
 }

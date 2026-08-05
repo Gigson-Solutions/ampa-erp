@@ -2,6 +2,8 @@ import { notFound } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { prisma } from "@/lib/prisma";
 import { RegisterFamilyForm } from "./RegisterFamilyForm";
+import { PageHeader } from "@/components/ui/PageHeader";
+import { Card } from "@/components/ui/Card";
 
 interface PageProps {
   params: Promise<{ ampa: string }>;
@@ -19,11 +21,11 @@ export default async function AltaPage({ params }: PageProps): Promise<React.Rea
 function AltaFormSection({ subdomain }: { subdomain: string }): React.ReactElement {
   const t = useTranslations("register");
   return (
-    <main className="mx-auto max-w-xl p-8">
-      <h1 className="text-2xl font-semibold">{t("title")}</h1>
-      <div className="mt-6">
+    <div>
+      <PageHeader title={t("title")} />
+      <Card>
         <RegisterFamilyForm ampaSubdomain={subdomain} />
-      </div>
-    </main>
+      </Card>
+    </div>
   );
 }

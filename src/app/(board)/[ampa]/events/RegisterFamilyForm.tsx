@@ -5,6 +5,9 @@ import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { registerFamilyForEventAction } from "./actions";
 import type { EventSummary, FamilySummary } from "@/lib/board-directory";
+import { Button } from "@/components/ui/Button";
+import { Alert } from "@/components/ui/Alert";
+import { FormField, Input, Label, Select } from "@/components/ui/Input";
 
 interface RegisterFamilyFormProps {
   events: EventSummary[];
@@ -39,46 +42,46 @@ export function RegisterFamilyForm({ events, families }: RegisterFamilyFormProps
   }
 
   if (events.length === 0 || families.length === 0) {
-    return <p role="alert">{t("noEventsOrFamilies")}</p>;
+    return <Alert variant="error">{t("noEventsOrFamilies")}</Alert>;
   }
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-      <div>
-        <label htmlFor="register-event">{t("event")}</label>
-        <select id="register-event" value={eventId} onChange={(e) => setEventId(e.target.value)}>
+      <FormField>
+        <Label htmlFor="register-event">{t("event")}</Label>
+        <Select id="register-event" value={eventId} onChange={(e) => setEventId(e.target.value)}>
           {events.map((event) => (
             <option key={event.id} value={event.id}>
               {event.name} ({event.registeredAttendees}
               {event.capacity !== null ? `/${event.capacity}` : ""})
             </option>
           ))}
-        </select>
-      </div>
-      <div>
-        <label htmlFor="register-family">{t("family")}</label>
-        <select id="register-family" value={familyId} onChange={(e) => setFamilyId(e.target.value)}>
+        </Select>
+      </FormField>
+      <FormField>
+        <Label htmlFor="register-family">{t("family")}</Label>
+        <Select id="register-family" value={familyId} onChange={(e) => setFamilyId(e.target.value)}>
           {families.map((family) => (
             <option key={family.id} value={family.id}>
               {family.referenceCode}
             </option>
           ))}
-        </select>
-      </div>
-      <div>
-        <label htmlFor="register-attendees">{t("attendeeCount")}</label>
-        <input
+        </Select>
+      </FormField>
+      <FormField>
+        <Label htmlFor="register-attendees">{t("attendeeCount")}</Label>
+        <Input
           id="register-attendees"
           type="number"
           min={1}
           value={attendeeCount}
           onChange={(e) => setAttendeeCount(Number(e.target.value))}
         />
-      </div>
-      {message && <p role={status === "error" ? "alert" : "status"}>{message}</p>}
-      <button type="submit" disabled={status === "submitting"}>
+      </FormField>
+      {message && <Alert variant={status === "error" ? "error" : "success"}>{message}</Alert>}
+      <Button type="submit" disabled={status === "submitting"} variant="secondary">
         {status === "submitting" ? t("submitting") : t("register")}
-      </button>
+      </Button>
     </form>
   );
 }

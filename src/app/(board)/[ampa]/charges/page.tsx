@@ -2,6 +2,9 @@ import { useTranslations } from "next-intl";
 import { requireAmpaRole } from "@/lib/require-ampa-session";
 import { listPendingCharges } from "@/lib/board-directory";
 import { ChargeRow } from "./ChargeRow";
+import { PageHeader } from "@/components/ui/PageHeader";
+import { Card } from "@/components/ui/Card";
+import { Table, THead, TBody, TR, TH } from "@/components/ui/Table";
 
 export default async function ChargesPage(): Promise<React.ReactElement> {
   const { ampaId } = await requireAmpaRole("MANAGE_TREASURY");
@@ -17,34 +20,32 @@ function ChargesPageContent({
 }): React.ReactElement {
   const t = useTranslations("board.charges");
 
-  if (charges.length === 0) {
-    return (
-      <main className="mx-auto max-w-3xl p-8">
-        <h1 className="text-2xl font-semibold">{t("title")}</h1>
-        <p className="mt-4">{t("empty")}</p>
-      </main>
-    );
-  }
-
   return (
-    <main className="mx-auto max-w-3xl p-8">
-      <h1 className="text-2xl font-semibold">{t("title")}</h1>
-      <table className="mt-6 w-full text-left">
-        <thead>
-          <tr>
-            <th>{t("family")}</th>
-            <th>{t("concept")}</th>
-            <th>{t("amount")}</th>
-            <th>{t("dueDate")}</th>
-            <th />
-          </tr>
-        </thead>
-        <tbody>
-          {charges.map((charge) => (
-            <ChargeRow key={charge.id} charge={charge} />
-          ))}
-        </tbody>
-      </table>
-    </main>
+    <>
+      <PageHeader title={t("title")} />
+
+      {charges.length === 0 ? (
+        <Card>
+          <p className="text-sm text-ink-700">{t("empty")}</p>
+        </Card>
+      ) : (
+        <Table>
+          <THead>
+            <TR>
+              <TH>{t("family")}</TH>
+              <TH>{t("concept")}</TH>
+              <TH>{t("amount")}</TH>
+              <TH>{t("dueDate")}</TH>
+              <TH />
+            </TR>
+          </THead>
+          <TBody>
+            {charges.map((charge) => (
+              <ChargeRow key={charge.id} charge={charge} />
+            ))}
+          </TBody>
+        </Table>
+      )}
+    </>
   );
 }

@@ -4,6 +4,9 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { createMinutesEntryAction } from "./actions";
+import { Button } from "@/components/ui/Button";
+import { Alert } from "@/components/ui/Alert";
+import { FormField, Input, Label, Textarea } from "@/components/ui/Input";
 
 export function MinutesForm(): React.ReactElement {
   const t = useTranslations("board.minutes");
@@ -36,28 +39,28 @@ export function MinutesForm(): React.ReactElement {
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-      <p className="text-sm text-gray-600">{t("immutableNotice")}</p>
-      <div>
-        <label htmlFor="minutes-title">{t("titleLabel")}</label>
-        <input id="minutes-title" required value={title} onChange={(e) => setTitle(e.target.value)} />
-      </div>
-      <div>
-        <label htmlFor="minutes-body">{t("bodyLabel")}</label>
-        <textarea id="minutes-body" required value={body} onChange={(e) => setBody(e.target.value)} />
-      </div>
-      <div>
-        <label htmlFor="minutes-signed-by">{t("signedByLabel")}</label>
-        <input
+      <p className="text-sm text-ink-700">{t("immutableNotice")}</p>
+      <FormField>
+        <Label htmlFor="minutes-title">{t("titleLabel")}</Label>
+        <Input id="minutes-title" required value={title} onChange={(e) => setTitle(e.target.value)} />
+      </FormField>
+      <FormField>
+        <Label htmlFor="minutes-body">{t("bodyLabel")}</Label>
+        <Textarea id="minutes-body" required value={body} onChange={(e) => setBody(e.target.value)} />
+      </FormField>
+      <FormField>
+        <Label htmlFor="minutes-signed-by">{t("signedByLabel")}</Label>
+        <Input
           id="minutes-signed-by"
           required
           value={signedByName}
           onChange={(e) => setSignedByName(e.target.value)}
         />
-      </div>
-      {status === "error" && error && <p role="alert">{error}</p>}
-      <button type="submit" disabled={status === "submitting"}>
+      </FormField>
+      {status === "error" && error && <Alert variant="error">{error}</Alert>}
+      <Button type="submit" disabled={status === "submitting"}>
         {status === "submitting" ? t("submitting") : t("addEntry")}
-      </button>
+      </Button>
     </form>
   );
 }

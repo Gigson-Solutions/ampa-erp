@@ -4,6 +4,8 @@ import QRCode from "qrcode";
 import { useTranslations } from "next-intl";
 import { prisma } from "@/lib/prisma";
 import { getFamilyCardByToken } from "@/lib/card";
+import { Card } from "@/components/ui/Card";
+import { Badge } from "@/components/ui/Badge";
 
 interface PageProps {
   params: Promise<{ ampa: string; token: string }>;
@@ -34,6 +36,13 @@ export default async function CarnetPage({ params }: PageProps): Promise<React.R
   return <CarnetContent card={card} qrDataUrl={qrDataUrl} />;
 }
 
+const STATUS_VARIANT = {
+  ACTIVE: "success",
+  PENDING: "warning",
+  CANCELLED: "danger",
+  NONE: "neutral",
+} as const;
+
 function CarnetContent({
   card,
   qrDataUrl,
@@ -51,24 +60,19 @@ function CarnetContent({
   }[card.membershipStatus];
 
   return (
-    <main className="mx-auto max-w-sm p-8 text-center">
-      <h1 className="text-xl font-semibold">{card.ampaName}</h1>
-      <p className="mt-1 text-gray-600">{t("subtitle")}</p>
+    <div className="mx-auto max-w-sm">
+      <Card className="text-center">
+        <p className="text-sm text-ink-700">{t("subtitle")}</p>
 
-      {/* eslint-disable-next-line @next/next/no-img-element -- data URI generado en servidor, no una imagen optimizable de Next */}
-      <img src={qrDataUrl} alt={t("qrAlt")} className="mx-auto mt-6" width={240} height={240} />
+        {/* eslint-disable-next-line @next/next/no-img-element -- data URI generado en servidor, no una imagen optimizable de Next */}
+        <img src={qrDataUrl} alt={t("qrAlt")} className="mx-auto mt-4" width={240} height={240} />
 
-      <div className="mt-6">
-        <p className="font-semibold">{card.referenceCode}</p>
-        <p>
-          {t("status")}: {statusLabel}
-        </p>
-        {card.academicYearLabel && (
-          <p>
-            {t("academicYear")}: {card.academicYearLabel}
-          </p>
-        )}
-      </div>
-    </main>
+        <div className="mt-6 flex flex-col items-center gap-2">
+          <p className="text-lg font-semibold text-ink-900">{card.referenceCode}</p>
+          <Badge variant={STATUS_VARIANT[card.membershipStatus]}>{statusLabel}</Badge>
+          {card.academicYearLabel && <p className="text-sm text-ink-700">{card.academicYearLabel}</p>}
+        </div>
+      </Card>
+    </div>
   );
 }

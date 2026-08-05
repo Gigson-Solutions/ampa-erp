@@ -4,6 +4,9 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { createEventAction } from "./actions";
+import { Button } from "@/components/ui/Button";
+import { Alert } from "@/components/ui/Alert";
+import { FormField, Input, Label } from "@/components/ui/Input";
 
 export function CreateEventForm(): React.ReactElement {
   const t = useTranslations("board.events");
@@ -43,17 +46,17 @@ export function CreateEventForm(): React.ReactElement {
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-      <div>
-        <label htmlFor="event-name">{t("name")}</label>
-        <input id="event-name" required value={name} onChange={(e) => setName(e.target.value)} />
-      </div>
-      <div>
-        <label htmlFor="event-date">{t("date")}</label>
-        <input id="event-date" type="date" required value={date} onChange={(e) => setDate(e.target.value)} />
-      </div>
-      <div>
-        <label htmlFor="event-capacity">{t("capacity")}</label>
-        <input
+      <FormField>
+        <Label htmlFor="event-name">{t("name")}</Label>
+        <Input id="event-name" required value={name} onChange={(e) => setName(e.target.value)} />
+      </FormField>
+      <FormField>
+        <Label htmlFor="event-date">{t("date")}</Label>
+        <Input id="event-date" type="date" required value={date} onChange={(e) => setDate(e.target.value)} />
+      </FormField>
+      <FormField>
+        <Label htmlFor="event-capacity">{t("capacity")}</Label>
+        <Input
           id="event-capacity"
           type="number"
           min={1}
@@ -61,10 +64,10 @@ export function CreateEventForm(): React.ReactElement {
           onChange={(e) => setCapacity(e.target.value)}
           placeholder={t("capacityPlaceholder")}
         />
-      </div>
-      <div>
-        <label htmlFor="event-price">{t("price")}</label>
-        <input
+      </FormField>
+      <FormField>
+        <Label htmlFor="event-price">{t("price")}</Label>
+        <Input
           id="event-price"
           type="number"
           min={0}
@@ -73,11 +76,11 @@ export function CreateEventForm(): React.ReactElement {
           onChange={(e) => setPrice(e.target.value)}
           placeholder={t("pricePlaceholder")}
         />
-      </div>
-      {status === "error" && error && <p role="alert">{error}</p>}
-      <button type="submit" disabled={status === "submitting"}>
+      </FormField>
+      {status === "error" && error && <Alert variant="error">{error}</Alert>}
+      <Button type="submit" disabled={status === "submitting"} variant="secondary">
         {status === "submitting" ? t("submitting") : t("createEvent")}
-      </button>
+      </Button>
     </form>
   );
 }

@@ -3,6 +3,9 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { registerFamilyAction } from "../actions";
+import { Button } from "@/components/ui/Button";
+import { Alert } from "@/components/ui/Alert";
+import { FormField, Input, Label } from "@/components/ui/Input";
 
 interface StudentField {
   name: string;
@@ -66,10 +69,12 @@ export function RegisterFamilyForm({ ampaSubdomain }: { ampaSubdomain: string })
   if (status === "success") {
     return (
       <div>
-        <p role="status">{message}</p>
+        <Alert variant="success">{message}</Alert>
         {cardToken && (
-          <p className="mt-2">
-            <a href={`/${ampaSubdomain}/carnet/${cardToken}`}>{t("viewCard")}</a>
+          <p className="mt-3">
+            <a href={`/${ampaSubdomain}/carnet/${cardToken}`} className="text-sm font-medium text-brand-500 hover:underline">
+              {t("viewCard")}
+            </a>
           </p>
         )}
       </div>
@@ -78,92 +83,108 @@ export function RegisterFamilyForm({ ampaSubdomain }: { ampaSubdomain: string })
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-      <div>
-        <label htmlFor="guardianName">{t("guardianName")}</label>
-        <input
+      <FormField>
+        <Label htmlFor="guardianName">{t("guardianName")}</Label>
+        <Input
           id="guardianName"
           required
           value={guardianName}
           onChange={(event) => setGuardianName(event.target.value)}
         />
-      </div>
+      </FormField>
 
-      <div>
-        <label htmlFor="guardianEmail">{t("guardianEmail")}</label>
-        <input
+      <FormField>
+        <Label htmlFor="guardianEmail">{t("guardianEmail")}</Label>
+        <Input
           id="guardianEmail"
           type="email"
           required
           value={guardianEmail}
           onChange={(event) => setGuardianEmail(event.target.value)}
         />
-      </div>
+      </FormField>
 
-      <div>
-        <label htmlFor="guardianPhone">{t("guardianPhone")}</label>
-        <input
+      <FormField>
+        <Label htmlFor="guardianPhone">{t("guardianPhone")}</Label>
+        <Input
           id="guardianPhone"
           value={guardianPhone}
           onChange={(event) => setGuardianPhone(event.target.value)}
         />
+      </FormField>
+
+      <div className="flex flex-col gap-3 rounded-lg border border-border p-4">
+        {students.map((student, index) => (
+          <div key={index} className="flex items-end gap-2">
+            <FormField className="flex-1">
+              <Label htmlFor={`student-${index}`}>{t("studentName")}</Label>
+              <Input
+                id={`student-${index}`}
+                required
+                value={student.name}
+                onChange={(event) => updateStudentName(index, event.target.value)}
+              />
+            </FormField>
+            {students.length > 1 && (
+              <Button type="button" variant="tertiary" size="sm" onClick={() => removeStudent(index)}>
+                {t("removeStudent")}
+              </Button>
+            )}
+          </div>
+        ))}
+        <Button type="button" variant="secondary" size="sm" onClick={addStudent} className="self-start">
+          {t("addStudent")}
+        </Button>
       </div>
 
-      {students.map((student, index) => (
-        <div key={index}>
-          <label htmlFor={`student-${index}`}>{t("studentName")}</label>
+      <fieldset className="rounded-lg border border-border p-4">
+        <legend className="px-1 text-sm font-semibold text-ink-900">{t("consentDataTitle")}</legend>
+        <p className="text-sm text-ink-700">{t("consentDataHint")}</p>
+        <label className="mt-2 flex items-center gap-2 text-sm text-ink-900">
           <input
-            id={`student-${index}`}
+            type="checkbox"
             required
-            value={student.name}
-            onChange={(event) => updateStudentName(index, event.target.value)}
+            checked={consentData}
+            onChange={(event) => setConsentData(event.target.checked)}
+            className="h-4 w-4 rounded border-border text-brand-500 focus:ring-brand-500"
           />
-          {students.length > 1 && (
-            <button type="button" onClick={() => removeStudent(index)}>
-              {t("removeStudent")}
-            </button>
-          )}
-        </div>
-      ))}
-      <button type="button" onClick={addStudent}>
-        {t("addStudent")}
-      </button>
-
-      <fieldset>
-        <legend>{t("consentDataTitle")}</legend>
-        <p>{t("consentDataHint")}</p>
-        <label>
-          <input type="checkbox" required checked={consentData} onChange={(event) => setConsentData(event.target.checked)} />
           {t("accept")}
         </label>
       </fieldset>
 
-      <fieldset>
-        <legend>{t("consentImageTitle")}</legend>
-        <p>{t("consentImageHint")}</p>
-        <label>
-          <input type="checkbox" checked={consentImage} onChange={(event) => setConsentImage(event.target.checked)} />
+      <fieldset className="rounded-lg border border-border p-4">
+        <legend className="px-1 text-sm font-semibold text-ink-900">{t("consentImageTitle")}</legend>
+        <p className="text-sm text-ink-700">{t("consentImageHint")}</p>
+        <label className="mt-2 flex items-center gap-2 text-sm text-ink-900">
+          <input
+            type="checkbox"
+            checked={consentImage}
+            onChange={(event) => setConsentImage(event.target.checked)}
+            className="h-4 w-4 rounded border-border text-brand-500 focus:ring-brand-500"
+          />
           {t("accept")}
         </label>
       </fieldset>
 
-      <fieldset>
-        <legend>{t("consentCenterShareTitle")}</legend>
-        <p>{t("consentCenterShareHint")}</p>
-        <label>
+      <fieldset className="rounded-lg border border-border p-4">
+        <legend className="px-1 text-sm font-semibold text-ink-900">{t("consentCenterShareTitle")}</legend>
+        <p className="text-sm text-ink-700">{t("consentCenterShareHint")}</p>
+        <label className="mt-2 flex items-center gap-2 text-sm text-ink-900">
           <input
             type="checkbox"
             checked={consentCenterShare}
             onChange={(event) => setConsentCenterShare(event.target.checked)}
+            className="h-4 w-4 rounded border-border text-brand-500 focus:ring-brand-500"
           />
           {t("accept")}
         </label>
       </fieldset>
 
-      {status === "error" && message && <p role="alert">{message}</p>}
+      {status === "error" && message && <Alert variant="error">{message}</Alert>}
 
-      <button type="submit" disabled={status === "submitting"}>
+      <Button type="submit" disabled={status === "submitting"} size="md">
         {status === "submitting" ? t("submitting") : t("submit")}
-      </button>
+      </Button>
     </form>
   );
 }

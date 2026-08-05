@@ -2,6 +2,8 @@ import { notFound } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { prisma } from "@/lib/prisma";
 import { listAnnouncements } from "@/lib/announcements";
+import { PageHeader } from "@/components/ui/PageHeader";
+import { Card } from "@/components/ui/Card";
 
 interface PageProps {
   params: Promise<{ ampa: string }>;
@@ -28,26 +30,26 @@ function TablonContent({
 }): React.ReactElement {
   const t = useTranslations("tablon");
 
-  if (announcements.length === 0) {
-    return (
-      <main className="mx-auto max-w-xl p-8">
-        <h1 className="text-2xl font-semibold">{t("title")}</h1>
-        <p className="mt-4">{t("empty")}</p>
-      </main>
-    );
-  }
-
   return (
-    <main className="mx-auto max-w-xl p-8">
-      <h1 className="text-2xl font-semibold">{t("title")}</h1>
-      <ul className="mt-6 flex flex-col gap-6">
-        {announcements.map((announcement) => (
-          <li key={announcement.id}>
-            <h2 className="font-semibold">{announcement.title}</h2>
-            <p>{announcement.body}</p>
-          </li>
-        ))}
-      </ul>
-    </main>
+    <div>
+      <PageHeader title={t("title")} />
+
+      {announcements.length === 0 ? (
+        <Card>
+          <p className="text-sm text-ink-700">{t("empty")}</p>
+        </Card>
+      ) : (
+        <ul className="flex flex-col gap-4">
+          {announcements.map((announcement) => (
+            <li key={announcement.id}>
+              <Card>
+                <h2 className="font-semibold text-ink-900">{announcement.title}</h2>
+                <p className="mt-1 text-sm text-ink-700">{announcement.body}</p>
+              </Card>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
   );
 }

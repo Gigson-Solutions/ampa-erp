@@ -1,14 +1,19 @@
 import { useTranslations } from "next-intl";
 import { LoginForm } from "./LoginForm";
+import { Card } from "@/components/ui/Card";
 
 export default function LoginPage(): React.ReactElement {
   const t = useTranslations("common");
   return (
-    <main className="mx-auto max-w-sm p-8">
-      <h1 className="text-xl font-semibold">{t("login")}</h1>
-      <p className="mt-2 text-sm text-gray-600">{t("loginHint")}</p>
-      <div className="mt-6">
-        <LoginForm />
+    <main className="flex min-h-screen items-center justify-center bg-page p-6">
+      <div className="w-full max-w-sm">
+        <Card>
+          <h1 className="text-xl font-bold text-ink-900">{t("login")}</h1>
+          <p className="mt-2 text-sm text-ink-700">{t("loginHint")}</p>
+          <div className="mt-6">
+            <LoginForm />
+          </div>
+        </Card>
       </div>
     </main>
   );

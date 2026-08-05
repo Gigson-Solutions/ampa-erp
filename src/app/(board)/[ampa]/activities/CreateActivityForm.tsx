@@ -5,6 +5,9 @@ import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { createActivityAction } from "./actions";
 import type { AcademicYearSummary } from "@/lib/board-directory";
+import { Button } from "@/components/ui/Button";
+import { Alert } from "@/components/ui/Alert";
+import { FormField, Input, Label, Select } from "@/components/ui/Input";
 
 export function CreateActivityForm({ academicYears }: { academicYears: AcademicYearSummary[] }): React.ReactElement {
   const t = useTranslations("board.activities");
@@ -42,28 +45,28 @@ export function CreateActivityForm({ academicYears }: { academicYears: AcademicY
   }
 
   if (academicYears.length === 0) {
-    return <p role="alert">{t("noAcademicYears")}</p>;
+    return <Alert variant="error">{t("noAcademicYears")}</Alert>;
   }
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-      <div>
-        <label htmlFor="activity-name">{t("name")}</label>
-        <input id="activity-name" required value={name} onChange={(e) => setName(e.target.value)} />
-      </div>
-      <div>
-        <label htmlFor="activity-year">{t("academicYear")}</label>
-        <select id="activity-year" value={academicYearId} onChange={(e) => setAcademicYearId(e.target.value)}>
+      <FormField>
+        <Label htmlFor="activity-name">{t("name")}</Label>
+        <Input id="activity-name" required value={name} onChange={(e) => setName(e.target.value)} />
+      </FormField>
+      <FormField>
+        <Label htmlFor="activity-year">{t("academicYear")}</Label>
+        <Select id="activity-year" value={academicYearId} onChange={(e) => setAcademicYearId(e.target.value)}>
           {academicYears.map((year) => (
             <option key={year.id} value={year.id}>
               {year.label}
             </option>
           ))}
-        </select>
-      </div>
-      <div>
-        <label htmlFor="activity-capacity">{t("capacity")}</label>
-        <input
+        </Select>
+      </FormField>
+      <FormField>
+        <Label htmlFor="activity-capacity">{t("capacity")}</Label>
+        <Input
           id="activity-capacity"
           type="number"
           min={1}
@@ -71,10 +74,10 @@ export function CreateActivityForm({ academicYears }: { academicYears: AcademicY
           onChange={(e) => setCapacity(e.target.value)}
           placeholder={t("capacityPlaceholder")}
         />
-      </div>
-      <div>
-        <label htmlFor="activity-price">{t("price")}</label>
-        <input
+      </FormField>
+      <FormField>
+        <Label htmlFor="activity-price">{t("price")}</Label>
+        <Input
           id="activity-price"
           type="number"
           min={0}
@@ -82,11 +85,11 @@ export function CreateActivityForm({ academicYears }: { academicYears: AcademicY
           value={price}
           onChange={(e) => setPrice(Number(e.target.value))}
         />
-      </div>
-      {status === "error" && error && <p role="alert">{error}</p>}
-      <button type="submit" disabled={status === "submitting"}>
+      </FormField>
+      {status === "error" && error && <Alert variant="error">{error}</Alert>}
+      <Button type="submit" disabled={status === "submitting"} variant="secondary">
         {status === "submitting" ? t("submitting") : t("createActivity")}
-      </button>
+      </Button>
     </form>
   );
 }

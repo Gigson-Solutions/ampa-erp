@@ -5,6 +5,9 @@ import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { enrollStudentAction } from "./actions";
 import type { ActivitySummary, StudentSummary } from "@/lib/board-directory";
+import { Button } from "@/components/ui/Button";
+import { Alert } from "@/components/ui/Alert";
+import { FormField, Label, Select } from "@/components/ui/Input";
 
 interface EnrollStudentFormProps {
   activities: ActivitySummary[];
@@ -38,36 +41,36 @@ export function EnrollStudentForm({ activities, students }: EnrollStudentFormPro
   }
 
   if (activities.length === 0 || students.length === 0) {
-    return <p role="alert">{t("noActivitiesOrStudents")}</p>;
+    return <Alert variant="error">{t("noActivitiesOrStudents")}</Alert>;
   }
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-      <div>
-        <label htmlFor="enroll-activity">{t("activity")}</label>
-        <select id="enroll-activity" value={activityId} onChange={(e) => setActivityId(e.target.value)}>
+      <FormField>
+        <Label htmlFor="enroll-activity">{t("activity")}</Label>
+        <Select id="enroll-activity" value={activityId} onChange={(e) => setActivityId(e.target.value)}>
           {activities.map((activity) => (
             <option key={activity.id} value={activity.id}>
               {activity.name} ({activity.enrolledCount}
               {activity.capacity !== null ? `/${activity.capacity}` : ""})
             </option>
           ))}
-        </select>
-      </div>
-      <div>
-        <label htmlFor="enroll-student">{t("student")}</label>
-        <select id="enroll-student" value={studentId} onChange={(e) => setStudentId(e.target.value)}>
+        </Select>
+      </FormField>
+      <FormField>
+        <Label htmlFor="enroll-student">{t("student")}</Label>
+        <Select id="enroll-student" value={studentId} onChange={(e) => setStudentId(e.target.value)}>
           {students.map((student) => (
             <option key={student.id} value={student.id}>
               {student.name} ({student.familyReferenceCode})
             </option>
           ))}
-        </select>
-      </div>
-      {message && <p role={status === "error" ? "alert" : "status"}>{message}</p>}
-      <button type="submit" disabled={status === "submitting"}>
+        </Select>
+      </FormField>
+      {message && <Alert variant={status === "error" ? "error" : "success"}>{message}</Alert>}
+      <Button type="submit" disabled={status === "submitting"} variant="secondary">
         {status === "submitting" ? t("submitting") : t("enroll")}
-      </button>
+      </Button>
     </form>
   );
 }

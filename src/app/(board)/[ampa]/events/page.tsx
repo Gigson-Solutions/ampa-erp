@@ -4,6 +4,10 @@ import { requireAmpaRole } from "@/lib/require-ampa-session";
 import { listEvents, listFamilies } from "@/lib/board-directory";
 import { CreateEventForm } from "./CreateEventForm";
 import { RegisterFamilyForm } from "./RegisterFamilyForm";
+import { PageHeader } from "@/components/ui/PageHeader";
+import { Card } from "@/components/ui/Card";
+import { Table, THead, TBody, TR, TH, TD } from "@/components/ui/Table";
+import { Badge } from "@/components/ui/Badge";
 
 export default async function EventsPage(): Promise<React.ReactElement> {
   const { ampaId } = await requireAmpaRole("MANAGE_ACTIVITIES");
@@ -23,49 +27,61 @@ function EventsPageContent({
   const t = useTranslations("board.events");
 
   return (
-    <main className="mx-auto max-w-3xl p-8">
-      <h1 className="text-2xl font-semibold">{t("title")}</h1>
+    <>
+      <PageHeader title={t("title")} />
 
-      <section className="mt-6">
-        <h2 className="font-semibold">{t("createEvent")}</h2>
-        <CreateEventForm />
-      </section>
+      <div className="grid grid-cols-2 gap-6">
+        <Card>
+          <h2 className="mb-4 font-semibold text-ink-900">{t("createEvent")}</h2>
+          <CreateEventForm />
+        </Card>
 
-      <section className="mt-8">
-        <h2 className="font-semibold">{t("register")}</h2>
-        <RegisterFamilyForm events={events} families={families} />
-      </section>
+        <Card>
+          <h2 className="mb-4 font-semibold text-ink-900">{t("register")}</h2>
+          <RegisterFamilyForm events={events} families={families} />
+        </Card>
+      </div>
 
-      <section className="mt-8">
-        <table className="w-full text-left">
-          <thead>
-            <tr>
-              <th>{t("name")}</th>
-              <th>{t("date")}</th>
-              <th>{t("price")}</th>
-              <th>{t("attendance")}</th>
-              <th />
-            </tr>
-          </thead>
-          <tbody>
+      <div className="mt-6">
+        <Table>
+          <THead>
+            <TR>
+              <TH>{t("name")}</TH>
+              <TH>{t("date")}</TH>
+              <TH>{t("price")}</TH>
+              <TH>{t("attendance")}</TH>
+              <TH />
+            </TR>
+          </THead>
+          <TBody>
             {events.map((event) => (
-              <tr key={event.id}>
-                <td>{event.name}</td>
-                <td>{new Date(event.date).toLocaleDateString("es-ES")}</td>
-                <td>{event.price !== null ? `${event.price}€` : "—"}</td>
-                <td>
-                  {event.registeredAttendees}
-                  {event.capacity !== null ? `/${event.capacity}` : ""}
-                  {event.waitlistedCount > 0 ? ` (+${event.waitlistedCount} ${t("waitlistShort")})` : ""}
-                </td>
-                <td>
-                  <Link href={`events/${event.id}`}>{t("viewRegistrations")}</Link>
-                </td>
-              </tr>
+              <TR key={event.id}>
+                <TD className="font-medium">{event.name}</TD>
+                <TD>{new Date(event.date).toLocaleDateString("es-ES")}</TD>
+                <TD>{event.price !== null ? `${event.price}€` : "—"}</TD>
+                <TD>
+                  <div className="flex items-center gap-2">
+                    <span>
+                      {event.registeredAttendees}
+                      {event.capacity !== null ? `/${event.capacity}` : ""}
+                    </span>
+                    {event.waitlistedCount > 0 && (
+                      <Badge variant="warning">
+                        +{event.waitlistedCount} {t("waitlistShort")}
+                      </Badge>
+                    )}
+                  </div>
+                </TD>
+                <TD>
+                  <Link href={`events/${event.id}`} className="text-brand-500 hover:underline">
+                    {t("viewRegistrations")}
+                  </Link>
+                </TD>
+              </TR>
             ))}
-          </tbody>
-        </table>
-      </section>
-    </main>
+          </TBody>
+        </Table>
+      </div>
+    </>
   );
 }

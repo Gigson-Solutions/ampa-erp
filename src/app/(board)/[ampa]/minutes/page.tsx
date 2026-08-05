@@ -3,6 +3,8 @@ import { requireAmpaRole } from "@/lib/require-ampa-session";
 import { listMinutesEntries } from "@/lib/minutes";
 import { MinutesForm } from "./MinutesForm";
 import { VerifyChainButton } from "./VerifyChainButton";
+import { PageHeader } from "@/components/ui/PageHeader";
+import { Card } from "@/components/ui/Card";
 
 export default async function MinutesPage(): Promise<React.ReactElement> {
   const { ampaId } = await requireAmpaRole("MANAGE_MEMBERS");
@@ -19,31 +21,29 @@ function MinutesPageContent({
   const t = useTranslations("board.minutes");
 
   return (
-    <main className="mx-auto max-w-2xl p-8">
-      <h1 className="text-2xl font-semibold">{t("title")}</h1>
+    <div className="max-w-2xl">
+      <PageHeader title={t("title")} actions={<VerifyChainButton />} />
 
-      <section className="mt-6">
+      <Card>
         <MinutesForm />
-      </section>
+      </Card>
 
-      <section className="mt-8">
-        <VerifyChainButton />
-      </section>
-
-      <ul className="mt-8 flex flex-col gap-4">
+      <ul className="mt-6 flex flex-col gap-4">
         {entries.map((entry) => (
           <li key={entry.id}>
-            <p className="text-sm text-gray-500">
-              {t("entryNumber")} {entry.sequenceNumber} — {new Date(entry.signedAt).toLocaleString("es-ES")}
-            </p>
-            <h2 className="font-semibold">{entry.title}</h2>
-            <p>{entry.body}</p>
-            <p className="text-sm text-gray-500">
-              {t("signedBy")}: {entry.signedByName}
-            </p>
+            <Card>
+              <p className="text-xs font-medium text-ink-400">
+                {t("entryNumber")} {entry.sequenceNumber} — {new Date(entry.signedAt).toLocaleString("es-ES")}
+              </p>
+              <h2 className="mt-1 font-semibold text-ink-900">{entry.title}</h2>
+              <p className="mt-1 text-sm text-ink-700">{entry.body}</p>
+              <p className="mt-2 text-xs text-ink-400">
+                {t("signedBy")}: {entry.signedByName}
+              </p>
+            </Card>
           </li>
         ))}
       </ul>
-    </main>
+    </div>
   );
 }

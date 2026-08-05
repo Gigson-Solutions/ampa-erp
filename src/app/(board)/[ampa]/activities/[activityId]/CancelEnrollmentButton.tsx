@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { cancelEnrollmentAction } from "../actions";
+import { Button } from "@/components/ui/Button";
 
 export function CancelEnrollmentButton({ enrollmentId }: { enrollmentId: string }): React.ReactElement {
   const t = useTranslations("board.activities");
@@ -22,8 +23,8 @@ export function CancelEnrollmentButton({ enrollmentId }: { enrollmentId: string 
   }
 
   return (
-    <button type="button" onClick={handleCancel} disabled={status === "submitting"}>
+    <Button type="button" variant="tertiary" size="xs" onClick={handleCancel} disabled={status === "submitting"}>
       {t("cancelEnrollment")}
-    </button>
+    </Button>
   );
 }

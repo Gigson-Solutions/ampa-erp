@@ -2,6 +2,8 @@ import { useTranslations } from "next-intl";
 import { requireAmpaRole } from "@/lib/require-ampa-session";
 import { listFamilies, listFeeSchemas } from "@/lib/board-directory";
 import { CreateMembershipForm } from "./CreateMembershipForm";
+import { PageHeader } from "@/components/ui/PageHeader";
+import { Card } from "@/components/ui/Card";
 
 interface PageProps {
   searchParams: Promise<{ familyId?: string }>;
@@ -32,15 +34,15 @@ function MembershipsPageContent({
 }): React.ReactElement {
   const t = useTranslations("board.memberships");
   return (
-    <main className="mx-auto max-w-xl p-8">
-      <h1 className="text-2xl font-semibold">{t("title")}</h1>
-      <div className="mt-6">
+    <div className="max-w-xl">
+      <PageHeader title={t("title")} />
+      <Card>
         <CreateMembershipForm
           families={families}
           feeSchemas={feeSchemas}
           preselectedFamilyId={preselectedFamilyId}
         />
-      </div>
-    </main>
+      </Card>
+    </div>
   );
 }

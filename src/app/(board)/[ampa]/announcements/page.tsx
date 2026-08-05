@@ -2,6 +2,8 @@ import { useTranslations } from "next-intl";
 import { requireAmpaRole } from "@/lib/require-ampa-session";
 import { listAnnouncements } from "@/lib/announcements";
 import { AnnouncementForm } from "./AnnouncementForm";
+import { PageHeader } from "@/components/ui/PageHeader";
+import { Card } from "@/components/ui/Card";
 
 export default async function AnnouncementsPage(): Promise<React.ReactElement> {
   const { ampaId } = await requireAmpaRole("MANAGE_COMMUNICATIONS");
@@ -18,19 +20,21 @@ function AnnouncementsPageContent({
   const t = useTranslations("board.announcements");
 
   return (
-    <main className="mx-auto max-w-2xl p-8">
-      <h1 className="text-2xl font-semibold">{t("title")}</h1>
-      <div className="mt-6">
+    <div className="max-w-2xl">
+      <PageHeader title={t("title")} />
+      <Card>
         <AnnouncementForm />
-      </div>
-      <ul className="mt-8 flex flex-col gap-4">
+      </Card>
+      <ul className="mt-6 flex flex-col gap-4">
         {announcements.map((announcement) => (
           <li key={announcement.id}>
-            <h2 className="font-semibold">{announcement.title}</h2>
-            <p>{announcement.body}</p>
+            <Card>
+              <h2 className="font-semibold text-ink-900">{announcement.title}</h2>
+              <p className="mt-1 text-sm text-ink-700">{announcement.body}</p>
+            </Card>
           </li>
         ))}
       </ul>
-    </main>
+    </div>
   );
 }

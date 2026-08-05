@@ -1,9 +1,12 @@
 "use client";
 
 import { useState } from "react";
+import { ShieldCheck } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { verifyMinutesChainAction } from "./actions";
 import type { MinutesChainVerification } from "@/lib/minutes";
+import { Button } from "@/components/ui/Button";
+import { Badge } from "@/components/ui/Badge";
 
 export function VerifyChainButton(): React.ReactElement {
   const t = useTranslations("board.minutes");
@@ -18,17 +21,18 @@ export function VerifyChainButton(): React.ReactElement {
   }
 
   return (
-    <div>
-      <button type="button" onClick={handleVerify} disabled={status === "checking"}>
-        {status === "checking" ? t("verifying") : t("verifyChain")}
-      </button>
+    <div className="flex items-center gap-3">
       {result && (
-        <p role={result.valid ? "status" : "alert"} className="mt-2">
+        <Badge variant={result.valid ? "success" : "danger"}>
           {result.valid
             ? `${t("chainValid")} (${result.entryCount})`
             : `${t("chainBroken")} #${result.brokenAtSequence}: ${result.reason}`}
-        </p>
+        </Badge>
       )}
+      <Button type="button" variant="secondary" size="sm" onClick={handleVerify} disabled={status === "checking"}>
+        <ShieldCheck size={16} />
+        {status === "checking" ? t("verifying") : t("verifyChain")}
+      </Button>
     </div>
   );
 }

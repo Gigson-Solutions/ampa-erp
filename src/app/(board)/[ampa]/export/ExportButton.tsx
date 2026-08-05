@@ -1,8 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import { Download } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { exportDataAction } from "./actions";
+import { Button } from "@/components/ui/Button";
+import { Alert } from "@/components/ui/Alert";
 
 export function ExportButton(): React.ReactElement {
   const t = useTranslations("board.export");
@@ -32,10 +35,15 @@ export function ExportButton(): React.ReactElement {
 
   return (
     <div>
-      <button type="button" onClick={handleExport} disabled={status === "submitting"}>
+      <Button type="button" onClick={handleExport} disabled={status === "submitting"} variant="secondary">
+        <Download size={16} />
         {status === "submitting" ? t("exporting") : t("export")}
-      </button>
-      {status === "error" && error && <p role="alert">{error}</p>}
+      </Button>
+      {status === "error" && error && (
+        <div className="mt-3">
+          <Alert variant="error">{error}</Alert>
+        </div>
+      )}
     </div>
   );
 }

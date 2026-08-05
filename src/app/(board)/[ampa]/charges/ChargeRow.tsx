@@ -5,6 +5,9 @@ import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { recordManualPaymentAction } from "./actions";
 import type { PendingChargeSummary } from "@/lib/board-directory";
+import { TR, TD } from "@/components/ui/Table";
+import { Button } from "@/components/ui/Button";
+import { Select } from "@/components/ui/Input";
 
 export function ChargeRow({ charge }: { charge: PendingChargeSummary }): React.ReactElement {
   const t = useTranslations("board.charges");
@@ -29,21 +32,31 @@ export function ChargeRow({ charge }: { charge: PendingChargeSummary }): React.R
   }
 
   return (
-    <tr>
-      <td>{charge.familyReferenceCode}</td>
-      <td>{charge.concept}</td>
-      <td>{charge.amount}€</td>
-      <td>{new Date(charge.dueDate).toLocaleDateString("es-ES")}</td>
-      <td>
-        <select value={method} onChange={(event) => setMethod(event.target.value as "TRANSFER" | "CASH")}>
-          <option value="TRANSFER">{t("methodTransfer")}</option>
-          <option value="CASH">{t("methodCash")}</option>
-        </select>
-        <button type="button" onClick={handleMarkPaid} disabled={status === "submitting"}>
-          {status === "submitting" ? t("submitting") : t("markPaid")}
-        </button>
-        {status === "error" && error && <p role="alert">{error}</p>}
-      </td>
-    </tr>
+    <TR>
+      <TD>{charge.familyReferenceCode}</TD>
+      <TD>{charge.concept}</TD>
+      <TD>{charge.amount}€</TD>
+      <TD>{new Date(charge.dueDate).toLocaleDateString("es-ES")}</TD>
+      <TD>
+        <div className="flex items-center gap-2">
+          <Select
+            className="h-8 w-auto"
+            value={method}
+            onChange={(event) => setMethod(event.target.value as "TRANSFER" | "CASH")}
+          >
+            <option value="TRANSFER">{t("methodTransfer")}</option>
+            <option value="CASH">{t("methodCash")}</option>
+          </Select>
+          <Button type="button" size="xs" onClick={handleMarkPaid} disabled={status === "submitting"}>
+            {status === "submitting" ? t("submitting") : t("markPaid")}
+          </Button>
+        </div>
+        {status === "error" && error && (
+          <p role="alert" className="mt-1 text-xs text-danger-fg">
+            {error}
+          </p>
+        )}
+      </TD>
+    </TR>
   );
 }

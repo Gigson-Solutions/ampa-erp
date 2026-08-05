@@ -3,6 +3,11 @@ import { useTranslations } from "next-intl";
 import { requireAmpaRole } from "@/lib/require-ampa-session";
 import { listActivityEnrollments } from "@/lib/board-directory";
 import { CancelEnrollmentButton } from "./CancelEnrollmentButton";
+import { PageHeader } from "@/components/ui/PageHeader";
+import { Card } from "@/components/ui/Card";
+import { Table, THead, TBody, TR, TH, TD } from "@/components/ui/Table";
+import { Badge } from "@/components/ui/Badge";
+import { Button } from "@/components/ui/Button";
 
 interface PageProps {
   params: Promise<{ activityId: string }>;
@@ -23,43 +28,51 @@ function ActivityEnrollmentsContent({
 }): React.ReactElement {
   const t = useTranslations("board.activities");
 
-  if (enrollments.length === 0) {
-    return (
-      <main className="mx-auto max-w-2xl p-8">
-        <h1 className="text-2xl font-semibold">{t("enrollmentsTitle")}</h1>
-        <p className="mt-4">{t("noEnrollments")}</p>
-      </main>
-    );
-  }
-
   return (
-    <main className="mx-auto max-w-2xl p-8">
-      <h1 className="text-2xl font-semibold">{t("enrollmentsTitle")}</h1>
-      <p className="mt-2">
-        <Link href="attendance">{t("takeAttendance")}</Link>
-      </p>
-      <table className="mt-6 w-full text-left">
-        <thead>
-          <tr>
-            <th>{t("student")}</th>
-            <th>{t("family")}</th>
-            <th>{t("status")}</th>
-            <th />
-          </tr>
-        </thead>
-        <tbody>
-          {enrollments.map((enrollment) => (
-            <tr key={enrollment.id}>
-              <td>{enrollment.studentName}</td>
-              <td>{enrollment.familyReferenceCode}</td>
-              <td>{enrollment.status === "WAITLISTED" ? t("waitlisted") : t("enrolled")}</td>
-              <td>
-                <CancelEnrollmentButton enrollmentId={enrollment.id} />
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </main>
+    <>
+      <PageHeader
+        title={t("enrollmentsTitle")}
+        actions={
+          <Link href="attendance">
+            <Button variant="secondary" size="sm">
+              {t("takeAttendance")}
+            </Button>
+          </Link>
+        }
+      />
+
+      {enrollments.length === 0 ? (
+        <Card>
+          <p className="text-sm text-ink-700">{t("noEnrollments")}</p>
+        </Card>
+      ) : (
+        <Table>
+          <THead>
+            <TR>
+              <TH>{t("student")}</TH>
+              <TH>{t("family")}</TH>
+              <TH>{t("status")}</TH>
+              <TH />
+            </TR>
+          </THead>
+          <TBody>
+            {enrollments.map((enrollment) => (
+              <TR key={enrollment.id}>
+                <TD className="font-medium">{enrollment.studentName}</TD>
+                <TD>{enrollment.familyReferenceCode}</TD>
+                <TD>
+                  <Badge variant={enrollment.status === "WAITLISTED" ? "warning" : "success"}>
+                    {enrollment.status === "WAITLISTED" ? t("waitlisted") : t("enrolled")}
+                  </Badge>
+                </TD>
+                <TD>
+                  <CancelEnrollmentButton enrollmentId={enrollment.id} />
+                </TD>
+              </TR>
+            ))}
+          </TBody>
+        </Table>
+      )}
+    </>
   );
 }

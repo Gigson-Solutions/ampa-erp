@@ -4,6 +4,9 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { createDocumentAction } from "./actions";
+import { Button } from "@/components/ui/Button";
+import { Alert } from "@/components/ui/Alert";
+import { FormField, Input, Label } from "@/components/ui/Input";
 
 export function DocumentForm(): React.ReactElement {
   const t = useTranslations("board.documents");
@@ -36,13 +39,13 @@ export function DocumentForm(): React.ReactElement {
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-      <div>
-        <label htmlFor="document-title">{t("titleLabel")}</label>
-        <input id="document-title" required value={title} onChange={(e) => setTitle(e.target.value)} />
-      </div>
-      <div>
-        <label htmlFor="document-url">{t("urlLabel")}</label>
-        <input
+      <FormField>
+        <Label htmlFor="document-title">{t("titleLabel")}</Label>
+        <Input id="document-title" required value={title} onChange={(e) => setTitle(e.target.value)} />
+      </FormField>
+      <FormField>
+        <Label htmlFor="document-url">{t("urlLabel")}</Label>
+        <Input
           id="document-url"
           type="url"
           required
@@ -50,15 +53,15 @@ export function DocumentForm(): React.ReactElement {
           onChange={(e) => setUrl(e.target.value)}
           placeholder="https://..."
         />
-      </div>
-      <div>
-        <label htmlFor="document-category">{t("categoryLabel")}</label>
-        <input id="document-category" value={category} onChange={(e) => setCategory(e.target.value)} />
-      </div>
-      {status === "error" && error && <p role="alert">{error}</p>}
-      <button type="submit" disabled={status === "submitting"}>
+      </FormField>
+      <FormField>
+        <Label htmlFor="document-category">{t("categoryLabel")}</Label>
+        <Input id="document-category" value={category} onChange={(e) => setCategory(e.target.value)} />
+      </FormField>
+      {status === "error" && error && <Alert variant="error">{error}</Alert>}
+      <Button type="submit" disabled={status === "submitting"}>
         {status === "submitting" ? t("submitting") : t("add")}
-      </button>
+      </Button>
     </form>
   );
 }

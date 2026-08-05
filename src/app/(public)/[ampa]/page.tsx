@@ -21,9 +21,9 @@ export default async function AmpaPublicPage({ params }: PageProps): Promise<Rea
 function AmpaWelcome({ name }: { name: string }): React.ReactElement {
   const t = useTranslations("common");
   return (
-    <main className="mx-auto max-w-xl p-8">
-      <h1 className="text-2xl font-semibold">{t("welcome")}</h1>
-      <p className="mt-2 text-gray-600">{name}</p>
-    </main>
+    <div>
+      <h1 className="text-2xl font-bold text-ink-900">{t("welcome")}</h1>
+      <p className="mt-2 text-ink-700">{name}</p>
+    </div>
   );
 }

@@ -2,6 +2,9 @@ import { useTranslations } from "next-intl";
 import { requireAmpaRole } from "@/lib/require-ampa-session";
 import { listAttendanceForDate } from "@/lib/attendance";
 import { AttendanceRoster } from "./AttendanceRoster";
+import { PageHeader } from "@/components/ui/PageHeader";
+import { Card } from "@/components/ui/Card";
+import { Button } from "@/components/ui/Button";
 
 interface PageProps {
   params: Promise<{ activityId: string }>;
@@ -33,16 +36,28 @@ function AttendancePageContent({
   const t = useTranslations("board.attendance");
 
   return (
-    <main className="mx-auto max-w-2xl p-8">
-      <h1 className="text-2xl font-semibold">{t("title")}</h1>
-      <form method="get" className="mt-4">
-        <label htmlFor="attendance-date">{t("date")}</label>
-        <input id="attendance-date" type="date" name="date" defaultValue={date} />
-        <button type="submit">{t("changeDate")}</button>
-      </form>
-      <div className="mt-6">
-        <AttendanceRoster roster={roster} date={date} />
-      </div>
-    </main>
+    <>
+      <PageHeader title={t("title")} />
+      <Card className="mb-6">
+        <form method="get" className="flex items-end gap-3">
+          <div>
+            <label htmlFor="attendance-date" className="mb-1 block text-sm font-medium text-ink-900">
+              {t("date")}
+            </label>
+            <input
+              id="attendance-date"
+              type="date"
+              name="date"
+              defaultValue={date}
+              className="h-10 rounded border border-border bg-surface px-3 text-sm text-ink-900"
+            />
+          </div>
+          <Button type="submit" variant="secondary">
+            {t("changeDate")}
+          </Button>
+        </form>
+      </Card>
+      <AttendanceRoster roster={roster} date={date} />
+    </>
   );
 }

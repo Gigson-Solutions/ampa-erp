@@ -1,7 +1,10 @@
+import { FileText } from "lucide-react";
 import { notFound } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { prisma } from "@/lib/prisma";
 import { listDocuments } from "@/lib/documents";
+import { PageHeader } from "@/components/ui/PageHeader";
+import { Card } from "@/components/ui/Card";
 
 interface PageProps {
   params: Promise<{ ampa: string }>;
@@ -27,28 +30,32 @@ function DocumentosContent({
 }): React.ReactElement {
   const t = useTranslations("documentos");
 
-  if (documents.length === 0) {
-    return (
-      <main className="mx-auto max-w-xl p-8">
-        <h1 className="text-2xl font-semibold">{t("title")}</h1>
-        <p className="mt-4">{t("empty")}</p>
-      </main>
-    );
-  }
-
   return (
-    <main className="mx-auto max-w-xl p-8">
-      <h1 className="text-2xl font-semibold">{t("title")}</h1>
-      <ul className="mt-6 flex flex-col gap-2">
-        {documents.map((document) => (
-          <li key={document.id}>
-            <a href={document.url} target="_blank" rel="noreferrer">
-              {document.title}
-            </a>
-            {document.category && <span> — {document.category}</span>}
-          </li>
-        ))}
-      </ul>
-    </main>
+    <div>
+      <PageHeader title={t("title")} />
+
+      {documents.length === 0 ? (
+        <Card>
+          <p className="text-sm text-ink-700">{t("empty")}</p>
+        </Card>
+      ) : (
+        <ul className="flex flex-col gap-2">
+          {documents.map((document) => (
+            <li key={document.id}>
+              <a
+                href={document.url}
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center gap-3 rounded-lg border border-border bg-surface px-4 py-3 text-sm hover:bg-page"
+              >
+                <FileText size={18} className="shrink-0 text-ink-400" />
+                <span className="font-medium text-brand-500">{document.title}</span>
+                {document.category && <span className="text-ink-700">— {document.category}</span>}
+              </a>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
   );
 }

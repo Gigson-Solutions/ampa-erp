@@ -1,1 +1,47 @@
 @import "tailwindcss";
+
+/*
+ * Tokens de diseño extraídos del Figma Community "ERP B2B Design Kit"
+ * (https://www.figma.com/community/file/1220373386573896297/erp-b2b-design-kit)
+ * decodificado localmente (canvas.fig -> kiwi -> JSON) el 2026-08-05. No es un
+ * kit del dominio de AMPAs (es de manufactura/pedidos), pero el lenguaje visual
+ * -paleta, tipografía, radios, sombra de tarjetas/botones- sí es el que se adapta
+ * a toda la app. Ver /tmp/figma_layout.json de esa sesión si hace falta volver a
+ * consultar el árbol de nodos original.
+ */
+@theme {
+  /* Fondo de página / superficie de tarjetas */
+  --color-page: #f7f9fb;
+  --color-surface: #ffffff;
+
+  /* Texto y bordes (escala de grises del kit) */
+  --color-ink-900: #1a1f36; /* texto principal, marca */
+  --color-ink-700: #585757; /* texto secundario */
+  --color-ink-400: #969696; /* texto terciario / placeholders */
+  --color-border: #dddee1;
+  --color-border-strong: #e8e8e8;
+  --color-nav-hover: #ebeef0; /* fondo de item de sidebar activo/hover */
+
+  /* Marca */
+  --color-brand-500: #0085ff;
+  --color-brand-600: #006fd6;
+
+  /* Estados (fondo claro + texto oscuro a juego, igual que los badges del kit) */
+  --color-success-bg: #d7ffd0;
+  --color-success-fg: #0c8c09;
+  --color-warning-bg: #fff9d4;
+  --color-warning-fg: #c9981b;
+  --color-danger-bg: #ffdfdf;
+  --color-danger-fg: #8c0909;
+  --color-info-bg: #d0f4ff;
+  --color-info-fg: #093e8c;
+  --color-neutral-bg: #fbf5c4;
+  --color-neutral-fg: #8b5401;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
+body {
+  background-color: var(--color-page);
+  color: var(--color-ink-900);
+}
