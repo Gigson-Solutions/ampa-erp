@@ -58,9 +58,9 @@ describe("requireAmpaRole (autorización de (board), con sesión simulada)", () 
     otherAmpaId = otherAmpa.id;
 
     const presidenciaUser = await prisma.user.upsert({
-      where: { email: "presidencia@example.com" },
+      where: { email: "test-presidencia@example.com" },
       update: {},
-      create: { email: "presidencia@example.com" },
+      create: { email: "test-presidencia@example.com" },
     });
     presidenciaUserId = presidenciaUser.id;
     await prisma.userAmpaRole.upsert({
@@ -70,9 +70,9 @@ describe("requireAmpaRole (autorización de (board), con sesión simulada)", () 
     });
 
     const familiaUser = await prisma.user.upsert({
-      where: { email: "familia@example.com" },
+      where: { email: "test-familia@example.com" },
       update: {},
-      create: { email: "familia@example.com" },
+      create: { email: "test-familia@example.com" },
     });
     familiaUserId = familiaUser.id;
     await prisma.userAmpaRole.upsert({
@@ -84,9 +84,9 @@ describe("requireAmpaRole (autorización de (board), con sesión simulada)", () 
     // Presidente de la OTRA AMPA — para probar que un rol en la AMPA B no da
     // ningún permiso en la AMPA A.
     const noRoleUser = await prisma.user.upsert({
-      where: { email: "presidencia-other@example.com" },
+      where: { email: "test-presidencia-other@example.com" },
       update: {},
-      create: { email: "presidencia-other@example.com" },
+      create: { email: "test-presidencia-other@example.com" },
     });
     noRoleUserId = noRoleUser.id;
     await prisma.userAmpaRole.upsert({
