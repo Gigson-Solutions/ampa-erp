@@ -6,9 +6,9 @@ import { prisma } from "../src/lib/prisma";
 // AMPA B por ninguna vía.
 async function main(): Promise<void> {
   const centerA = await prisma.center.upsert({
-    where: { code: "IES-RIBERA-DEL-TAJO" },
+    where: { code: "IES-CAMPANAR" },
     update: {},
-    create: { name: "IES Ribera del Tajo", code: "IES-RIBERA-DEL-TAJO" },
+    create: { name: "IES Campanar", code: "IES-CAMPANAR" },
   });
 
   const centerB = await prisma.center.upsert({
@@ -18,12 +18,12 @@ async function main(): Promise<void> {
   });
 
   const ampaA = await prisma.ampa.upsert({
-    where: { subdomain: "riberadeltajo" },
+    where: { subdomain: "campanar" },
     update: {},
     create: {
       centerId: centerA.id,
-      name: "AMPA IES Ribera del Tajo",
-      subdomain: "riberadeltajo",
+      name: "AMPA IES Campanar",
+      subdomain: "campanar",
       locale: "es",
     },
   });
@@ -102,7 +102,7 @@ async function main(): Promise<void> {
   });
 
   // Usuario de junta de prueba (PRESIDENCIA de ampaA) para poder entrar en local a
-  // /riberadeltajo/families y /riberadeltajo/memberships: pide el magic link con
+  // /campanar/families y /campanar/memberships: pide el magic link con
   // este email en /login — en desarrollo (sin credenciales AWS) el enlace se
   // imprime en la consola de `pnpm dev` en vez de enviarse por email de verdad.
   const boardUser = await prisma.user.upsert({

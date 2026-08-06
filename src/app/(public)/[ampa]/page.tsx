@@ -12,7 +12,7 @@ interface PageProps {
 
 // Ruta pública por AMPA (resuelta por subdominio en producción; el segmento
 // `[ampa]` de la URL solo es el fallback local sin subdominios reales, p.ej.
-// `localhost:3000/riberadeltajo`).
+// `localhost:3000/campanar`).
 //
 // Importante: esta es la ÚNICA puerta de entrada visible para llegar al panel de
 // junta — antes no había ningún enlace entre la web pública y `/[ampa]/families`

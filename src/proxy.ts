@@ -28,7 +28,7 @@ export function extractSubdomainFromHost(host: string): string | null {
 
 /**
  * Fallback SOLO para desarrollo local sin subdominios reales configurados (p.ej.
- * `localhost:3000/riberadeltajo/...`, como ya usan las páginas públicas vía
+ * `localhost:3000/campanar/...`, como ya usan las páginas públicas vía
  * `params.ampa`). En producción esto nunca se llega a usar porque
  * `extractSubdomainFromHost` ya resuelve el subdominio real primero — este fallback
  * solo entra en juego cuando el host no coincide con `ROOT_DOMAIN`.

@@ -5,11 +5,11 @@ import { extractSubdomainFromHost, extractSubdomainFromPath, resolveAmpaSubdomai
 
 describe("extractSubdomainFromHost", () => {
   it("extrae el subdominio de un host de producción real", () => {
-    expect(extractSubdomainFromHost("riberadeltajo.ampas.org")).toBe("riberadeltajo");
+    expect(extractSubdomainFromHost("campanar.ampas.org")).toBe("campanar");
   });
 
   it("ignora el puerto", () => {
-    expect(extractSubdomainFromHost("riberadeltajo.ampas.org:3000")).toBe("riberadeltajo");
+    expect(extractSubdomainFromHost("campanar.ampas.org:3000")).toBe("campanar");
   });
 
   it("devuelve null si el host no es de ROOT_DOMAIN (p.ej. localhost)", () => {
@@ -28,8 +28,8 @@ describe("extractSubdomainFromHost", () => {
 
 describe("extractSubdomainFromPath (fallback local sin subdominios reales)", () => {
   it("extrae el primer segmento de la ruta", () => {
-    expect(extractSubdomainFromPath("/riberadeltajo/families")).toBe("riberadeltajo");
-    expect(extractSubdomainFromPath("/riberadeltajo")).toBe("riberadeltajo");
+    expect(extractSubdomainFromPath("/campanar/families")).toBe("campanar");
+    expect(extractSubdomainFromPath("/campanar")).toBe("campanar");
   });
 
   it("devuelve null para rutas reservadas (login, api) para no confundirlas con una AMPA", () => {
@@ -48,11 +48,11 @@ describe("extractSubdomainFromPath (fallback local sin subdominios reales)", () 
 
 describe("resolveAmpaSubdomain", () => {
   it("prioriza el host real sobre el fallback de ruta", () => {
-    expect(resolveAmpaSubdomain("riberadeltajo.ampas.org", "/families")).toBe("riberadeltajo");
+    expect(resolveAmpaSubdomain("campanar.ampas.org", "/families")).toBe("campanar");
   });
 
   it("usa el fallback de ruta cuando el host no resuelve (localhost)", () => {
-    expect(resolveAmpaSubdomain("localhost:3000", "/riberadeltajo/families")).toBe("riberadeltajo");
+    expect(resolveAmpaSubdomain("localhost:3000", "/campanar/families")).toBe("campanar");
   });
 
   it("no confunde /login con una AMPA ni en local", () => {
