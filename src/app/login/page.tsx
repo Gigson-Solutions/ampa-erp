@@ -1,5 +1,6 @@
 import { useTranslations } from "next-intl";
 import { LoginForm } from "./LoginForm";
+import { DevQuickLogin } from "./DevQuickLogin";
 import { Card } from "@/components/ui/Card";
 
 interface PageProps {
@@ -13,6 +14,9 @@ export default async function LoginPage({ searchParams }: PageProps): Promise<Re
 
 function LoginPageContent({ callbackUrl }: { callbackUrl?: string }): React.ReactElement {
   const t = useTranslations("common");
+  // Se evalúa en el servidor: en producción el bloque de acceso rápido no llega
+  // siquiera al HTML (y su proveedor tampoco está registrado, ver auth.config.ts).
+  const showDevQuickLogin = process.env.NODE_ENV !== "production";
   return (
     <main className="flex min-h-screen items-center justify-center bg-page p-6">
       <div className="w-full max-w-sm">
@@ -22,6 +26,7 @@ function LoginPageContent({ callbackUrl }: { callbackUrl?: string }): React.Reac
           <div className="mt-6">
             <LoginForm callbackUrl={callbackUrl} />
           </div>
+          {showDevQuickLogin && <DevQuickLogin callbackUrl={callbackUrl} />}
         </Card>
       </div>
     </main>
