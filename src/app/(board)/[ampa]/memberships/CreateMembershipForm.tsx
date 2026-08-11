@@ -45,6 +45,8 @@ export function CreateMembershipForm({
   const [feeSchemaId, setFeeSchemaId] = useState(feeSchemas[0]?.id ?? "");
   const [isLargeFamily, setIsLargeFamily] = useState(false);
   const [scholarshipDiscountPercent, setScholarshipDiscountPercent] = useState(0);
+  const [alreadyPaid, setAlreadyPaid] = useState(false);
+  const [paymentMethod, setPaymentMethod] = useState<"TRANSFER" | "CASH">("TRANSFER");
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [message, setMessage] = useState<string | null>(null);
 
@@ -62,6 +64,7 @@ export function CreateMembershipForm({
       familyId,
       feeSchemaId,
       familyDiscounts: { siblingCount, isLargeFamily, scholarshipDiscountPercent },
+      payment: alreadyPaid ? { method: paymentMethod } : undefined,
     });
 
     if (result.ok) {
@@ -135,6 +138,35 @@ export function CreateMembershipForm({
           onChange={(e) => setScholarshipDiscountPercent(Number(e.target.value))}
         />
       </FormField>
+
+      {/* Feedback de usuario (2026-08-11): el método de pago se elige aquí, en
+          el alta del cargo, para el caso de pago inmediato — no en el listado
+          de /charges (que ahora solo tiene un botón simple para el caso de
+          pago diferido, el más habitual). */}
+      <div className="rounded-lg border border-border p-4">
+        <label className="flex items-center gap-2 text-sm text-ink-900">
+          <input
+            type="checkbox"
+            checked={alreadyPaid}
+            onChange={(e) => setAlreadyPaid(e.target.checked)}
+            className="h-4 w-4 rounded border-border text-brand-500 focus:ring-brand-500"
+          />
+          {t("alreadyPaid")}
+        </label>
+        {alreadyPaid && (
+          <FormField className="mt-3">
+            <Label htmlFor="paymentMethod">{t("paymentMethod")}</Label>
+            <Select
+              id="paymentMethod"
+              value={paymentMethod}
+              onChange={(e) => setPaymentMethod(e.target.value as "TRANSFER" | "CASH")}
+            >
+              <option value="TRANSFER">{t("methodTransfer")}</option>
+              <option value="CASH">{t("methodCash")}</option>
+            </Select>
+          </FormField>
+        )}
+      </div>
 
       {message && <Alert variant={status === "error" ? "error" : "success"}>{message}</Alert>}
 

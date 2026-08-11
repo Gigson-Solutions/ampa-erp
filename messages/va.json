@@ -43,7 +43,10 @@
       "methodCash": "Efectiu",
       "markPaid": "Marcar com a pagat",
       "submitting": "Guardant…",
-      "genericError": "No s'ha pogut registrar el pagament. Torna-ho a intentar."
+      "genericError": "No s'ha pogut registrar el pagament. Torna-ho a intentar.",
+      "summaryPending": "Pendent de cobrament",
+      "summaryOverdue": "Endarrerit",
+      "summaryChargesCount": "càrrec/s"
     },
     "families": {
       "title": "Famílies",
@@ -67,7 +70,11 @@
       "success": "Membresia creada. Import del càrrec:",
       "genericError": "No s'ha pogut crear la membresia. Torna-ho a intentar.",
       "emptyDirectories": "Encara no hi ha famílies o quotes creades per a esta AMPA.",
-      "siblingCountAuto": "calculat automàticament segons els alumnes ja registrats"
+      "siblingCountAuto": "calculat automàticament segons els alumnes ja registrats",
+      "alreadyPaid": "Ja està pagat",
+      "paymentMethod": "Mètode de pagament",
+      "methodTransfer": "Transferència",
+      "methodCash": "Efectiu"
     },
     "announcements": {
       "title": "Comunicats",

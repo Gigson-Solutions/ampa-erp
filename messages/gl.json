@@ -43,7 +43,10 @@
       "methodCash": "Efectivo",
       "markPaid": "Marcar como pagado",
       "submitting": "Gardando…",
-      "genericError": "Non se puido rexistrar o pago. Inténtao de novo."
+      "genericError": "Non se puido rexistrar o pago. Inténtao de novo.",
+      "summaryPending": "Pendente de cobro",
+      "summaryOverdue": "Atrasado",
+      "summaryChargesCount": "cargo/s"
     },
     "families": {
       "title": "Familias",
@@ -67,7 +70,11 @@
       "success": "Membresía creada. Importe do cargo:",
       "genericError": "Non se puido crear a membresía. Inténtao de novo.",
       "emptyDirectories": "Aínda non hai familias ou cotas creadas para esta AMPA.",
-      "siblingCountAuto": "calculado automaticamente segundo o alumnado xa rexistrado"
+      "siblingCountAuto": "calculado automaticamente segundo o alumnado xa rexistrado",
+      "alreadyPaid": "Xa está pagado",
+      "paymentMethod": "Método de pago",
+      "methodTransfer": "Transferencia",
+      "methodCash": "Efectivo"
     },
     "announcements": {
       "title": "Comunicados",

@@ -8,13 +8,19 @@ import type { PendingChargeSummary } from "@/lib/board-directory";
 import { formatCurrency } from "@/lib/format";
 import { TR, TD } from "@/components/ui/Table";
 import { Button } from "@/components/ui/Button";
-import { Select } from "@/components/ui/Input";
+
+// Feedback de usuario (2026-08-11): antes había que elegir el método de pago
+// aquí para cada cargo — se ha movido al alta de la membresía (para el caso
+// de pago inmediato). Un pago registrado DESDE AQUÍ es casi siempre diferido
+// (la familia paga semanas después de que venza el cargo, normalmente por
+// transferencia vista en el extracto bancario) — se usa "TRANSFER" por
+// defecto, sin pedir que se elija en cada fila.
+const DEFAULT_DEFERRED_PAYMENT_METHOD = "TRANSFER" as const;
 
 export function ChargeRow({ charge }: { charge: PendingChargeSummary }): React.ReactElement {
   const t = useTranslations("board.charges");
   const router = useRouter();
 
-  const [method, setMethod] = useState<"TRANSFER" | "CASH">("TRANSFER");
   const [status, setStatus] = useState<"idle" | "submitting" | "error">("idle");
   const [error, setError] = useState<string | null>(null);
 
@@ -22,7 +28,10 @@ export function ChargeRow({ charge }: { charge: PendingChargeSummary }): React.R
     setStatus("submitting");
     setError(null);
 
-    const result = await recordManualPaymentAction({ chargeId: charge.id, method });
+    const result = await recordManualPaymentAction({
+      chargeId: charge.id,
+      method: DEFAULT_DEFERRED_PAYMENT_METHOD,
+    });
 
     if (result.ok) {
       router.refresh();
@@ -44,19 +53,9 @@ export function ChargeRow({ charge }: { charge: PendingChargeSummary }): React.R
       <TD>{formatCurrency(charge.amount)}</TD>
       <TD>{new Date(charge.dueDate).toLocaleDateString("es-ES")}</TD>
       <TD>
-        <div className="flex items-center gap-2">
-          <Select
-            className="h-8 w-auto"
-            value={method}
-            onChange={(event) => setMethod(event.target.value as "TRANSFER" | "CASH")}
-          >
-            <option value="TRANSFER">{t("methodTransfer")}</option>
-            <option value="CASH">{t("methodCash")}</option>
-          </Select>
-          <Button type="button" size="xs" onClick={handleMarkPaid} disabled={status === "submitting"}>
-            {status === "submitting" ? t("submitting") : t("markPaid")}
-          </Button>
-        </div>
+        <Button type="button" size="xs" onClick={handleMarkPaid} disabled={status === "submitting"}>
+          {status === "submitting" ? t("submitting") : t("markPaid")}
+        </Button>
         {status === "error" && error && (
           <p role="alert" className="mt-1 text-xs text-danger-fg">
             {error}

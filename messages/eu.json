@@ -43,7 +43,10 @@
       "methodCash": "Eskudirua",
       "markPaid": "Ordainduta gisa markatu",
       "submitting": "Gordetzen…",
-      "genericError": "Ezin izan da ordainketa erregistratu. Saiatu berriro."
+      "genericError": "Ezin izan da ordainketa erregistratu. Saiatu berriro.",
+      "summaryPending": "Kobratzeko zain",
+      "summaryOverdue": "Atzeratuta",
+      "summaryChargesCount": "kargu"
     },
     "families": {
       "title": "Familiak",
@@ -67,7 +70,11 @@
       "success": "Kidetza sortuta. Karguaren zenbatekoa:",
       "genericError": "Ezin izan da kidetza sortu. Saiatu berriro.",
       "emptyDirectories": "Oraindik ez dago familiarik edo kuotarik sortuta AMPA honentzat.",
-      "siblingCountAuto": "automatikoki kalkulatua jada erregistratutako ikasleen arabera"
+      "siblingCountAuto": "automatikoki kalkulatua jada erregistratutako ikasleen arabera",
+      "alreadyPaid": "Jada ordainduta dago",
+      "paymentMethod": "Ordainketa-metodoa",
+      "methodTransfer": "Transferentzia",
+      "methodCash": "Eskudirua"
     },
     "announcements": {
       "title": "Jakinarazpenak",
