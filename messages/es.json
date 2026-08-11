@@ -232,6 +232,23 @@
       "endMembership": "Dar de baja",
       "endMembershipConfirm": "¿Dar de baja a este socio/a? Quedará registrado/a en el libro con la fecha de baja.",
       "genericError": "No se pudo dar de baja al socio/a. Inténtalo de nuevo."
+    },
+    "treasury": {
+      "forecastTitle": "Previsión de tesorería (próximos 6 meses)",
+      "month": "Mes",
+      "income": "Ingresos",
+      "expenses": "Gastos",
+      "net": "Neto",
+      "expenseForecastsTitle": "Gastos previstos",
+      "noExpenseForecasts": "Todavía no hay gastos previstos registrados.",
+      "expensePaid": "Pagado",
+      "addExpense": "Añadir gasto previsto",
+      "expenseDescription": "Descripción",
+      "expenseAmount": "Importe",
+      "expenseExpectedDate": "Fecha prevista",
+      "markExpensePaid": "Marcar como pagado",
+      "submitting": "Guardando…",
+      "genericError": "No se pudo completar la operación. Inténtalo de nuevo."
     }
   },
   "tablon": {

@@ -232,6 +232,23 @@
       "endMembership": "Donar de baixa",
       "endMembershipConfirm": "Vols donar de baixa a este soci/a? Quedarà registrat/ada al llibre amb la data de baixa.",
       "genericError": "No s'ha pogut donar de baixa el soci/a. Torna-ho a intentar."
+    },
+    "treasury": {
+      "forecastTitle": "Previsió de tresoreria (pròxims 6 mesos)",
+      "month": "Mes",
+      "income": "Ingressos",
+      "expenses": "Despeses",
+      "net": "Net",
+      "expenseForecastsTitle": "Despeses previstes",
+      "noExpenseForecasts": "Encara no hi ha despeses previstes registrades.",
+      "expensePaid": "Pagat",
+      "addExpense": "Afig despesa prevista",
+      "expenseDescription": "Descripció",
+      "expenseAmount": "Import",
+      "expenseExpectedDate": "Data prevista",
+      "markExpensePaid": "Marca com a pagat",
+      "submitting": "Guardant…",
+      "genericError": "No s'ha pogut completar l'operació. Torna-ho a intentar."
     }
   },
   "tablon": {

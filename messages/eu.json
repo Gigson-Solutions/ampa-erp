@@ -232,6 +232,23 @@
       "endMembership": "Baja eman",
       "endMembershipConfirm": "Bazkide honi baja eman nahi diozu? Liburuan geratuko da erregistratuta baja-datarekin.",
       "genericError": "Ezin izan zaio baja eman bazkideari. Saiatu berriro."
+    },
+    "treasury": {
+      "forecastTitle": "Diruzaintzaren aurreikuspena (hurrengo 6 hilabeteak)",
+      "month": "Hilabetea",
+      "income": "Sarrerak",
+      "expenses": "Gastuak",
+      "net": "Garbia",
+      "expenseForecastsTitle": "Aurreikusitako gastuak",
+      "noExpenseForecasts": "Oraindik ez dago aurreikusitako gasturik erregistratuta.",
+      "expensePaid": "Ordainduta",
+      "addExpense": "Aurreikusitako gastua gehitu",
+      "expenseDescription": "Deskribapena",
+      "expenseAmount": "Zenbatekoa",
+      "expenseExpectedDate": "Aurreikusitako data",
+      "markExpensePaid": "Ordainduta gisa markatu",
+      "submitting": "Gordetzen…",
+      "genericError": "Ezin izan da eragiketa osatu. Saiatu berriro."
     }
   },
   "tablon": {

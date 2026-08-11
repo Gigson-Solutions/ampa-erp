@@ -32,6 +32,7 @@ const TENANT_SCOPED_MODELS = new Set([
   "LedgerEntry",
   "UserAmpaRole",
   "MinutesEntry",
+  "ExpenseForecast",
 ]);
 
 const WRITE_OPERATIONS_WITH_DATA = new Set([

@@ -171,6 +171,7 @@ model Ampa {
   documents     Document[]
   ledgerEntries LedgerEntry[]
   minutesEntries MinutesEntry[]
+  expenseForecasts ExpenseForecast[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -568,4 +569,26 @@ model MinutesEntry {
   @@unique([ampaId, sequenceNumber])
   @@index([ampaId])
   @@map("minutes_entries")
+}
+
+// ─── Fase 2: impagos y previsión de tesorería ────────────────────────────────
+// Gasto previsto simple (alquiler de autobús, material, catering...), sin
+// códigos de cuenta PGC ni doble entrada — deliberadamente separado de
+// `LedgerEntry` (contabilidad PGC ESFL formal, todavía sin construir) para no
+// mezclar "previsión de caja rápida para la junta" con la contabilidad legal
+// completa. Si en el futuro se decide unificarlos, se puede migrar entonces.
+model ExpenseForecast {
+  id           String   @id @default(cuid())
+  ampaId       String
+  description  String
+  amount       Decimal  @db.Decimal(10, 2)
+  expectedDate DateTime
+  status       String   @default("PLANNED") // PLANNED | PAID
+
+  ampa Ampa @relation(fields: [ampaId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@index([ampaId])
+  @@map("expense_forecasts")
 }
