@@ -14,6 +14,11 @@ export const registerFamilySchema = z.object({
     name: z.string().trim().min(1, "El nombre es obligatorio"),
     email: z.string().trim().email("Email no válido"),
     phone: z.string().trim().min(1).optional(),
+    // El tutor que da de alta la familia es, por defecto, el socio/a de la
+    // asociación (libro de socios, LO 1/2002) — DNI/NIE y dirección son los
+    // datos mínimos que exige el registro formal de un socio.
+    dni: z.string().trim().min(1, "El DNI/NIE es obligatorio"),
+    address: z.string().trim().min(1, "La dirección es obligatoria"),
   }),
   students: z
     .array(
@@ -75,6 +80,12 @@ export async function registerFamily(
         name: parsed.guardian.name,
         email: parsed.guardian.email,
         phone: parsed.guardian.phone,
+        dni: parsed.guardian.dni,
+        address: parsed.guardian.address,
+        // El tutor que registra la familia queda como socio/a (libro de
+        // socios) desde el mismo momento del alta — no es un paso aparte.
+        isLegalMember: true,
+        memberJoinedAt: now,
       },
     });
 

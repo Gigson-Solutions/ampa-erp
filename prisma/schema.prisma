@@ -236,6 +236,19 @@ model Guardian {
   email    String
   phone    String?
 
+  // Libro de socios (LO 1/2002): un socio/a es una persona por familia — el
+  // "tutor legal" (`isLegalMember = true`). Una familia puede tener además
+  // otros `Guardian` sin este flag, que son solo personas de contacto (no
+  // socios de la asociación). DNI/dirección son los datos mínimos exigidos
+  // para el registro formal de socios; nullable porque las personas de
+  // contacto no los necesitan y las familias existentes antes de esta pieza
+  // no los tienen todavía.
+  dni            String?
+  address        String?
+  isLegalMember  Boolean   @default(false)
+  memberJoinedAt DateTime?
+  memberLeftAt   DateTime?
+
   family Family @relation(fields: [familyId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now())

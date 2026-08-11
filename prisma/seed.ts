@@ -28,6 +28,8 @@ interface DemoFamilyInput {
   guardianName: string;
   guardianEmail: string;
   guardianPhone: string;
+  guardianDni: string;
+  guardianAddress: string;
   students: Array<{ name: string; birthDate: string }>;
   discounts: { siblingCount: number; isLargeFamily: boolean; scholarshipDiscountPercent: number };
   consents: { image: boolean; centerShare: boolean };
@@ -129,6 +131,8 @@ async function main(): Promise<void> {
       guardianName: "María García Martínez",
       guardianEmail: "maria.garcia@example.com",
       guardianPhone: "611111111",
+      guardianDni: "12345671A",
+      guardianAddress: "Calle Mayor 1, Valencia",
       students: [
         { name: "Lucía García", birthDate: "2012-03-15" },
         { name: "Pablo García", birthDate: "2010-06-20" },
@@ -143,6 +147,8 @@ async function main(): Promise<void> {
       guardianName: "Javier López Fernández",
       guardianEmail: "javier.lopez@example.com",
       guardianPhone: "622222222",
+      guardianDni: "12345672B",
+      guardianAddress: "Calle Colón 2, Valencia",
       students: [{ name: "Sofía López", birthDate: "2011-09-10" }],
       discounts: { siblingCount: 0, isLargeFamily: false, scholarshipDiscountPercent: 0 },
       consents: { image: true, centerShare: false },
@@ -154,6 +160,8 @@ async function main(): Promise<void> {
       guardianName: "Ana Ruiz Sánchez",
       guardianEmail: "ana.ruiz@example.com",
       guardianPhone: "633333333",
+      guardianDni: "12345673C",
+      guardianAddress: "Avenida del Puerto 3, Valencia",
       students: [
         { name: "Diego Ruiz", birthDate: "2009-01-05" },
         { name: "Marta Ruiz", birthDate: "2013-04-22" },
@@ -169,6 +177,8 @@ async function main(): Promise<void> {
       guardianName: "Elena Torres Gómez",
       guardianEmail: "elena.torres@example.com",
       guardianPhone: "644444444",
+      guardianDni: "12345674D",
+      guardianAddress: "Calle Xàtiva 4, Valencia",
       students: [{ name: "Hugo Torres", birthDate: "2012-08-01" }],
       discounts: { siblingCount: 0, isLargeFamily: false, scholarshipDiscountPercent: 50 },
       consents: { image: true, centerShare: true },
@@ -180,6 +190,8 @@ async function main(): Promise<void> {
       guardianName: "David Moreno Díaz",
       guardianEmail: "david.moreno@example.com",
       guardianPhone: "655555555",
+      guardianDni: "12345675E",
+      guardianAddress: "Calle Ruzafa 5, Valencia",
       students: [
         { name: "Claudia Moreno", birthDate: "2011-02-14" },
         { name: "Daniela Moreno", birthDate: "2014-07-19" },
@@ -197,6 +209,8 @@ async function main(): Promise<void> {
       guardianName: "Laura Jiménez Romero",
       guardianEmail: "laura.jimenez@example.com",
       guardianPhone: "666666666",
+      guardianDni: "12345676F",
+      guardianAddress: "Calle Campanar 6, Valencia",
       students: [{ name: "Marcos Jiménez", birthDate: "2010-12-03" }],
       discounts: { siblingCount: 0, isLargeFamily: false, scholarshipDiscountPercent: 0 },
       consents: { image: true, centerShare: true },
@@ -213,7 +227,13 @@ async function main(): Promise<void> {
     const { familyId } = await registerFamily(
       ampaA.id,
       {
-        guardian: { name: demo.guardianName, email: demo.guardianEmail, phone: demo.guardianPhone },
+        guardian: {
+          name: demo.guardianName,
+          email: demo.guardianEmail,
+          phone: demo.guardianPhone,
+          dni: demo.guardianDni,
+          address: demo.guardianAddress,
+        },
         students: demo.students.map((student) => ({
           name: student.name,
           birthDate: new Date(student.birthDate),

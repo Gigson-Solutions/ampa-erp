@@ -27,7 +27,9 @@
     "submitting": "Enviant…",
     "success": "Família donada d'alta! Codi de referència:",
     "genericError": "No s'ha pogut completar l'alta. Torna-ho a provar.",
-    "viewCard": "Veure el teu carnet digital"
+    "viewCard": "Veure el teu carnet digital",
+    "guardianDni": "DNI/NIE",
+    "guardianAddress": "Adreça"
   },
   "board": {
     "charges": {
@@ -50,7 +52,8 @@
       "guardians": "Tutor/a",
       "students": "Alumnes",
       "createMembership": "Crear membresia",
-      "viewCard": "Veure carnet"
+      "viewCard": "Veure carnet",
+      "manage": "Gestionar"
     },
     "memberships": {
       "title": "Alta de membresia",
@@ -63,7 +66,8 @@
       "submitting": "Creant…",
       "success": "Membresia creada. Import del càrrec:",
       "genericError": "No s'ha pogut crear la membresia. Torna-ho a provar.",
-      "emptyDirectories": "Encara no hi ha famílies o quotes creades per a aquesta AMPA."
+      "emptyDirectories": "Encara no hi ha famílies o quotes creades per a aquesta AMPA.",
+      "siblingCountAuto": "calculat automàticament segons els alumnes ja registrats"
     },
     "announcements": {
       "title": "Comunicats",
@@ -168,6 +172,39 @@
       "chainBroken": "⚠️ Cadena trencada a l'acta",
       "entryNumber": "Acta núm.",
       "signedBy": "Firmat per"
+    },
+    "familyDetail": {
+      "title": "Fitxa de família",
+      "guardiansTitle": "Tutors",
+      "legalMember": "Soci/a",
+      "noGuardians": "Aquesta família no té tutors registrats.",
+      "studentsTitle": "Alumnes",
+      "noStudents": "Aquesta família encara no té alumnes registrats.",
+      "studentName": "Nom de l'alumne/a",
+      "studentBirthDate": "Data de naixement",
+      "addStudent": "Afegir fill/a",
+      "addStudentError": "No s'ha pogut afegir l'alumne/a. Torna-ho a provar.",
+      "submitting": "Guardant…",
+      "backToFamilies": "← Tornar a famílies"
+    },
+    "newFamily": {
+      "title": "Nova família",
+      "guardianName": "Nom del tutor/a",
+      "guardianEmail": "Email",
+      "guardianPhone": "Telèfon (opcional)",
+      "guardianDni": "DNI/NIE",
+      "guardianAddress": "Adreça",
+      "studentName": "Nom de l'alumne/a",
+      "addStudent": "Afegeix un altre/a alumne/a",
+      "removeStudent": "Treu",
+      "consentDataTitle": "Tractament de dades bàsiques",
+      "consentDataLabel": "El tutor/a accepta el tractament de dades bàsiques (obligatori)",
+      "consentImageLabel": "Autoritza l'ús d'imatge en activitats de l'AMPA",
+      "consentCenterShareLabel": "Autoritza compartir dades bàsiques amb el centre educatiu",
+      "submit": "Donar d'alta",
+      "submitting": "Enviant…",
+      "success": "Família donada d'alta! Codi de referència:",
+      "genericError": "No s'ha pogut completar l'alta. Torna-ho a provar."
     }
   },
   "tablon": {

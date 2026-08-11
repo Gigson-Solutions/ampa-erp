@@ -27,7 +27,9 @@
     "submitting": "Bidaltzen…",
     "success": "Familia alta emanda! Erreferentzia kodea:",
     "genericError": "Ezin izan da altarik osatu. Saiatu berriro.",
-    "viewCard": "Ikusi zure txartel digitala"
+    "viewCard": "Ikusi zure txartel digitala",
+    "guardianDni": "NAN/AIZ",
+    "guardianAddress": "Helbidea"
   },
   "board": {
     "charges": {
@@ -50,7 +52,8 @@
       "guardians": "Tutorea",
       "students": "Ikasleak",
       "createMembership": "Kidetza sortu",
-      "viewCard": "Txartela ikusi"
+      "viewCard": "Txartela ikusi",
+      "manage": "Kudeatu"
     },
     "memberships": {
       "title": "Kidetza alta",
@@ -63,7 +66,8 @@
       "submitting": "Sortzen…",
       "success": "Kidetza sortuta. Karguaren zenbatekoa:",
       "genericError": "Ezin izan da kidetza sortu. Saiatu berriro.",
-      "emptyDirectories": "Oraindik ez dago familiarik edo kuotarik sortuta AMPA honentzat."
+      "emptyDirectories": "Oraindik ez dago familiarik edo kuotarik sortuta AMPA honentzat.",
+      "siblingCountAuto": "automatikoki kalkulatua jada erregistratutako ikasleen arabera"
     },
     "announcements": {
       "title": "Jakinarazpenak",
@@ -168,6 +172,39 @@
       "chainBroken": "⚠️ Katea hautsita akta honetan",
       "entryNumber": "Akta zk.",
       "signedBy": "Sinatzailea"
+    },
+    "familyDetail": {
+      "title": "Familiaren fitxa",
+      "guardiansTitle": "Tutoreak",
+      "legalMember": "Bazkidea",
+      "noGuardians": "Familia honek ez du tutorerik erregistratuta.",
+      "studentsTitle": "Ikasleak",
+      "noStudents": "Familia honek oraindik ez du ikaslerik erregistratuta.",
+      "studentName": "Ikaslearen izena",
+      "studentBirthDate": "Jaiotze-data",
+      "addStudent": "Semea/alaba gehitu",
+      "addStudentError": "Ezin izan da ikaslea gehitu. Saiatu berriro.",
+      "submitting": "Gordetzen…",
+      "backToFamilies": "← Familietara itzuli"
+    },
+    "newFamily": {
+      "title": "Familia berria",
+      "guardianName": "Tutorearen izena",
+      "guardianEmail": "Emaila",
+      "guardianPhone": "Telefonoa (aukerakoa)",
+      "guardianDni": "NAN/AIZ",
+      "guardianAddress": "Helbidea",
+      "studentName": "Ikaslearen izena",
+      "addStudent": "Beste ikasle bat gehitu",
+      "removeStudent": "Kendu",
+      "consentDataTitle": "Oinarrizko datuen tratamendua",
+      "consentDataLabel": "Tutoreak oinarrizko datuen tratamendua onartzen du (nahitaezkoa)",
+      "consentImageLabel": "AMPAren jardueretan irudia erabiltzea baimentzen du",
+      "consentCenterShareLabel": "Oinarrizko datuak ikastetxearekin partekatzea baimentzen du",
+      "submit": "Alta eman",
+      "submitting": "Bidaltzen…",
+      "success": "Familia alta emanda! Erreferentzia kodea:",
+      "genericError": "Ezin izan da altarik osatu. Saiatu berriro."
     }
   },
   "tablon": {

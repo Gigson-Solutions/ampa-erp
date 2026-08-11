@@ -27,7 +27,9 @@
     "submitting": "Enviando…",
     "success": "Familia dada de alta! Código de referencia:",
     "genericError": "Non se puido completar a alta. Inténtao de novo.",
-    "viewCard": "Ver o teu carné dixital"
+    "viewCard": "Ver o teu carné dixital",
+    "guardianDni": "DNI/NIE",
+    "guardianAddress": "Enderezo"
   },
   "board": {
     "charges": {
@@ -50,7 +52,8 @@
       "guardians": "Titor/a",
       "students": "Alumnado",
       "createMembership": "Crear membresía",
-      "viewCard": "Ver carné"
+      "viewCard": "Ver carné",
+      "manage": "Xestionar"
     },
     "memberships": {
       "title": "Alta de membresía",
@@ -63,7 +66,8 @@
       "submitting": "Creando…",
       "success": "Membresía creada. Importe do cargo:",
       "genericError": "Non se puido crear a membresía. Inténtao de novo.",
-      "emptyDirectories": "Aínda non hai familias ou cotas creadas para esta AMPA."
+      "emptyDirectories": "Aínda non hai familias ou cotas creadas para esta AMPA.",
+      "siblingCountAuto": "calculado automaticamente segundo o alumnado xa rexistrado"
     },
     "announcements": {
       "title": "Comunicados",
@@ -168,6 +172,39 @@
       "chainBroken": "⚠️ Cadea rota na acta",
       "entryNumber": "Acta nº",
       "signedBy": "Asinado por"
+    },
+    "familyDetail": {
+      "title": "Ficha de familia",
+      "guardiansTitle": "Titores",
+      "legalMember": "Socio/a",
+      "noGuardians": "Esta familia non ten titores rexistrados.",
+      "studentsTitle": "Alumnado",
+      "noStudents": "Esta familia aínda non ten alumnado rexistrado.",
+      "studentName": "Nome do alumno/a",
+      "studentBirthDate": "Data de nacemento",
+      "addStudent": "Engadir fillo/a",
+      "addStudentError": "Non se puido engadir o alumno/a. Inténtao de novo.",
+      "submitting": "Gardando…",
+      "backToFamilies": "← Volver a familias"
+    },
+    "newFamily": {
+      "title": "Nova familia",
+      "guardianName": "Nome do titor/a",
+      "guardianEmail": "Email",
+      "guardianPhone": "Teléfono (opcional)",
+      "guardianDni": "DNI/NIE",
+      "guardianAddress": "Enderezo",
+      "studentName": "Nome do alumno/a",
+      "addStudent": "Engadir outro/a alumno/a",
+      "removeStudent": "Quitar",
+      "consentDataTitle": "Tratamento de datos básicos",
+      "consentDataLabel": "O titor/a acepta o tratamento de datos básicos (obrigatorio)",
+      "consentImageLabel": "Autoriza o uso de imaxe en actividades da AMPA",
+      "consentCenterShareLabel": "Autoriza compartir datos básicos co centro educativo",
+      "submit": "Dar de alta",
+      "submitting": "Enviando…",
+      "success": "Familia dada de alta! Código de referencia:",
+      "genericError": "Non se puido completar a alta. Inténtao de novo."
     }
   },
   "tablon": {

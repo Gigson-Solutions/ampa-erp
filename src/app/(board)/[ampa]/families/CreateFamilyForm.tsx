@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { registerFamilyAction } from "../actions";
+import { createFamilyAction } from "./actions";
 import { Button } from "@/components/ui/Button";
 import { Alert } from "@/components/ui/Alert";
 import { FormField, Input, Label } from "@/components/ui/Input";
@@ -11,8 +12,16 @@ interface StudentField {
   name: string;
 }
 
-export function RegisterFamilyForm({ ampaSubdomain }: { ampaSubdomain: string }): React.ReactElement {
-  const t = useTranslations("register");
+// Alta de familia desde el panel de junta (feedback de usuario, 2026-08-11) —
+// mismo formulario/contrato que el alta pública (`(public)/[ampa]/alta`), para
+// altas presenciales/en papel. Deliberadamente NO comparte componente con
+// `RegisterFamilyForm` (aunque los campos coincidan) porque una vive en
+// `(public)` y la otra en `(board)`, con acciones y gates de autorización
+// distintos — duplicar este formulario simple es más claro que forzar una
+// abstracción compartida entre dos árboles de rutas con permisos diferentes.
+export function CreateFamilyForm(): React.ReactElement {
+  const t = useTranslations("board.newFamily");
+  const router = useRouter();
 
   const [guardianName, setGuardianName] = useState("");
   const [guardianEmail, setGuardianEmail] = useState("");
@@ -23,9 +32,8 @@ export function RegisterFamilyForm({ ampaSubdomain }: { ampaSubdomain: string })
   const [consentData, setConsentData] = useState(false);
   const [consentImage, setConsentImage] = useState(false);
   const [consentCenterShare, setConsentCenterShare] = useState(false);
-  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [status, setStatus] = useState<"idle" | "submitting" | "error">("idle");
   const [message, setMessage] = useState<string | null>(null);
-  const [cardToken, setCardToken] = useState<string | null>(null);
 
   function updateStudentName(index: number, name: string): void {
     setStudents((prev) => prev.map((student, i) => (i === index ? { name } : student)));
@@ -39,12 +47,24 @@ export function RegisterFamilyForm({ ampaSubdomain }: { ampaSubdomain: string })
     setStudents((prev) => prev.filter((_, i) => i !== index));
   }
 
+  function resetForm(): void {
+    setGuardianName("");
+    setGuardianEmail("");
+    setGuardianPhone("");
+    setGuardianDni("");
+    setGuardianAddress("");
+    setStudents([{ name: "" }]);
+    setConsentData(false);
+    setConsentImage(false);
+    setConsentCenterShare(false);
+  }
+
   async function handleSubmit(event: React.FormEvent): Promise<void> {
     event.preventDefault();
     setStatus("submitting");
     setMessage(null);
 
-    const result = await registerFamilyAction(ampaSubdomain, {
+    const result = await createFamilyAction({
       guardian: {
         name: guardianName,
         email: guardianEmail,
@@ -61,92 +81,76 @@ export function RegisterFamilyForm({ ampaSubdomain }: { ampaSubdomain: string })
     });
 
     if (result.ok) {
-      setStatus("success");
+      setStatus("idle");
       setMessage(`${t("success")} ${result.referenceCode}`);
-      setCardToken(result.cardToken ?? null);
+      resetForm();
+      router.refresh();
     } else {
       setStatus("error");
       setMessage(result.error ?? t("genericError"));
     }
   }
 
-  if (status === "success") {
-    return (
-      <div>
-        <Alert variant="success">{message}</Alert>
-        {cardToken && (
-          <p className="mt-3">
-            <a href={`/${ampaSubdomain}/carnet/${cardToken}`} className="text-sm font-medium text-brand-500 hover:underline">
-              {t("viewCard")}
-            </a>
-          </p>
-        )}
-      </div>
-    );
-  }
-
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-      <FormField>
-        <Label htmlFor="guardianName">{t("guardianName")}</Label>
-        <Input
-          id="guardianName"
-          required
-          value={guardianName}
-          onChange={(event) => setGuardianName(event.target.value)}
-        />
-      </FormField>
-
-      <FormField>
-        <Label htmlFor="guardianEmail">{t("guardianEmail")}</Label>
-        <Input
-          id="guardianEmail"
-          type="email"
-          required
-          value={guardianEmail}
-          onChange={(event) => setGuardianEmail(event.target.value)}
-        />
-      </FormField>
-
-      <FormField>
-        <Label htmlFor="guardianPhone">{t("guardianPhone")}</Label>
-        <Input
-          id="guardianPhone"
-          value={guardianPhone}
-          onChange={(event) => setGuardianPhone(event.target.value)}
-        />
-      </FormField>
-
-      <FormField>
-        <Label htmlFor="guardianDni">{t("guardianDni")}</Label>
-        <Input
-          id="guardianDni"
-          required
-          value={guardianDni}
-          onChange={(event) => setGuardianDni(event.target.value)}
-        />
-      </FormField>
-
-      <FormField>
-        <Label htmlFor="guardianAddress">{t("guardianAddress")}</Label>
-        <Input
-          id="guardianAddress"
-          required
-          value={guardianAddress}
-          onChange={(event) => setGuardianAddress(event.target.value)}
-        />
-      </FormField>
+      <div className="grid grid-cols-2 gap-4">
+        <FormField>
+          <Label htmlFor="new-family-guardian-name">{t("guardianName")}</Label>
+          <Input
+            id="new-family-guardian-name"
+            required
+            value={guardianName}
+            onChange={(e) => setGuardianName(e.target.value)}
+          />
+        </FormField>
+        <FormField>
+          <Label htmlFor="new-family-guardian-email">{t("guardianEmail")}</Label>
+          <Input
+            id="new-family-guardian-email"
+            type="email"
+            required
+            value={guardianEmail}
+            onChange={(e) => setGuardianEmail(e.target.value)}
+          />
+        </FormField>
+        <FormField>
+          <Label htmlFor="new-family-guardian-phone">{t("guardianPhone")}</Label>
+          <Input
+            id="new-family-guardian-phone"
+            value={guardianPhone}
+            onChange={(e) => setGuardianPhone(e.target.value)}
+          />
+        </FormField>
+        <FormField>
+          <Label htmlFor="new-family-guardian-dni">{t("guardianDni")}</Label>
+          <Input
+            id="new-family-guardian-dni"
+            required
+            value={guardianDni}
+            onChange={(e) => setGuardianDni(e.target.value)}
+          />
+        </FormField>
+        <FormField className="col-span-2">
+          <Label htmlFor="new-family-guardian-address">{t("guardianAddress")}</Label>
+          <Input
+            id="new-family-guardian-address"
+            required
+            value={guardianAddress}
+            onChange={(e) => setGuardianAddress(e.target.value)}
+          />
+        </FormField>
+      </div>
 
       <div className="flex flex-col gap-3 rounded-lg border border-border p-4">
         {students.map((student, index) => (
           <div key={index} className="flex items-end gap-2">
             <FormField className="flex-1">
-              <Label htmlFor={`student-${index}`}>{t("studentName")}</Label>
+              <Label htmlFor={`new-family-student-${index}`}>{t("studentName")}</Label>
               <Input
-                id={`student-${index}`}
+                id={`new-family-student-${index}`}
                 required
                 value={student.name}
-                onChange={(event) => updateStudentName(index, event.target.value)}
+                onChange={(e) => updateStudentName(index, e.target.value)}
               />
             </FormField>
             {students.length > 1 && (
@@ -163,50 +167,42 @@ export function RegisterFamilyForm({ ampaSubdomain }: { ampaSubdomain: string })
 
       <fieldset className="rounded-lg border border-border p-4">
         <legend className="px-1 text-sm font-semibold text-ink-900">{t("consentDataTitle")}</legend>
-        <p className="text-sm text-ink-700">{t("consentDataHint")}</p>
         <label className="mt-2 flex items-center gap-2 text-sm text-ink-900">
           <input
             type="checkbox"
             required
             checked={consentData}
-            onChange={(event) => setConsentData(event.target.checked)}
+            onChange={(e) => setConsentData(e.target.checked)}
             className="h-4 w-4 rounded border-border text-brand-500 focus:ring-brand-500"
           />
-          {t("accept")}
+          {t("consentDataLabel")}
         </label>
       </fieldset>
 
-      <fieldset className="rounded-lg border border-border p-4">
-        <legend className="px-1 text-sm font-semibold text-ink-900">{t("consentImageTitle")}</legend>
-        <p className="text-sm text-ink-700">{t("consentImageHint")}</p>
-        <label className="mt-2 flex items-center gap-2 text-sm text-ink-900">
+      <div className="flex flex-col gap-2">
+        <label className="flex items-center gap-2 text-sm text-ink-900">
           <input
             type="checkbox"
             checked={consentImage}
-            onChange={(event) => setConsentImage(event.target.checked)}
+            onChange={(e) => setConsentImage(e.target.checked)}
             className="h-4 w-4 rounded border-border text-brand-500 focus:ring-brand-500"
           />
-          {t("accept")}
+          {t("consentImageLabel")}
         </label>
-      </fieldset>
-
-      <fieldset className="rounded-lg border border-border p-4">
-        <legend className="px-1 text-sm font-semibold text-ink-900">{t("consentCenterShareTitle")}</legend>
-        <p className="text-sm text-ink-700">{t("consentCenterShareHint")}</p>
-        <label className="mt-2 flex items-center gap-2 text-sm text-ink-900">
+        <label className="flex items-center gap-2 text-sm text-ink-900">
           <input
             type="checkbox"
             checked={consentCenterShare}
-            onChange={(event) => setConsentCenterShare(event.target.checked)}
+            onChange={(e) => setConsentCenterShare(e.target.checked)}
             className="h-4 w-4 rounded border-border text-brand-500 focus:ring-brand-500"
           />
-          {t("accept")}
+          {t("consentCenterShareLabel")}
         </label>
-      </fieldset>
+      </div>
 
-      {status === "error" && message && <Alert variant="error">{message}</Alert>}
+      {message && <Alert variant={status === "error" ? "error" : "success"}>{message}</Alert>}
 
-      <Button type="submit" disabled={status === "submitting"} size="md">
+      <Button type="submit" disabled={status === "submitting"} size="md" className="self-start">
         {status === "submitting" ? t("submitting") : t("submit")}
       </Button>
     </form>

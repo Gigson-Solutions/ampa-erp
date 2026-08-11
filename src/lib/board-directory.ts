@@ -29,6 +29,60 @@ export async function listFamilies(ampaId: string): Promise<FamilySummary[]> {
   });
 }
 
+export interface FamilyGuardianDetail {
+  id: string;
+  name: string;
+  email: string;
+  phone: string | null;
+  isLegalMember: boolean;
+}
+
+export interface FamilyStudentDetail {
+  id: string;
+  name: string;
+  birthDate: Date | null;
+}
+
+export interface FamilyDetail {
+  id: string;
+  referenceCode: string;
+  guardians: FamilyGuardianDetail[];
+  students: FamilyStudentDetail[];
+}
+
+/**
+ * Ficha de familia (feedback de usuario, 2026-08-11): a diferencia de
+ * `listFamilies` (listado plano para la tabla), esto trae el detalle completo
+ * de UNA familia — tutores y alumnos — para la página `/families/[familyId]`.
+ * Devuelve `null` si la familia no existe o pertenece a otra AMPA.
+ */
+export async function getFamilyDetail(ampaId: string, familyId: string): Promise<FamilyDetail | null> {
+  return withAmpaScope(ampaId, async (db) => {
+    const family = await db.family.findUnique({
+      where: { id: familyId },
+      include: { guardians: true, students: true },
+    });
+    if (!family) return null;
+
+    return {
+      id: family.id,
+      referenceCode: family.referenceCode,
+      guardians: family.guardians.map((guardian) => ({
+        id: guardian.id,
+        name: guardian.name,
+        email: guardian.email,
+        phone: guardian.phone,
+        isLegalMember: guardian.isLegalMember,
+      })),
+      students: family.students.map((student) => ({
+        id: student.id,
+        name: student.name,
+        birthDate: student.birthDate,
+      })),
+    };
+  });
+}
+
 export interface FeeSchemaSummary {
   id: string;
   name: string;

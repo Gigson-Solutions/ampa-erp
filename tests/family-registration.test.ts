@@ -11,7 +11,7 @@ import { CONSENT_VERSION } from "../src/lib/consent";
 describe("registerFamilySchema", () => {
   it("rechaza el alta si no se acepta el consentimiento de datos básicos", () => {
     const result = registerFamilySchema.safeParse({
-      guardian: { name: "Ana García", email: "ana@example.com" },
+      guardian: { name: "Ana García", email: "ana@example.com", dni: "12345678A", address: "Calle Falsa 123" },
       students: [{ name: "Luis García" }],
       consents: { data: false, image: false, centerShare: false },
     });
@@ -20,7 +20,7 @@ describe("registerFamilySchema", () => {
 
   it("rechaza el alta sin ningún alumno/a", () => {
     const result = registerFamilySchema.safeParse({
-      guardian: { name: "Ana García", email: "ana@example.com" },
+      guardian: { name: "Ana García", email: "ana@example.com", dni: "12345678A", address: "Calle Falsa 123" },
       students: [],
       consents: { data: true, image: false, centerShare: false },
     });
@@ -29,7 +29,7 @@ describe("registerFamilySchema", () => {
 
   it("acepta un alta válida con dos alumnos", () => {
     const result = registerFamilySchema.safeParse({
-      guardian: { name: "Ana García", email: "ana@example.com" },
+      guardian: { name: "Ana García", email: "ana@example.com", dni: "12345678A", address: "Calle Falsa 123" },
       students: [{ name: "Luis García" }, { name: "Marta García" }],
       consents: { data: true, image: true, centerShare: false },
     });
@@ -75,7 +75,7 @@ describe("registerFamily (integración contra Postgres real)", () => {
     const result = await registerFamily(
       ampaId,
       {
-        guardian: { name: "Ana García", email: "ana@example.com", phone: "600000000" },
+        guardian: { name: "Ana García", email: "ana@example.com", phone: "600000000", dni: "12345678A", address: "Calle Falsa 123" },
         students: [{ name: "Luis García" }, { name: "Marta García" }],
         consents: { data: true, image: true, centerShare: false },
       },
@@ -93,6 +93,13 @@ describe("registerFamily (integración contra Postgres real)", () => {
     expect(family?.ampaId).toBe(ampaId);
     expect(family?.guardians).toHaveLength(1);
     expect(family?.guardians[0]?.email).toBe("ana@example.com");
+    // Libro de socios: el tutor que da de alta la familia queda como socio/a
+    // (isLegalMember) desde el propio momento del alta.
+    expect(family?.guardians[0]?.dni).toBe("12345678A");
+    expect(family?.guardians[0]?.address).toBe("Calle Falsa 123");
+    expect(family?.guardians[0]?.isLegalMember).toBe(true);
+    expect(family?.guardians[0]?.memberJoinedAt).toEqual(fixedNow);
+    expect(family?.guardians[0]?.memberLeftAt).toBeNull();
     expect(family?.students).toHaveLength(2);
     expect(family?.consents).toHaveLength(3);
 
@@ -110,7 +117,7 @@ describe("registerFamily (integración contra Postgres real)", () => {
     const result = await registerFamily(
       ampaId,
       {
-        guardian: { name: "Otro Tutor", email: "otro@example.com" },
+        guardian: { name: "Otro Tutor", email: "otro@example.com", dni: "87654321B", address: "Avenida Siempreviva 742" },
         students: [{ name: "Otro Alumno" }],
         consents: { data: true, image: false, centerShare: false },
       },
