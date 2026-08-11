@@ -382,6 +382,21 @@ model Activity {
   capacity       Int?
   price          Decimal @db.Decimal(10, 2)
 
+  // Monitor asignado (feedback de usuario, 2026-08-11) — sin relación formal
+  // de Prisma a propósito, igual que `Guardian.userId`: nunca se navega desde
+  // `User` hacia sus actividades vía Prisma, solo se filtra por este campo
+  // (ver src/lib/monitors.ts). Una misma persona puede ser monitor de varias
+  // actividades distintas, un monitor por actividad en esta primera versión.
+  monitorUserId String?
+
+  // Pago fraccionado (feedback de usuario, 2026-08-11: "el viaje de fin de
+  // curso no es un concepto aparte, es una actividad más donde se configura
+  // la cantidad y recurrencia de los plazos"). `null` o `1` = cobro único,
+  // como cualquier extraescolar. Ver enrollStudentInActivity en
+  // src/lib/activities.ts, que genera el/los `Charge` correspondientes.
+  installmentCount         Int?
+  installmentRecurrenceDays Int?
+
   ampa         Ampa                 @relation(fields: [ampaId], references: [id], onDelete: Cascade)
   academicYear AcademicYear         @relation(fields: [academicYearId], references: [id])
   provider     Provider?            @relation(fields: [providerId], references: [id])

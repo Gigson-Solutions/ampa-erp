@@ -184,8 +184,12 @@ export interface ActivitySummary {
   name: string;
   academicYearLabel: string;
   providerName: string | null;
+  monitorUserId: string | null;
+  monitorName: string | null;
   capacity: number | null;
   price: number;
+  installmentCount: number | null;
+  installmentRecurrenceDays: number | null;
   enrolledCount: number;
   waitlistedCount: number;
 }
@@ -204,13 +208,25 @@ export async function listActivities(ampaId: string): Promise<ActivitySummary[]>
       orderBy: { createdAt: "desc" },
     });
 
+    // `Activity.monitorUserId` no tiene relación formal de Prisma (mismo
+    // criterio que `Guardian.userId`) — se resuelve el nombre a mano con un
+    // único `findMany` en vez de una consulta por actividad.
+    const monitorIds = [...new Set(activities.map((a) => a.monitorUserId).filter((id): id is string => id !== null))];
+    const monitors =
+      monitorIds.length === 0 ? [] : await db.user.findMany({ where: { id: { in: monitorIds } } });
+    const monitorNameById = new Map(monitors.map((monitor) => [monitor.id, monitor.name ?? monitor.email]));
+
     return activities.map((activity) => ({
       id: activity.id,
       name: activity.name,
       academicYearLabel: activity.academicYear.label,
       providerName: activity.provider?.name ?? null,
+      monitorUserId: activity.monitorUserId,
+      monitorName: activity.monitorUserId ? monitorNameById.get(activity.monitorUserId) ?? null : null,
       capacity: activity.capacity,
       price: activity.price.toNumber(),
+      installmentCount: activity.installmentCount,
+      installmentRecurrenceDays: activity.installmentRecurrenceDays,
       enrolledCount: activity.enrollments.filter((e) => e.status === "ENROLLED").length,
       waitlistedCount: activity.enrollments.filter((e) => e.status === "WAITLISTED").length,
     }));

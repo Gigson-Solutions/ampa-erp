@@ -111,7 +111,29 @@
       "noEnrollments": "Oraindik ez dago inor izena emanda jarduera honetan.",
       "family": "Familia",
       "status": "Egoera",
-      "cancelEnrollment": "Izen-ematea bertan behera utzi"
+      "cancelEnrollment": "Izen-ematea bertan behera utzi",
+      "searchStudent": "Ikaslea bilatu",
+      "searchStudentPlaceholder": "Idatzi izen bat…",
+      "noStudentsMatch": "Ez dago bilaketarekin bat datorren ikaslerik.",
+      "monitor": "Begiralea",
+      "noMonitor": "Begiralerik esleitu gabe",
+      "installmentsTitle": "Ordainketa zatikatua (aukerakoa)",
+      "installmentsHint": "Prezioa zenbait epetan banatzen du — adibidez, ikasturte amaierako bidaia bat 3 epe hilabetekari banatuta.",
+      "installmentCount": "Epe kopurua",
+      "installmentRecurrenceDays": "Epeen arteko egunak",
+      "installmentsBadge": "epe",
+      "edit": "Editatu",
+      "delete": "Ezabatu",
+      "save": "Gorde",
+      "cancel": "Utzi",
+      "deleteConfirm": "Jarduera hau ezabatu? Inskripzio aktiborik ez badu bakarrik.",
+      "monitorsTitle": "Begiraleak",
+      "noMonitors": "Oraindik ez dago gonbidatutako begileirik.",
+      "monitorName": "Izena",
+      "monitorEmail": "Emaila",
+      "inviteMonitor": "Begiralea gonbidatu",
+      "removeMonitor": "Kendu",
+      "removeMonitorConfirm": "Pertsona honi begiralearen rola kendu?"
     },
     "events": {
       "title": "Ekitaldiak",
@@ -254,6 +276,16 @@
       "markExpensePaid": "Ordainduta gisa markatu",
       "submitting": "Gordetzen…",
       "genericError": "Ezin izan da eragiketa osatu. Saiatu berriro."
+    },
+    "myActivities": {
+      "title": "Nire jarduera",
+      "noActivities": "Oraindik ez zara jarduera bateko begiralea.",
+      "noStudents": "Ez dago ikaslerik izena emanda jarduera honetan.",
+      "student": "Ikaslea",
+      "family": "Familia",
+      "status": "Egoera",
+      "waitlisted": "Itxaron zerrendan",
+      "enrolled": "Izena emanda"
     }
   },
   "tablon": {

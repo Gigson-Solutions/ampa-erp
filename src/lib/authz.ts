@@ -33,3 +33,15 @@ export function hasPermission(userRoles: readonly AmpaRole[], permission: Permis
   const allowedRoles: readonly AmpaRole[] = PERMISSIONS[permission];
   return userRoles.some((role) => allowedRoles.includes(role));
 }
+
+/**
+ * Todos los permisos que satisfacen estos roles — usado por
+ * `(board)/[ampa]/layout.tsx` para que el `Sidebar` solo muestre los enlaces
+ * a los que el usuario realmente puede entrar (feedback de usuario,
+ * 2026-08-11: un monitor con solo el rol `MONITOR` veía las 9 secciones de
+ * junta aunque 404earan todas menos una). Puramente informativo para la UI —
+ * la autorización real la sigue haciendo `requireAmpaRole` en cada página.
+ */
+export function getPermissionsForRoles(userRoles: readonly AmpaRole[]): Permission[] {
+  return (Object.keys(PERMISSIONS) as Permission[]).filter((permission) => hasPermission(userRoles, permission));
+}

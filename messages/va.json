@@ -111,7 +111,29 @@
       "noEnrollments": "Encara no hi ha ningú inscrit en esta activitat.",
       "family": "Família",
       "status": "Estat",
-      "cancelEnrollment": "Cancel·lar inscripció"
+      "cancelEnrollment": "Cancel·lar inscripció",
+      "searchStudent": "Cercar alumne/a",
+      "searchStudentPlaceholder": "Escriu un nom…",
+      "noStudentsMatch": "Cap alumne/a coincidix amb la cerca.",
+      "monitor": "Monitor/a",
+      "noMonitor": "Sense monitor/a assignat/ada",
+      "installmentsTitle": "Pagament fraccionat (opcional)",
+      "installmentsHint": "Reparteix el preu en diversos terminis — per eixemple, un viatge de fi de curs en 3 terminis mensuals.",
+      "installmentCount": "Núm. de terminis",
+      "installmentRecurrenceDays": "Dies entre terminis",
+      "installmentsBadge": "terminis",
+      "edit": "Editar",
+      "delete": "Esborrar",
+      "save": "Guardar",
+      "cancel": "Cancel·lar",
+      "deleteConfirm": "Vols esborrar esta activitat? Només es pot si no té inscripcions actives.",
+      "monitorsTitle": "Monitors",
+      "noMonitors": "Encara no hi ha monitors convidats.",
+      "monitorName": "Nom",
+      "monitorEmail": "Email",
+      "inviteMonitor": "Convidar monitor/a",
+      "removeMonitor": "Llevar",
+      "removeMonitorConfirm": "Vols llevar el rol de monitor/a a esta persona?"
     },
     "events": {
       "title": "Esdeveniments",
@@ -254,6 +276,16 @@
       "markExpensePaid": "Marca com a pagat",
       "submitting": "Guardant…",
       "genericError": "No s'ha pogut completar l'operació. Torna-ho a intentar."
+    },
+    "myActivities": {
+      "title": "La meua activitat",
+      "noActivities": "Encara no eres monitor/a de cap activitat.",
+      "noStudents": "No hi ha alumnes inscrits en esta activitat.",
+      "student": "Alumne/a",
+      "family": "Família",
+      "status": "Estat",
+      "waitlisted": "En llista d'espera",
+      "enrolled": "Inscrit/a"
     }
   },
   "tablon": {

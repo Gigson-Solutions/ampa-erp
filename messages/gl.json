@@ -111,7 +111,29 @@
       "noEnrollments": "Aínda non hai ninguén inscrito nesta actividade.",
       "family": "Familia",
       "status": "Estado",
-      "cancelEnrollment": "Cancelar inscrición"
+      "cancelEnrollment": "Cancelar inscrición",
+      "searchStudent": "Buscar alumno/a",
+      "searchStudentPlaceholder": "Escribe un nome…",
+      "noStudentsMatch": "Ningún alumno/a coincide coa busca.",
+      "monitor": "Monitor/a",
+      "noMonitor": "Sen monitor/a asignado/a",
+      "installmentsTitle": "Pago fraccionado (opcional)",
+      "installmentsHint": "Repartir o prezo en varios prazos — por exemplo, unha viaxe de fin de curso en 3 prazos mensuais.",
+      "installmentCount": "Nº de prazos",
+      "installmentRecurrenceDays": "Días entre prazos",
+      "installmentsBadge": "prazos",
+      "edit": "Editar",
+      "delete": "Eliminar",
+      "save": "Gardar",
+      "cancel": "Cancelar",
+      "deleteConfirm": "Eliminar esta actividade? Só se pode se non ten inscricións activas.",
+      "monitorsTitle": "Monitores",
+      "noMonitors": "Aínda non hai monitores convidados.",
+      "monitorName": "Nome",
+      "monitorEmail": "Email",
+      "inviteMonitor": "Convidar monitor/a",
+      "removeMonitor": "Quitar",
+      "removeMonitorConfirm": "Quitar o rol de monitor/a a esta persoa?"
     },
     "events": {
       "title": "Eventos",
@@ -254,6 +276,16 @@
       "markExpensePaid": "Marcar como pagado",
       "submitting": "Gardando…",
       "genericError": "Non se puido completar a operación. Inténtao de novo."
+    },
+    "myActivities": {
+      "title": "A miña actividade",
+      "noActivities": "Aínda non es monitor/a de ningunha actividade.",
+      "noStudents": "Non hai alumnado inscrito nesta actividade.",
+      "student": "Alumno/a",
+      "family": "Familia",
+      "status": "Estado",
+      "waitlisted": "En lista de espera",
+      "enrolled": "Inscrito/a"
     }
   },
   "tablon": {
