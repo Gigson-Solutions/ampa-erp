@@ -185,7 +185,13 @@
       "addStudent": "Semea/alaba gehitu",
       "addStudentError": "Ezin izan da ikaslea gehitu. Saiatu berriro.",
       "submitting": "Gordetzen…",
-      "backToFamilies": "← Familietara itzuli"
+      "backToFamilies": "← Familietara itzuli",
+      "addContact": "Kontaktu-pertsona gehitu",
+      "addContactHint": "Ez da elkarteko bazkidea — familiaren kontaktu gehigarri bat da soilik (adib. beste guraso bat edo aitona-amona).",
+      "contactName": "Izena",
+      "contactEmail": "Emaila",
+      "contactPhone": "Telefonoa (aukerakoa)",
+      "addContactError": "Ezin izan da kontaktu-pertsona gehitu. Saiatu berriro."
     },
     "newFamily": {
       "title": "Familia berria",
@@ -205,6 +211,20 @@
       "submitting": "Bidaltzen…",
       "success": "Familia alta emanda! Erreferentzia kodea:",
       "genericError": "Ezin izan da altarik osatu. Saiatu berriro."
+    },
+    "members": {
+      "title": "Bazkideen liburua",
+      "empty": "Oraindik ez dago bazkiderik erregistratuta AMPA honetan.",
+      "name": "Izena",
+      "family": "Familia",
+      "dni": "NAN/AIZ",
+      "joinedAt": "Alta data",
+      "status": "Egoera",
+      "statusActive": "Aktibo",
+      "statusInactive": "Baja emanda",
+      "endMembership": "Baja eman",
+      "endMembershipConfirm": "Bazkide honi baja eman nahi diozu? Liburuan geratuko da erregistratuta baja-datarekin.",
+      "genericError": "Ezin izan zaio baja eman bazkideari. Saiatu berriro."
     }
   },
   "tablon": {

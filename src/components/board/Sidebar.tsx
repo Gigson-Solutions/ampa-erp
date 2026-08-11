@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   Users,
+  UserCheck,
   CreditCard,
   Receipt,
   ClipboardList,
@@ -35,6 +36,7 @@ export function Sidebar({ ampaSubdomain, ampaName }: SidebarProps): React.ReactE
   const base = `/${ampaSubdomain}`;
   const items: NavItem[] = [
     { href: `${base}/families`, label: "Familias", icon: Users },
+    { href: `${base}/members`, label: "Socios", icon: UserCheck },
     { href: `${base}/memberships`, label: "Membresías", icon: CreditCard },
     { href: `${base}/charges`, label: "Cargos", icon: Receipt },
     { href: `${base}/activities`, label: "Extraescolares", icon: ClipboardList },

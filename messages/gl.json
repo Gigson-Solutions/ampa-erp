@@ -185,7 +185,13 @@
       "addStudent": "Engadir fillo/a",
       "addStudentError": "Non se puido engadir o alumno/a. Inténtao de novo.",
       "submitting": "Gardando…",
-      "backToFamilies": "← Volver a familias"
+      "backToFamilies": "← Volver a familias",
+      "addContact": "Engadir persoa de contacto",
+      "addContactHint": "Non é socio/a da asociación — só un contacto adicional da familia (p. ex. outro proxenitor ou un avó/a).",
+      "contactName": "Nome",
+      "contactEmail": "Email",
+      "contactPhone": "Teléfono (opcional)",
+      "addContactError": "Non se puido engadir a persoa de contacto. Inténtao de novo."
     },
     "newFamily": {
       "title": "Nova familia",
@@ -205,6 +211,20 @@
       "submitting": "Enviando…",
       "success": "Familia dada de alta! Código de referencia:",
       "genericError": "Non se puido completar a alta. Inténtao de novo."
+    },
+    "members": {
+      "title": "Libro de socios",
+      "empty": "Aínda non hai socios/as rexistrados/as nesta AMPA.",
+      "name": "Nome",
+      "family": "Familia",
+      "dni": "DNI/NIE",
+      "joinedAt": "Data de alta",
+      "status": "Estado",
+      "statusActive": "Activo/a",
+      "statusInactive": "De baixa",
+      "endMembership": "Dar de baixa",
+      "endMembershipConfirm": "Queres dar de baixa a este/a socio/a? Quedará rexistrado/a no libro coa data de baixa.",
+      "genericError": "Non se puido dar de baixa ao socio/a. Inténtao de novo."
     }
   },
   "tablon": {

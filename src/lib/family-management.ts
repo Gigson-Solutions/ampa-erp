@@ -36,3 +36,36 @@ export async function addStudentToFamily(
     return { id: student.id };
   });
 }
+
+export const addContactToFamilySchema = z.object({
+  name: z.string().trim().min(1, "El nombre es obligatorio"),
+  email: z.string().trim().email("Email no válido"),
+  phone: z.string().trim().min(1).optional(),
+});
+
+export type AddContactToFamilyInput = z.infer<typeof addContactToFamilySchema>;
+
+/**
+ * Añade una persona de contacto a una familia (libro de socios, ver
+ * src/lib/members.ts): NO es socio/a de la asociación (`isLegalMember` queda
+ * en `false` por defecto) — por eso no exige DNI ni dirección, a diferencia
+ * del tutor legal que se registra en `registerFamily`.
+ */
+export async function addContactToFamily(
+  ampaId: string,
+  familyId: string,
+  input: AddContactToFamilyInput,
+): Promise<{ id: string }> {
+  const parsed = addContactToFamilySchema.parse(input);
+
+  return withAmpaScope(ampaId, async (db) => {
+    const family = await db.family.findUnique({ where: { id: familyId } });
+    if (!family) throw new Error("Familia no encontrada para esta AMPA");
+
+    const guardian = await db.guardian.create({
+      data: { familyId, name: parsed.name, email: parsed.email, phone: parsed.phone },
+    });
+
+    return { id: guardian.id };
+  });
+}

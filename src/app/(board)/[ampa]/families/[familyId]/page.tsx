@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import { requireAmpaRole } from "@/lib/require-ampa-session";
 import { getFamilyDetail, listFeeSchemas } from "@/lib/board-directory";
 import { AddStudentForm } from "./AddStudentForm";
+import { AddContactForm } from "./AddContactForm";
 import { CreateMembershipForm } from "../../memberships/CreateMembershipForm";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { Card } from "@/components/ui/Card";
@@ -119,6 +120,14 @@ function FamilyDetailContent({
         <Card>
           <h2 className="mb-4 font-semibold text-ink-900">{t("addStudent")}</h2>
           <AddStudentForm familyId={family.id} />
+        </Card>
+      </div>
+
+      <div className="mt-6">
+        <Card>
+          <h2 className="mb-4 font-semibold text-ink-900">{t("addContact")}</h2>
+          <p className="mb-4 text-sm text-ink-700">{t("addContactHint")}</p>
+          <AddContactForm familyId={family.id} />
         </Card>
       </div>
     </>

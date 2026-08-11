@@ -185,7 +185,13 @@
       "addStudent": "Afig fill/a",
       "addStudentError": "No s'ha pogut afegir l'alumne/a. Torna-ho a intentar.",
       "submitting": "Guardant…",
-      "backToFamilies": "← Tornar a famílies"
+      "backToFamilies": "← Tornar a famílies",
+      "addContact": "Afig persona de contacte",
+      "addContactHint": "No és soci/sòcia de l'associació — només un contacte addicional de la família (p. ex. un altre progenitor o un avi/a).",
+      "contactName": "Nom",
+      "contactEmail": "Email",
+      "contactPhone": "Telèfon (opcional)",
+      "addContactError": "No s'ha pogut afegir la persona de contacte. Torna-ho a intentar."
     },
     "newFamily": {
       "title": "Nova família",
@@ -205,6 +211,20 @@
       "submitting": "Enviant…",
       "success": "Família donada d'alta! Codi de referència:",
       "genericError": "No s'ha pogut completar l'alta. Torna-ho a intentar."
+    },
+    "members": {
+      "title": "Llibre de socis",
+      "empty": "Encara no hi ha socis/sòcies registrats/ades en esta AMPA.",
+      "name": "Nom",
+      "family": "Família",
+      "dni": "DNI/NIE",
+      "joinedAt": "Data d'alta",
+      "status": "Estat",
+      "statusActive": "Actiu/a",
+      "statusInactive": "De baixa",
+      "endMembership": "Donar de baixa",
+      "endMembershipConfirm": "Vols donar de baixa a este soci/a? Quedarà registrat/ada al llibre amb la data de baixa.",
+      "genericError": "No s'ha pogut donar de baixa el soci/a. Torna-ho a intentar."
     }
   },
   "tablon": {
