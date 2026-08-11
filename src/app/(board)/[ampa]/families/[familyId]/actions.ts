@@ -7,6 +7,7 @@ import {
   type AddStudentToFamilyInput,
   type AddContactToFamilyInput,
 } from "@/lib/family-management";
+import { inviteGuardianToPortal } from "@/lib/family-portal";
 
 export interface AddStudentActionResult {
   ok: boolean;
@@ -46,6 +47,31 @@ export async function addContactAction(
   } catch (error) {
     console.error("addContactAction failed:", error);
     const message = error instanceof Error ? error.message : "No se pudo añadir la persona de contacto.";
+    return { ok: false, error: message };
+  }
+}
+
+export interface InvitePortalActionResult {
+  ok: boolean;
+  error?: string;
+  email?: string;
+}
+
+/**
+ * Solo prepara el acceso (User + UserAmpaRole FAMILIA) en el servidor — el
+ * envío real del magic link lo dispara el cliente justo después con
+ * `signIn("nodemailer", ...)`, reutilizando el mismo mecanismo que ya usa
+ * `LoginForm.tsx` (ver InvitePortalButton.tsx).
+ */
+export async function invitePortalAction(guardianId: string): Promise<InvitePortalActionResult> {
+  const { ampaId } = await requireAmpaRole("MANAGE_MEMBERS");
+
+  try {
+    const result = await inviteGuardianToPortal(ampaId, guardianId);
+    return { ok: true, email: result.email };
+  } catch (error) {
+    console.error("invitePortalAction failed:", error);
+    const message = error instanceof Error ? error.message : "No se pudo invitar al portal.";
     return { ok: false, error: message };
   }
 }

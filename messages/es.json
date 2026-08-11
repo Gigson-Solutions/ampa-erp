@@ -6,7 +6,8 @@
     "loginHint": "Te enviaremos un enlace de acceso a tu email",
     "loginButton": "Enviar enlace de acceso",
     "goToBoard": "Ir al panel de junta",
-    "boardLogin": "¿Eres de la junta? Accede aquí"
+    "boardLogin": "¿Eres de la junta? Accede aquí",
+    "goToPortal": "Ir a mi espacio de familia"
   },
   "register": {
     "title": "Alta de familia",
@@ -198,7 +199,11 @@
       "contactName": "Nombre",
       "contactEmail": "Email",
       "contactPhone": "Teléfono (opcional)",
-      "addContactError": "No se pudo añadir la persona de contacto. Inténtalo de nuevo."
+      "addContactError": "No se pudo añadir la persona de contacto. Inténtalo de nuevo.",
+      "invitePortal": "Invitar al portal",
+      "invitePortalSent": "Invitación enviada",
+      "invitePortalError": "No se pudo invitar al portal. Inténtalo de nuevo.",
+      "portalAccessGranted": "Ya tiene acceso a su espacio"
     },
     "newFamily": {
       "title": "Nueva familia",
@@ -277,5 +282,33 @@
     "statusCancelled": "Cancelado",
     "statusNone": "Sin membresía",
     "academicYear": "Curso"
+  },
+  "portal": {
+    "title": "Mi familia",
+    "childrenTitle": "Mis hijos/as",
+    "noChildren": "Todavía no hay hijos/as registrados.",
+    "cardTitle": "Carnet digital",
+    "viewCard": "Ver mi carnet digital",
+    "noCard": "Todavía no se ha generado el carnet.",
+    "chargesTitle": "Cuotas y cargos",
+    "noCharges": "No hay cuotas ni cargos registrados.",
+    "concept": "Concepto",
+    "amount": "Importe",
+    "dueDate": "Vencimiento",
+    "status": "Estado",
+    "chargeStatus": {
+      "PENDING": "Pendiente",
+      "PAID": "Pagado",
+      "OVERDUE": "Atrasado",
+      "CANCELLED": "Cancelado"
+    },
+    "activitiesTitle": "Extraescolares",
+    "noActivities": "No hay extraescolares con inscripciones activas.",
+    "waitlisted": "En lista de espera",
+    "enrolled": "Inscrito/a",
+    "eventsTitle": "Eventos",
+    "noEvents": "No hay eventos con inscripciones activas.",
+    "registered": "Inscrita",
+    "noFamilyFound": "No hemos encontrado tu familia en esta AMPA. Contacta con la junta si crees que es un error."
   }
 }

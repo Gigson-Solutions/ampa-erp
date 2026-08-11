@@ -6,7 +6,8 @@
     "loginHint": "T'enviarem un enllaç d'accés al teu correu",
     "loginButton": "Envia l'enllaç d'accés",
     "goToBoard": "Anar al panell de junta",
-    "boardLogin": "Ets de la junta? Accedeix ací"
+    "boardLogin": "Ets de la junta? Accedeix ací",
+    "goToPortal": "Anar al meu espai de família"
   },
   "register": {
     "title": "Alta de família",
@@ -198,7 +199,11 @@
       "contactName": "Nom",
       "contactEmail": "Email",
       "contactPhone": "Telèfon (opcional)",
-      "addContactError": "No s'ha pogut afegir la persona de contacte. Torna-ho a provar."
+      "addContactError": "No s'ha pogut afegir la persona de contacte. Torna-ho a provar.",
+      "invitePortal": "Convidar al portal",
+      "invitePortalSent": "Invitació enviada",
+      "invitePortalError": "No s'ha pogut convidar al portal. Torna-ho a provar.",
+      "portalAccessGranted": "Ja té accés al seu espai"
     },
     "newFamily": {
       "title": "Nova família",
@@ -277,5 +282,33 @@
     "statusCancelled": "Cancel·lat",
     "statusNone": "Sense membresia",
     "academicYear": "Curs"
+  },
+  "portal": {
+    "title": "La meua família",
+    "childrenTitle": "Els meus fills/es",
+    "noChildren": "Encara no hi ha fills/es registrats.",
+    "cardTitle": "Carnet digital",
+    "viewCard": "Veure el meu carnet digital",
+    "noCard": "Encara no s'ha generat el carnet.",
+    "chargesTitle": "Quotes i càrrecs",
+    "noCharges": "No hi ha quotes ni càrrecs registrats.",
+    "concept": "Concepte",
+    "amount": "Import",
+    "dueDate": "Venciment",
+    "status": "Estat",
+    "chargeStatus": {
+      "PENDING": "Pendent",
+      "PAID": "Pagat",
+      "OVERDUE": "Endarrerit",
+      "CANCELLED": "Cancel·lat"
+    },
+    "activitiesTitle": "Extraescolars",
+    "noActivities": "No hi ha extraescolars amb inscripcions actives.",
+    "waitlisted": "En llista d'espera",
+    "enrolled": "Inscrit/a",
+    "eventsTitle": "Esdeveniments",
+    "noEvents": "No hi ha esdeveniments amb inscripcions actives.",
+    "registered": "Inscrita",
+    "noFamilyFound": "No hem trobat la teua família en aquesta AMPA. Contacta amb la junta si creus que és un error."
   }
 }

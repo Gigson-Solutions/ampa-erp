@@ -6,7 +6,8 @@
     "loginHint": "Sarbide-esteka bidaliko dizugu zure emailera",
     "loginButton": "Bidali sarbide-esteka",
     "goToBoard": "Zuzendaritzaren panelera joan",
-    "boardLogin": "Zuzendaritzakoa zara? Sartu hemen"
+    "boardLogin": "Zuzendaritzakoa zara? Sartu hemen",
+    "goToPortal": "Nire familia-esparrura joan"
   },
   "register": {
     "title": "Familia alta",
@@ -198,7 +199,11 @@
       "contactName": "Izena",
       "contactEmail": "Emaila",
       "contactPhone": "Telefonoa (aukerakoa)",
-      "addContactError": "Ezin izan da kontaktu-pertsona gehitu. Saiatu berriro."
+      "addContactError": "Ezin izan da kontaktu-pertsona gehitu. Saiatu berriro.",
+      "invitePortal": "Ataria gonbidatu",
+      "invitePortalSent": "Gonbidapena bidalita",
+      "invitePortalError": "Ezin izan da atarira gonbidatu. Saiatu berriro.",
+      "portalAccessGranted": "Jada badu bere esparrurako sarbidea"
     },
     "newFamily": {
       "title": "Familia berria",
@@ -277,5 +282,33 @@
     "statusCancelled": "Bertan behera utzita",
     "statusNone": "Kidetzarik gabe",
     "academicYear": "Ikasturtea"
+  },
+  "portal": {
+    "title": "Nire familia",
+    "childrenTitle": "Nire seme-alabak",
+    "noChildren": "Oraindik ez dago seme-alabarik erregistratuta.",
+    "cardTitle": "Txartel digitala",
+    "viewCard": "Ikusi nire txartel digitala",
+    "noCard": "Oraindik ez da txartela sortu.",
+    "chargesTitle": "Kuotak eta karguak",
+    "noCharges": "Ez dago kuotarik ez kargurik erregistratuta.",
+    "concept": "Kontzeptua",
+    "amount": "Zenbatekoa",
+    "dueDate": "Muga-eguna",
+    "status": "Egoera",
+    "chargeStatus": {
+      "PENDING": "Zain",
+      "PAID": "Ordainduta",
+      "OVERDUE": "Atzeratuta",
+      "CANCELLED": "Bertan behera utzita"
+    },
+    "activitiesTitle": "Eskola-orduz kanpokoak",
+    "noActivities": "Ez dago inskripzio aktiborik dituen jarduerarik.",
+    "waitlisted": "Itxaron zerrendan",
+    "enrolled": "Izena emanda",
+    "eventsTitle": "Ekitaldiak",
+    "noEvents": "Ez dago inskripzio aktiborik dituen ekitaldirik.",
+    "registered": "Izena emanda",
+    "noFamilyFound": "Ez dugu zure familia aurkitu AMPA honetan. Jarri harremanetan junta batekin akatsa dela uste baduzu."
   }
 }

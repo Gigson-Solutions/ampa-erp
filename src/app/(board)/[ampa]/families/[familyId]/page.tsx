@@ -5,6 +5,7 @@ import { requireAmpaRole } from "@/lib/require-ampa-session";
 import { getFamilyDetail, listFeeSchemas } from "@/lib/board-directory";
 import { AddStudentForm } from "./AddStudentForm";
 import { AddContactForm } from "./AddContactForm";
+import { InvitePortalButton } from "./InvitePortalButton";
 import { CreateMembershipForm } from "../../memberships/CreateMembershipForm";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { Card } from "@/components/ui/Card";
@@ -12,7 +13,7 @@ import { Table, THead, TBody, TR, TH, TD } from "@/components/ui/Table";
 import { Badge } from "@/components/ui/Badge";
 
 interface PageProps {
-  params: Promise<{ familyId: string }>;
+  params: Promise<{ ampa: string; familyId: string }>;
 }
 
 // Ficha de familia (feedback de usuario, 2026-08-11): punto único para ver
@@ -20,22 +21,24 @@ interface PageProps {
 // volver a elegir la familia (ya se llegó aquí desde una familia concreta).
 export default async function FamilyDetailPage({ params }: PageProps): Promise<React.ReactElement> {
   const { ampaId } = await requireAmpaRole("MANAGE_MEMBERS");
-  const { familyId } = await params;
+  const { ampa: ampaSubdomain, familyId } = await params;
 
   const family = await getFamilyDetail(ampaId, familyId);
   if (!family) notFound();
 
   const feeSchemas = await listFeeSchemas(ampaId);
 
-  return <FamilyDetailContent family={family} feeSchemas={feeSchemas} />;
+  return <FamilyDetailContent family={family} feeSchemas={feeSchemas} ampaSubdomain={ampaSubdomain} />;
 }
 
 function FamilyDetailContent({
   family,
   feeSchemas,
+  ampaSubdomain,
 }: {
   family: NonNullable<Awaited<ReturnType<typeof getFamilyDetail>>>;
   feeSchemas: Awaited<ReturnType<typeof listFeeSchemas>>;
+  ampaSubdomain: string;
 }): React.ReactElement {
   const t = useTranslations("board.familyDetail");
   const tFamilies = useTranslations("board.families");
@@ -75,6 +78,13 @@ function FamilyDetailContent({
                   </div>
                   <div className="text-ink-700">{guardian.email}</div>
                   {guardian.phone && <div className="text-ink-700">{guardian.phone}</div>}
+                  <div className="mt-1">
+                    {guardian.hasPortalAccess ? (
+                      <span className="text-xs text-ink-400">{t("portalAccessGranted")}</span>
+                    ) : (
+                      <InvitePortalButton guardianId={guardian.id} ampaSubdomain={ampaSubdomain} />
+                    )}
+                  </div>
                 </li>
               ))}
             </ul>

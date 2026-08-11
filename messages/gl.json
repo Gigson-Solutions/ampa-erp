@@ -6,7 +6,8 @@
     "loginHint": "Enviarémosche unha ligazón de acceso ao teu email",
     "loginButton": "Enviar ligazón de acceso",
     "goToBoard": "Ir ao panel de xunta",
-    "boardLogin": "Es da xunta? Accede aquí"
+    "boardLogin": "Es da xunta? Accede aquí",
+    "goToPortal": "Ir ao meu espazo de familia"
   },
   "register": {
     "title": "Alta de familia",
@@ -198,7 +199,11 @@
       "contactName": "Nome",
       "contactEmail": "Email",
       "contactPhone": "Teléfono (opcional)",
-      "addContactError": "Non se puido engadir a persoa de contacto. Inténtao de novo."
+      "addContactError": "Non se puido engadir a persoa de contacto. Inténtao de novo.",
+      "invitePortal": "Convidar ao portal",
+      "invitePortalSent": "Invitación enviada",
+      "invitePortalError": "Non se puido convidar ao portal. Inténtao de novo.",
+      "portalAccessGranted": "Xa ten acceso ao seu espazo"
     },
     "newFamily": {
       "title": "Nova familia",
@@ -277,5 +282,33 @@
     "statusCancelled": "Cancelado",
     "statusNone": "Sen membresía",
     "academicYear": "Curso"
+  },
+  "portal": {
+    "title": "A miña familia",
+    "childrenTitle": "Os meus fillos/as",
+    "noChildren": "Aínda non hai fillos/as rexistrados.",
+    "cardTitle": "Carné dixital",
+    "viewCard": "Ver o meu carné dixital",
+    "noCard": "Aínda non se xerou o carné.",
+    "chargesTitle": "Cotas e cargos",
+    "noCharges": "Non hai cotas nin cargos rexistrados.",
+    "concept": "Concepto",
+    "amount": "Importe",
+    "dueDate": "Vencemento",
+    "status": "Estado",
+    "chargeStatus": {
+      "PENDING": "Pendente",
+      "PAID": "Pagado",
+      "OVERDUE": "Atrasado",
+      "CANCELLED": "Cancelado"
+    },
+    "activitiesTitle": "Extraescolares",
+    "noActivities": "Non hai extraescolares con inscricións activas.",
+    "waitlisted": "En lista de espera",
+    "enrolled": "Inscrito/a",
+    "eventsTitle": "Eventos",
+    "noEvents": "Non hai eventos con inscricións activas.",
+    "registered": "Inscrita",
+    "noFamilyFound": "Non atopamos a túa familia nesta AMPA. Contacta coa xunta se cres que é un erro."
   }
 }

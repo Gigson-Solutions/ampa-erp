@@ -20,6 +20,11 @@ interface PageProps {
 // Aquí se comprueba (sin exigir sesión) si el visitante ya tiene un rol en esta
 // AMPA para enlazar directamente al panel, o a `/login` con el `callbackUrl`
 // correcto en caso contrario.
+// Roles de junta propiamente dichos — a diferencia de FAMILIA/PROVEEDOR/MONITOR,
+// que tienen su propio espacio (portal de familias / futuro portal de
+// proveedores), no el panel de junta con sus 9 secciones.
+const BOARD_ROLES = new Set(["SUPERADMIN", "PRESIDENCIA", "SECRETARIA", "TESORERIA", "VOCAL", "COMISION"]);
+
 export default async function AmpaPublicPage({ params }: PageProps): Promise<React.ReactElement> {
   const { ampa: subdomain } = await params;
 
@@ -27,21 +32,33 @@ export default async function AmpaPublicPage({ params }: PageProps): Promise<Rea
   if (!ampa) notFound();
 
   const session = await auth();
-  const hasBoardAccess = session?.user?.id
-    ? (await getUserRolesForAmpa(session.user.id, ampa.id)).length > 0
-    : false;
+  const roles = session?.user?.id ? await getUserRolesForAmpa(session.user.id, ampa.id) : [];
+  const hasBoardAccess = roles.some((role) => BOARD_ROLES.has(role));
+  // Portal de familias (Feedback #5): un tutor/a con SOLO el rol FAMILIA no
+  // tiene ningún permiso de junta — enlazarlo a /families le daría 404. Se
+  // enlaza a su propio espacio en vez de al panel.
+  const hasFamilyPortalAccess = !hasBoardAccess && roles.includes("FAMILIA");
 
-  return <AmpaWelcome name={ampa.name} subdomain={subdomain} hasBoardAccess={hasBoardAccess} />;
+  return (
+    <AmpaWelcome
+      name={ampa.name}
+      subdomain={subdomain}
+      hasBoardAccess={hasBoardAccess}
+      hasFamilyPortalAccess={hasFamilyPortalAccess}
+    />
+  );
 }
 
 function AmpaWelcome({
   name,
   subdomain,
   hasBoardAccess,
+  hasFamilyPortalAccess,
 }: {
   name: string;
   subdomain: string;
   hasBoardAccess: boolean;
+  hasFamilyPortalAccess: boolean;
 }): React.ReactElement {
   const t = useTranslations("common");
   return (
@@ -53,6 +70,10 @@ function AmpaWelcome({
         {hasBoardAccess ? (
           <Link href={`/${subdomain}/families`}>
             <Button variant="primary">{t("goToBoard")}</Button>
+          </Link>
+        ) : hasFamilyPortalAccess ? (
+          <Link href={`/${subdomain}/portal`}>
+            <Button variant="primary">{t("goToPortal")}</Button>
           </Link>
         ) : (
           <Link href={`/login?callbackUrl=${encodeURIComponent(`/${subdomain}/families`)}`}>

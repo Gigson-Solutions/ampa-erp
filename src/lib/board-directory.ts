@@ -35,6 +35,9 @@ export interface FamilyGuardianDetail {
   email: string;
   phone: string | null;
   isLegalMember: boolean;
+  // Portal de familias (Feedback #5): si ya tiene un `User` enlazado, ya
+  // puede acceder a su espacio — no hace falta volver a invitarlo/a.
+  hasPortalAccess: boolean;
 }
 
 export interface FamilyStudentDetail {
@@ -73,6 +76,7 @@ export async function getFamilyDetail(ampaId: string, familyId: string): Promise
         email: guardian.email,
         phone: guardian.phone,
         isLegalMember: guardian.isLegalMember,
+        hasPortalAccess: guardian.userId !== null,
       })),
       students: family.students.map((student) => ({
         id: student.id,
