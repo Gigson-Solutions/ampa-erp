@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { createMembershipAction } from "./actions";
 import type { FamilySummary, FeeSchemaSummary } from "@/lib/board-directory";
+import { formatCurrency } from "@/lib/format";
 import { Button } from "@/components/ui/Button";
 import { Alert } from "@/components/ui/Alert";
 import { FormField, Input, Label, Select } from "@/components/ui/Input";
@@ -50,7 +51,7 @@ export function CreateMembershipForm({
 
     if (result.ok) {
       setStatus("success");
-      setMessage(`${t("success")} ${result.amount}€`);
+      setMessage(`${t("success")} ${formatCurrency(result.amount ?? 0)}`);
     } else {
       setStatus("error");
       setMessage(result.error ?? t("genericError"));
@@ -80,7 +81,7 @@ export function CreateMembershipForm({
         <Select id="feeSchemaId" required value={feeSchemaId} onChange={(e) => setFeeSchemaId(e.target.value)}>
           {feeSchemas.map((feeSchema) => (
             <option key={feeSchema.id} value={feeSchema.id}>
-              {feeSchema.academicYearLabel} — {feeSchema.name} ({feeSchema.amount}€)
+              {feeSchema.academicYearLabel} — {feeSchema.name} ({formatCurrency(feeSchema.amount)})
             </option>
           ))}
         </Select>

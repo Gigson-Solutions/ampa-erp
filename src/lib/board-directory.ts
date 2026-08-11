@@ -58,6 +58,10 @@ export interface PendingChargeSummary {
   id: string;
   familyId: string;
   familyReferenceCode: string;
+  // Antes solo se mostraba `familyReferenceCode` (p.ej. "F-E9AC124E") en el
+  // listado de cargos, que no le dice nada a tesorería sin buscar la familia por
+  // separado — se añade el nombre de los tutores, igual que ya hace `listFamilies`.
+  familyGuardianNames: string[];
   concept: string;
   amount: number;
   dueDate: Date;
@@ -68,7 +72,7 @@ export async function listPendingCharges(ampaId: string): Promise<PendingChargeS
   return withAmpaScope(ampaId, async (db) => {
     const charges = await db.charge.findMany({
       where: { status: { in: ["PENDING", "OVERDUE"] } },
-      include: { family: true },
+      include: { family: { include: { guardians: true } } },
       orderBy: { dueDate: "asc" },
     });
 
@@ -76,6 +80,7 @@ export async function listPendingCharges(ampaId: string): Promise<PendingChargeS
       id: charge.id,
       familyId: charge.familyId,
       familyReferenceCode: charge.family.referenceCode,
+      familyGuardianNames: charge.family.guardians.map((guardian) => guardian.name),
       concept: charge.concept,
       amount: charge.amount.toNumber(),
       dueDate: charge.dueDate,

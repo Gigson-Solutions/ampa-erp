@@ -1,6 +1,7 @@
 import { useTranslations } from "next-intl";
 import { requirePlatformAdmin } from "@/lib/require-platform-admin";
 import { listAmpasOverview } from "@/lib/platform-admin";
+import { formatCurrency } from "@/lib/format";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { Card } from "@/components/ui/Card";
 import { Table, THead, TBody, TR, TH, TD } from "@/components/ui/Table";
@@ -49,7 +50,7 @@ function AdminPageContent({ ampas }: { ampas: Awaited<ReturnType<typeof listAmpa
                   <TD>
                     {ampa.pendingChargesCount > 0 ? (
                       <Badge variant="warning">
-                        {ampa.pendingChargesCount} ({ampa.pendingChargesTotal}€)
+                        {ampa.pendingChargesCount} ({formatCurrency(ampa.pendingChargesTotal)})
                       </Badge>
                     ) : (
                       <span className="text-ink-400">0</span>

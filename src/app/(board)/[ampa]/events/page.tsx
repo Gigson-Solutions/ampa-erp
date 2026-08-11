@@ -2,6 +2,7 @@ import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { requireAmpaRole } from "@/lib/require-ampa-session";
 import { listEvents, listFamilies } from "@/lib/board-directory";
+import { formatCurrency } from "@/lib/format";
 import { CreateEventForm } from "./CreateEventForm";
 import { RegisterFamilyForm } from "./RegisterFamilyForm";
 import { PageHeader } from "@/components/ui/PageHeader";
@@ -58,7 +59,7 @@ function EventsPageContent({
               <TR key={event.id}>
                 <TD className="font-medium">{event.name}</TD>
                 <TD>{new Date(event.date).toLocaleDateString("es-ES")}</TD>
-                <TD>{event.price !== null ? `${event.price}€` : "—"}</TD>
+                <TD>{event.price !== null ? formatCurrency(event.price) : "—"}</TD>
                 <TD>
                   <div className="flex items-center gap-2">
                     <span>
