@@ -81,6 +81,15 @@ function AmpaWelcome({
           </Link>
         )}
       </div>
+
+      {/* Feedback de usuario (2026-08-11): feed público de calendario — visible
+          para cualquiera, ya que un evento solo tiene nombre/fecha/aforo, sin
+          datos personales. */}
+      <div className="mt-4">
+        <a href={`/${subdomain}/events/calendar.ics`} className="text-sm text-brand-500 hover:underline">
+          {t("subscribeCalendar")}
+        </a>
+      </div>
     </div>
   );
 }

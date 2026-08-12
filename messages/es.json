@@ -7,7 +7,8 @@
     "loginButton": "Enviar enlace de acceso",
     "goToBoard": "Ir al panel de junta",
     "boardLogin": "¿Eres de la junta? Accede aquí",
-    "goToPortal": "Ir a mi espacio de familia"
+    "goToPortal": "Ir a mi espacio de familia",
+    "subscribeCalendar": "Suscríbete al calendario de eventos (Google/Outlook)"
   },
   "register": {
     "title": "Alta de familia",
@@ -159,7 +160,10 @@
       "registrationsTitle": "Inscripciones",
       "noRegistrations": "Todavía no hay ninguna familia inscrita en este evento.",
       "status": "Estado",
-      "cancelRegistration": "Cancelar inscripción"
+      "cancelRegistration": "Cancelar inscripción",
+      "subscribeCalendar": "Suscríbete (Google/Outlook)",
+      "previousMonth": "← Mes anterior",
+      "nextMonth": "Mes siguiente →"
     },
     "documents": {
       "title": "Documentos",

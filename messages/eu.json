@@ -7,7 +7,8 @@
     "loginButton": "Bidali sarbide-esteka",
     "goToBoard": "Zuzendaritzaren panelera joan",
     "boardLogin": "Zuzendaritzakoa zara? Sartu hemen",
-    "goToPortal": "Nire familia-esparrura joan"
+    "goToPortal": "Nire familia-esparrura joan",
+    "subscribeCalendar": "Harpidetu ekitaldien egutegira (Google/Outlook)"
   },
   "register": {
     "title": "Familia alta",
@@ -159,7 +160,10 @@
       "registrationsTitle": "Izen-emateak",
       "noRegistrations": "Oraindik ez dago familiarik izena emanda ekitaldi honetan.",
       "status": "Egoera",
-      "cancelRegistration": "Izen-ematea bertan behera utzi"
+      "cancelRegistration": "Izen-ematea bertan behera utzi",
+      "subscribeCalendar": "Harpidetu (Google/Outlook)",
+      "previousMonth": "← Aurreko hilabetea",
+      "nextMonth": "Hurrengo hilabetea →"
     },
     "documents": {
       "title": "Dokumentuak",

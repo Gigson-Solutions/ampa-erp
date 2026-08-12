@@ -7,7 +7,8 @@
     "loginButton": "Enviar ligazón de acceso",
     "goToBoard": "Ir ao panel de xunta",
     "boardLogin": "Es da xunta? Accede aquí",
-    "goToPortal": "Ir ao meu espazo de familia"
+    "goToPortal": "Ir ao meu espazo de familia",
+    "subscribeCalendar": "Subscríbete ao calendario de eventos (Google/Outlook)"
   },
   "register": {
     "title": "Alta de familia",
@@ -159,7 +160,10 @@
       "registrationsTitle": "Inscricións",
       "noRegistrations": "Aínda non hai ningunha familia inscrita neste evento.",
       "status": "Estado",
-      "cancelRegistration": "Cancelar inscrición"
+      "cancelRegistration": "Cancelar inscrición",
+      "subscribeCalendar": "Subscríbete (Google/Outlook)",
+      "previousMonth": "← Mes anterior",
+      "nextMonth": "Mes seguinte →"
     },
     "documents": {
       "title": "Documentos",
