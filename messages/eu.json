@@ -307,7 +307,9 @@
     "subdomain": "Azpidomeinua",
     "academicYear": "Ikasturte aktiboa",
     "families": "Familiak",
-    "pendingCharges": "Zain dauden karguak"
+    "pendingCharges": "Zain dauden karguak",
+    "newAmpa": "+ AMPA berria",
+    "manage": "Kudeatu"
   },
   "carnet": {
     "subtitle": "Kide-txartel digitala",

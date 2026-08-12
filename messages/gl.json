@@ -307,7 +307,9 @@
     "subdomain": "Subdominio",
     "academicYear": "Curso activo",
     "families": "Familias",
-    "pendingCharges": "Cargos pendentes"
+    "pendingCharges": "Cargos pendentes",
+    "newAmpa": "+ Nova AMPA",
+    "manage": "Xestionar"
   },
   "carnet": {
     "subtitle": "Carné dixital de socio/a",

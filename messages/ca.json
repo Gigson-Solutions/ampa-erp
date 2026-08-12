@@ -307,7 +307,9 @@
     "subdomain": "Subdomini",
     "academicYear": "Curs actiu",
     "families": "Famílies",
-    "pendingCharges": "Càrrecs pendents"
+    "pendingCharges": "Càrrecs pendents",
+    "newAmpa": "+ Nova AMPA",
+    "manage": "Gestionar"
   },
   "carnet": {
     "subtitle": "Carnet digital de soci/a",
