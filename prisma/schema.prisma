@@ -172,6 +172,7 @@ model Ampa {
   ledgerEntries LedgerEntry[]
   minutesEntries MinutesEntry[]
   expenseForecasts ExpenseForecast[]
+  shiftTasks ShiftTask[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -250,7 +251,8 @@ model Guardian {
   memberJoinedAt DateTime?
   memberLeftAt   DateTime?
 
-  family Family @relation(fields: [familyId], references: [id], onDelete: Cascade)
+  family       Family        @relation(fields: [familyId], references: [id], onDelete: Cascade)
+  shiftSignups ShiftSignup[]
 
   createdAt DateTime @default(now())
 
@@ -606,4 +608,65 @@ model ExpenseForecast {
 
   @@index([ampaId])
   @@map("expense_forecasts")
+}
+
+// ─── Fase 2: gestión de turnos (antes "voluntariado por turnos") ─────────────
+// Tareas puntuales de voluntariado (barra en una fiesta, montaje/desmontaje,
+// guardia en una excursión...) — no confundir `ShiftTask` con `Activity`
+// (extraescolares). Una tarea puede tener varios turnos (mañana/tarde, dos
+// puestos distintos...); un turno se asigna a una PERSONA (`Guardian`: tutor
+// legal o contacto), no a una familia entera — primera vez en el proyecto que
+// una inscripción se liga directamente a un `Guardian`.
+model ShiftTask {
+  id          String  @id @default(cuid())
+  ampaId      String
+  name        String
+  description String?
+
+  ampa   Ampa    @relation(fields: [ampaId], references: [id], onDelete: Cascade)
+  shifts Shift[]
+
+  createdAt DateTime @default(now())
+
+  @@index([ampaId])
+  @@map("shift_tasks")
+}
+
+// Sin `ampaId` propio a propósito — igual que `Activity` -> `ActivityEnrollment`,
+// se aísla transitivamente a través de `ShiftTask.ampaId` (ver src/lib/shifts.ts,
+// que siempre verifica primero que la tarea pertenece a la AMPA activa).
+model Shift {
+  id       String   @id @default(cuid())
+  taskId   String
+  startsAt DateTime
+  endsAt   DateTime
+  location String
+  capacity Int?
+
+  task    ShiftTask     @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  signups ShiftSignup[]
+
+  createdAt DateTime @default(now())
+
+  @@index([taskId])
+  @@map("shifts")
+}
+
+// Sin `ampaId` propio — se aísla transitivamente vía `Shift` -> `ShiftTask`.
+// `guardianId` (no `familyId`/`studentId`): un turno lo cubre una PERSONA
+// concreta (tutor legal o persona de contacto), no la familia entera.
+model ShiftSignup {
+  id         String @id @default(cuid())
+  shiftId    String
+  guardianId String
+  status     String @default("SIGNED_UP") // SIGNED_UP | WAITLISTED | CANCELLED
+
+  shift    Shift    @relation(fields: [shiftId], references: [id], onDelete: Cascade)
+  guardian Guardian @relation(fields: [guardianId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@unique([shiftId, guardianId])
+  @@index([shiftId])
+  @@map("shift_signups")
 }

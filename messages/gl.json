@@ -290,6 +290,32 @@
       "status": "Estado",
       "waitlisted": "En lista de espera",
       "enrolled": "Inscrito/a"
+    },
+    "shifts": {
+      "title": "Xestión de quendas",
+      "createTask": "Crear tarefa",
+      "taskName": "Nome da tarefa",
+      "taskDescription": "Descrición (opcional)",
+      "submitting": "Gardando…",
+      "genericError": "Non se puido completar a operación. Inténtao de novo.",
+      "noTasks": "Aínda non hai tarefas de quenda creadas.",
+      "createShift": "Crear quenda",
+      "shiftStartsAt": "Inicio",
+      "shiftEndsAt": "Fin",
+      "shiftLocation": "Lugar",
+      "shiftCapacity": "Nº de persoas",
+      "shiftCapacityPlaceholder": "Ilimitado",
+      "waitlistShort": "en espera",
+      "person": "Persoa",
+      "family": "Familia",
+      "status": "Estado",
+      "waitlisted": "En lista de espera",
+      "signedUp": "Asignado/a",
+      "searchGuardianPlaceholder": "Buscar por nome…",
+      "noGuardiansMatch": "Ninguén coincide coa busca.",
+      "noGuardians": "Aínda non hai titores/as nin contactos rexistrados en ningunha familia.",
+      "assignGuardian": "Asignar",
+      "cancelSignup": "Cancelar"
     }
   },
   "tablon": {

@@ -33,6 +33,7 @@ const TENANT_SCOPED_MODELS = new Set([
   "UserAmpaRole",
   "MinutesEntry",
   "ExpenseForecast",
+  "ShiftTask",
 ]);
 
 const WRITE_OPERATIONS_WITH_DATA = new Set([

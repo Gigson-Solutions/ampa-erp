@@ -290,6 +290,32 @@
       "status": "Estat",
       "waitlisted": "En llista d'espera",
       "enrolled": "Inscrit/a"
+    },
+    "shifts": {
+      "title": "Gestió de torns",
+      "createTask": "Crear tasca",
+      "taskName": "Nom de la tasca",
+      "taskDescription": "Descripció (opcional)",
+      "submitting": "Guardant…",
+      "genericError": "No s'ha pogut completar l'operació. Torna-ho a intentar.",
+      "noTasks": "Encara no hi ha tasques de torn creades.",
+      "createShift": "Crear torn",
+      "shiftStartsAt": "Inici",
+      "shiftEndsAt": "Fi",
+      "shiftLocation": "Lloc",
+      "shiftCapacity": "Núm. de persones",
+      "shiftCapacityPlaceholder": "Il·limitat",
+      "waitlistShort": "en espera",
+      "person": "Persona",
+      "family": "Família",
+      "status": "Estat",
+      "waitlisted": "En llista d'espera",
+      "signedUp": "Assignat/ada",
+      "searchGuardianPlaceholder": "Cercar per nom…",
+      "noGuardiansMatch": "Ningú coincidix amb la cerca.",
+      "noGuardians": "Encara no hi ha tutors/es ni contactes registrats en cap família.",
+      "assignGuardian": "Assignar",
+      "cancelSignup": "Cancel·lar"
     }
   },
   "tablon": {

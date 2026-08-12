@@ -290,6 +290,32 @@
       "status": "Estado",
       "waitlisted": "En lista de espera",
       "enrolled": "Inscrito/a"
+    },
+    "shifts": {
+      "title": "Gestión de turnos",
+      "createTask": "Crear tarea",
+      "taskName": "Nombre de la tarea",
+      "taskDescription": "Descripción (opcional)",
+      "submitting": "Guardando…",
+      "genericError": "No se pudo completar la operación. Inténtalo de nuevo.",
+      "noTasks": "Todavía no hay tareas de turno creadas.",
+      "createShift": "Crear turno",
+      "shiftStartsAt": "Inicio",
+      "shiftEndsAt": "Fin",
+      "shiftLocation": "Lugar",
+      "shiftCapacity": "Nº de personas",
+      "shiftCapacityPlaceholder": "Ilimitado",
+      "waitlistShort": "en espera",
+      "person": "Persona",
+      "family": "Familia",
+      "status": "Estado",
+      "waitlisted": "En lista de espera",
+      "signedUp": "Asignado/a",
+      "searchGuardianPlaceholder": "Buscar por nombre…",
+      "noGuardiansMatch": "Nadie coincide con la búsqueda.",
+      "noGuardians": "Todavía no hay tutores/as ni contactos registrados en ninguna familia.",
+      "assignGuardian": "Asignar",
+      "cancelSignup": "Cancelar"
     }
   },
   "tablon": {

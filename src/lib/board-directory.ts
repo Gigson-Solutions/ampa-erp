@@ -160,6 +160,33 @@ export async function listAcademicYears(ampaId: string): Promise<AcademicYearSum
   });
 }
 
+export interface GuardianSummary {
+  id: string;
+  name: string;
+  familyReferenceCode: string;
+  isLegalMember: boolean;
+}
+
+/**
+ * Listado de personas (tutores legales y contactos) para el buscador de la
+ * gestión de turnos (`/[ampa]/shifts`) — mismo patrón que `listStudents`,
+ * consulta desde `Family` (tenant-scoped) para que `Guardian` (que no lleva
+ * `ampaId` propio) quede correctamente aislado.
+ */
+export async function listGuardians(ampaId: string): Promise<GuardianSummary[]> {
+  return withAmpaScope(ampaId, async (db) => {
+    const families = await db.family.findMany({ include: { guardians: true } });
+    return families.flatMap((family) =>
+      family.guardians.map((guardian) => ({
+        id: guardian.id,
+        name: guardian.name,
+        familyReferenceCode: family.referenceCode,
+        isLegalMember: guardian.isLegalMember,
+      })),
+    );
+  });
+}
+
 export interface StudentSummary {
   id: string;
   name: string;

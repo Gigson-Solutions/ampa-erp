@@ -13,6 +13,7 @@ import {
   FileText,
   BookText,
   Download,
+  Clock,
 } from "lucide-react";
 import { clsx } from "clsx";
 import type { Permission } from "@/lib/authz";
@@ -53,6 +54,7 @@ export function Sidebar({ ampaSubdomain, ampaName, permissions }: SidebarProps):
       requiredPermission: "MANAGE_ACTIVITIES",
     },
     { href: `${base}/events`, label: "Eventos", icon: CalendarDays, requiredPermission: "MANAGE_ACTIVITIES" },
+    { href: `${base}/shifts`, label: "Turnos", icon: Clock, requiredPermission: "MANAGE_ACTIVITIES" },
     {
       href: `${base}/my-activities`,
       label: "Mi actividad",

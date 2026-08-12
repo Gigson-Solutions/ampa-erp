@@ -290,6 +290,32 @@
       "status": "Egoera",
       "waitlisted": "Itxaron zerrendan",
       "enrolled": "Izena emanda"
+    },
+    "shifts": {
+      "title": "Txandaren kudeaketa",
+      "createTask": "Zeregina sortu",
+      "taskName": "Zereginaren izena",
+      "taskDescription": "Deskribapena (aukerakoa)",
+      "submitting": "Gordetzen…",
+      "genericError": "Ezin izan da eragiketa osatu. Saiatu berriro.",
+      "noTasks": "Oraindik ez dago txanda-zereginik sortuta.",
+      "createShift": "Txanda sortu",
+      "shiftStartsAt": "Hasiera",
+      "shiftEndsAt": "Amaiera",
+      "shiftLocation": "Lekua",
+      "shiftCapacity": "Pertsona kopurua",
+      "shiftCapacityPlaceholder": "Mugagabea",
+      "waitlistShort": "zain",
+      "person": "Pertsona",
+      "family": "Familia",
+      "status": "Egoera",
+      "waitlisted": "Itxaron zerrendan",
+      "signedUp": "Esleituta",
+      "searchGuardianPlaceholder": "Izenez bilatu…",
+      "noGuardiansMatch": "Inor ez dator bat bilaketarekin.",
+      "noGuardians": "Oraindik ez dago tutorerik ez kontakturik erregistratuta familia batean ere.",
+      "assignGuardian": "Esleitu",
+      "cancelSignup": "Utzi"
     }
   },
   "tablon": {
